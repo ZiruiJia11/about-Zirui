@@ -314,8 +314,9 @@ section {
 /* ===== Projects ===== */
 #projects .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
 .project-card h3 {
