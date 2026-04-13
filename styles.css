@@ -249,7 +249,12 @@ section {
   font-weight: 500;
 }
 
-/* ===== Education & Experience ===== */
+/* ===== Certification & Education & Experience ===== */
+.cert-badge {
+  width: 100px;
+  margin-bottom: 0.8rem;
+}
+
 .timeline {
   display: flex;
   flex-direction: column;
