@@ -1,7 +1,7 @@
 #  Zirui Jia – Software Engineer Portfolio
 
 View my portfolio website:  
-https://zirui-jia.dev/cv.html
+https://zirui-jia.dev
 
 ---
 
