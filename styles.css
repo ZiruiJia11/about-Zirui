@@ -351,6 +351,11 @@ section {
   max-width: 480px;
   margin: 0 auto 1.75rem;
 }
+.cv-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
 /* ===== Footer ===== */
 footer {
