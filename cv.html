@@ -8,290 +8,425 @@
   <link rel="stylesheet" href="styles.css"/>
 
   <style>
-    body { background:#fff; }
+    body {
+      background: #fff;
+    }
 
     .cv-wrapper {
-      max-width:820px;
-      margin:2rem auto;
-      padding:0 1.5rem 3rem;
+      max-width: 820px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 3rem;
     }
 
     .cv-header {
-      border-bottom:3px solid var(--primary);
-      padding-bottom:1.5rem;
-      margin-bottom:2rem;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .cv-header h1 {
-      font-size:2.2rem;
-      font-weight:800;
+      font-size: 2.2rem;
+      font-weight: 800;
     }
 
     .cv-header .subtitle {
-      color:var(--primary);
-      font-weight:600;
-      margin-bottom:0.5rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
     .cv-contact {
-      display:flex;
-      flex-wrap:wrap;
-      gap:1rem;
-      font-size:0.9rem;
-      color:var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
     }
 
-    .cv-section { margin-bottom:2rem; }
+    .cv-contact a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .cv-contact a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .cv-section {
+      margin-bottom: 2rem;
+    }
 
     .cv-section-title {
-      font-size:1.1rem;
-      font-weight:700;
-      text-transform:uppercase;
-      color:var(--primary);
-      border-bottom:1px solid var(--border);
-      margin-bottom:1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+      padding-bottom: 0.35rem;
     }
 
-    .cv-entry { margin-bottom:1.2rem; }
+    .cv-entry {
+      margin-bottom: 1.2rem;
+    }
 
     .cv-entry-header {
-      display:flex;
-      justify-content:space-between;
-      font-weight:700;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-weight: 700;
+      flex-wrap: wrap;
     }
 
     .cv-entry .org {
-      color:var(--text-muted);
-      font-size:0.9rem;
-      margin-bottom:0.3rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 0.35rem;
     }
 
     .cv-entry ul {
-      padding-left:1.2rem;
-      font-size:0.92rem;
+      padding-left: 1.2rem;
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .cv-entry ul li {
+      margin-bottom: 0.3rem;
     }
 
     .cv-skills-table {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:0.5rem 2rem;
-      font-size:0.92rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem 2rem;
+      font-size: 0.94rem;
     }
 
     .skill-row {
-      display:flex;
-      gap:0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
     }
 
     .skill-label {
-      font-weight:600;
-      min-width:130px;
+      font-weight: 600;
+      min-width: 110px;
+    }
+
+    .cert-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .cert-badge {
+      width: 110px;
+      height: auto;
+    }
+
+    .cert-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .cert-year {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      .cv-skills-table {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media print {
-      nav { display:none; }
-      body { background:#fff; }
+      nav,
+      footer {
+        display: none;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      .cv-wrapper {
+        margin: 0;
+        padding: 0;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<!-- ===== NAV ===== -->
-<nav>
-  <div class="container">
-    <a class="nav-brand" href="index.html">← Back</a>
+  <nav>
+    <div class="container">
+      <a class="nav-brand" href="index.html">← Back</a>
+    </div>
+  </nav>
+
+  <div class="cv-wrapper">
+
+    <header class="cv-header">
+      <h1>Zirui Jia</h1>
+      <p class="subtitle">Graduate Software Engineer</p>
+      <div class="cv-contact">
+        <span>Phone: 021 119 9859</span>
+        <span>Email: <a href="mailto:steven5115115@gmail.com">steven5115115@gmail.com</a></span>
+        <span>GitHub: <a href="https://github.com/ZiruiJia11" target="_blank" rel="noopener">github.com/ZiruiJia11</a></span>
+        <span>LinkedIn: <a href="https://www.linkedin.com/in/zirui-jia-b78314231" target="_blank" rel="noopener">linkedin.com/in/zirui-jia-b78314231</a></span>
+        <span>Portfolio: <a href="https://zirui-jia.dev/" target="_blank" rel="noopener">zirui-jia.dev</a></span>
+        <span>Location: New Zealand</span>
+      </div>
+    </header>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Career Objective</h2>
+      <p>
+        I am seeking a Graduate Software Engineer role. I have experience building applications using
+        Java and Python. I am interested in backend development and enjoy using logic to build structured
+        systems. I also have an interest in user interface design and improving usability. I enjoy working
+        in a team and want to keep building my skills in a collaborative environment.
+      </p>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Education</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Bachelor of Science — Computer Science</span>
+          <span>2023 – 2025</span>
+        </div>
+        <p class="org">Victoria University of Wellington</p>
+        <ul>
+          <li>Minor in Artificial Intelligence</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Qualifications</h2>
+
+      <div class="cert-center">
+        <img src="image/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner badge" class="cert-badge">
+        <div class="cert-title">AWS Certified Cloud Practitioner</div>
+        <div class="cert-year">2026</div>
+      </div>
+
+      <div class="cv-entry" style="margin-top: 1.5rem;">
+        <div class="cv-entry-header">
+          <span>VUW Git & GitHub Workshop</span>
+          <span>2024</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Technical Skills</h2>
+
+      <div class="cv-skills-table">
+        <div class="skill-row">
+          <span class="skill-label">Proficient</span>
+          <span>Java, Python, HTML, CSS, Vue.js</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Familiar with</span>
+          <span>SQL, Brython</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Testing</span>
+          <span>JUnit, Test Case Design</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Tools</span>
+          <span>Git, GitHub, Figma</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Core Skills</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Problem Solving & Systems Thinking</span>
+        </div>
+        <p class="org">Transport route planning project</p>
+        <ul>
+          <li>Built a transport route planning system that allows users to find optimal routes.</li>
+          <li>Designed the routing logic using DFS, BFS, and A* algorithms.</li>
+          <li>Handled transport data to support route calculation and system behaviour.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Software Testing & Quality</span>
+        </div>
+        <p class="org">Java game development project</p>
+        <ul>
+          <li>Improved the reliability of a Java-based game by finding and fixing bugs early.</li>
+          <li>Designed test cases and wrote unit tests using JUnit.</li>
+          <li>Built a simple fuzz testing tool to repeatedly run the game and catch unexpected errors.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Collaboration & Communication</span>
+        </div>
+        <p class="org">Team software engineering project</p>
+        <ul>
+          <li>Worked closely with teammates to support development and debugging.</li>
+          <li>Used Git for version control and shared progress clearly within the team.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>User Research & UX Design</span>
+        </div>
+        <p class="org">Inclusive public transport app project</p>
+        <ul>
+          <li>Conducted user interviews and created personas to identify accessibility issues.</li>
+          <li>Built wireframes and high-fidelity prototypes using Figma.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>User Interface Design</span>
+        </div>
+        <p class="org">Reel Local Cinema Club Website</p>
+        <ul>
+          <li>Built a web application that allows users to log in, manage events, and RSVP.</li>
+          <li>Implemented authentication, event scheduling, RSVP functionality, and input validation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Projects</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>DnD Dice & Character Manager Web Application</span>
+        </div>
+        <p class="org">Tools: HTML, CSS, JavaScript</p>
+        <ul>
+          <li>Developed a web-based Dungeons & Dragons application that supports dice rolling and character management in a single interface.</li>
+          <li>Implemented multiple dice roll mechanics with randomised results to simulate tabletop gameplay scenarios.</li>
+          <li>Designed and built a character tracking feature to store and manage player information for repeated sessions.</li>
+          <li>Created an interactive frontend with responsive user input handling and clear visual feedback.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Handwritten Character Recognition AI Project</span>
+        </div>
+        <p class="org">Tools: Python, Machine Learning, Computer Vision</p>
+        <ul>
+          <li>Developed an AI project to recognise handwritten uppercase letters, lowercase letters, and numbers from image input.</li>
+          <li>Prepared and processed image data for model training and evaluation.</li>
+          <li>Applied machine learning techniques to classify handwritten characters and evaluate prediction results.</li>
+          <li>Built end-to-end experience in artificial intelligence, pattern recognition, and model testing.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Transport Map Application</span>
+        </div>
+        <p class="org">Tools: Java</p>
+        <ul>
+          <li>Built an application that allows users to find optimal transport routes between locations.</li>
+          <li>Designed and implemented routing logic to handle pathfinding between stops.</li>
+          <li>Used DFS, BFS, and A* algorithms to compute routes.</li>
+          <li>Processed transport data to support route calculation and system behaviour.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Java Game Development Project</span>
+        </div>
+        <p class="org">Tools: Java, JUnit, Git</p>
+        <ul>
+          <li>Built a 2D pixel-based maze game with core gameplay and player interaction.</li>
+          <li>Worked on this as part of a team software engineering project using Git for version control.</li>
+          <li>Contributed to game logic and debugging to ensure correct behaviour.</li>
+          <li>Wrote unit tests using JUnit and built a simple fuzz testing tool.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Reel Local Cinema Club Website</span>
+        </div>
+        <p class="org">Tools: Vue.js, HTML, CSS</p>
+        <ul>
+          <li>Built a web application that allows users to log in, manage events, and RSVP.</li>
+          <li>Developed the frontend using Vue.js, focusing on user interaction and interface behaviour.</li>
+          <li>Implemented authentication, event scheduling, RSVP functionality, and input validation.</li>
+          <li>Handled user input and updated the interface based on user actions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Work Experience</h2>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Coding & Robotics Tutor – Scots College</span>
+          <span>2024 – Present</span>
+        </div>
+        <ul>
+          <li>Delivered coding and robotics sessions to secondary school students.</li>
+          <li>Improved students’ understanding of programming by teaching Python and problem solving.</li>
+          <li>Guided students in preparing for and participating in RobotCup competitions.</li>
+          <li>Explained technical concepts clearly and supported students with debugging and exercises.</li>
+          <li>Adapted teaching approaches to different skill levels to help students build confidence.</li>
+        </ul>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <span>Front of House Staff – Sushiya</span>
+          <span>2023 – 2025</span>
+        </div>
+        <ul>
+          <li>Provided good customer service by communicating clearly and handling customer requests.</li>
+          <li>Worked with the team during busy periods to keep service running smoothly.</li>
+          <li>Resolved customer issues and handled requests in a fast-paced environment.</li>
+          <li>Managed payments and handled cash accurately at the counter.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2 class="cv-section-title">Interests</h2>
+      <p>
+        I enjoy board games, skiing, hunting, and exploring new technologies.
+      </p>
+    </section>
+
   </div>
-</nav>
 
-<div class="cv-wrapper">
+  <footer>
+    <p>© <span id="year"></span> Zirui Jia</p>
+  </footer>
 
-<!-- ===== HEADER ===== -->
-<header class="cv-header">
-  <h1>Zirui Jia</h1>
-  <p class="subtitle">Graduate Software Engineer</p>
-  <div class="cv-contact">
-    <span>phone number: 0211199859</span>
-    <span>email address: steven5115115@gmail.com</span>
-    <span>github link: github.com/ZiruiJia11</span>
-    <span>Linkedin: LinkedIn</span>
-    <span>location: New Zealand</span>
-  </div>
-</header>
-
-<!-- ===== OBJECTIVE ===== -->
-<section class="cv-section">
-  <h2 class="cv-section-title">Career Objective</h2>
-  <p>
-    I am seeking a Graduate Software Engineer role where I can build reliable
-    and user-focused systems. I have experience with Java, Python, and SQL,
-    and a strong interest in user interface design, software quality, and
-    problem solving.
-  </p>
-</section>
-
-<!-- ===== EDUCATION ===== -->
-<section class="cv-section">
-  <h2 class="cv-section-title">Education</h2>
-
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span>Bachelor of Science – Computer Science</span>
-      <span>2023–2025</span>
-    </div>
-    <p class="org">Victoria University of Wellington</p>
-    <ul>
-      <li>Minor in Artificial Intelligence</li>
-      <li>Courses: HCI, Software Engineering, System Design</li>
-    </ul>
-  </div>
-
-</section>
-
-<!-- ===== WORK ===== -->
-<section class="cv-section">
-  <h2 class="cv-section-title">Work Experience</h2>
-
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span>Coding & Robotics Tutor</span>
-      <span>2024–Present</span>
-    </div>
-    <p class="org">Scots College</p>
-    <ul>
-      <li>Taught Python and problem-solving skills</li>
-      <li>Helped students debug and understand coding concepts</li>
-      <li>Adapted teaching methods for different levels</li>
-    </ul>
-  </div>
-
-</section>
-
-<!-- ===== PROJECTS ===== -->
-<section class="cv-section">
-  <h2 class="cv-section-title">Projects</h2>
-
-  <!-- DnD -->
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span class="title">DnD Dice & Character Manager Web Application</span>
-    </div>
-    <p class="org">HTML · CSS · JavaScript</p>
-    <ul>
-      <li>Developed a web-based Dungeons & Dragons application integrating dice rolling and character management.</li>
-      <li>Implemented multiple dice roll mechanics with randomised outputs to simulate gameplay.</li>
-      <li>Designed a character tracking system for managing player data across sessions.</li>
-      <li>Built an interactive frontend with responsive user input handling and visual feedback.</li>
-    </ul>
-  </div>
-
-  <!-- AI -->
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span class="title">Handwritten Character Recognition AI Project</span>
-    </div>
-    <p class="org">Python · Machine Learning · Computer Vision</p>
-    <ul>
-      <li>Developed a model to recognise handwritten digits and alphabet characters from images.</li>
-      <li>Preprocessed image data for training and evaluation.</li>
-      <li>Applied classification techniques and evaluated model performance.</li>
-      <li>Built experience in AI workflows including training, testing, and analysis.</li>
-    </ul>
-  </div>
-
-  <!-- Reel Local -->
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span class="title">Reel Local Cinema Club Website</span>
-    </div>
-    <p class="org">Vue.js · Brython · HTML · CSS</p>
-    <ul>
-      <li>Developed a web application for managing movie events and meetups.</li>
-      <li>Implemented login, scheduling, RSVP, and user interaction features.</li>
-      <li>Focused on usability and user experience design.</li>
-    </ul>
-  </div>
-
-  <!-- Transport -->
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span class="title">Transport Map Application</span>
-    </div>
-    <p class="org">Java · SQLite</p>
-    <ul>
-      <li>Built a route planning system using custom algorithms.</li>
-      <li>Processed transport data efficiently using SQLite.</li>
-    </ul>
-  </div>
-
-  <!-- Game -->
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span class="title">Java Game Development Project</span>
-    </div>
-    <p class="org">Java · JUnit · Git</p>
-    <ul>
-      <li>Developed a team-based game project with focus on testing and debugging.</li>
-      <li>Implemented unit tests and designed test cases using JUnit.</li>
-    </ul>
-  </div>
-
-  <!-- UX -->
-  <div class="cv-entry">
-    <div class="cv-entry-header">
-      <span class="title">Inclusive Transport App Design (UX Project)</span>
-    </div>
-    <p class="org">Figma · UX Design</p>
-    <ul>
-      <li>Designed an inclusive transport app based on user research.</li>
-      <li>Created wireframes and high-fidelity prototypes.</li>
-    </ul>
-  </div>
-
-</section>
-
-<!-- ===== SKILLS ===== -->
-<section class="cv-section">
-  <h2 class="cv-section-title">Technical Skills</h2>
-
-  <div class="cv-skills-table">
-    <div class="skill-row">
-      <span class="skill-label">Programming</span>
-      <span>Java, Python, SQL</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-label">Web</span>
-      <span>Vue.js, HTML, CSS, Brython</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-label">Tools</span>
-      <span>Git, GitHub, SQLite, Figma</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-label">Testing</span>
-      <span>JUnit</span>
-    </div>
-  </div>
-
-</section>
-
-<!-- ===== INTERESTS ===== -->
-<section class="cv-section">
-  <h2 class="cv-section-title">Interests</h2>
-  <p>
-    Board games, skiing, hunting, and exploring new technologies.
-  </p>
-</section>
-
-</div>
-
-<footer>
-  <p>© <span id="year"></span> Zirui Jia</p>
-</footer>
-
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
