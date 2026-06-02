@@ -337,6 +337,14 @@ section {
   gap: 0.4rem;
 }
 
+.project-links {
+  margin-top: 1rem;
+}
+
+.project-links a {
+  font-weight: 600;
+}
+
 /* ===== CV Download ===== */
 #cv {
   background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
