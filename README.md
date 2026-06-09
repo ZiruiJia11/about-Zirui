@@ -1,40 +1,18 @@
-#  Zirui Jia – Software Engineer Portfolio
+﻿# Zirui Jia Portfolio
 
-View my portfolio website:  
-https://zirui-jia.dev
+Personal portfolio for Zirui Jia, rebuilt with React and Vite.
 
----
+## Local development
 
-## About Me
-Computer Science graduate from Victoria University of Wellington (Minor in AI).  
-Interested in building user-focused software systems and solving real-world problems.
+```bash
+npm install
+npm run dev
+```
 
----
+## Production build
 
-## Featured Projects
+```bash
+npm run build
+```
 
-### DnD Dice & Character Manager
-Web application for dice rolling and character tracking in tabletop games.  
-**Tech:** HTML, CSS, JavaScript  
-
----
-
-### Handwritten Character Recognition AI
-Machine learning project for recognising handwritten letters and digits.  
-**Tech:** Python, Machine Learning  
-
----
-
-### Reel Local Cinema Website
-Event-based web platform with login, scheduling, and RSVP features.  
-**Tech:** Vue.js, Brython  
-
----
-
-## Skills
-Java · Python · SQL · HTML · CSS · Vue.js · Git · JUnit  
-
----
-
-## Contact
-steven5115115@gmail.com  
+The site includes role-focused CV downloads, selected projects, skills, experience, education, and certifications.
