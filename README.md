@@ -1,6 +1,6 @@
-﻿# Zirui Jia Portfolio
+# Steven Jia Portfolio
 
-Personal portfolio for Zirui Jia, rebuilt with React and Vite.
+Personal portfolio for Steven Jia, built with React and Vite.
 
 ## Local development
 
@@ -15,4 +15,4 @@ npm run dev
 npm run build
 ```
 
-The site includes role-focused CV downloads, selected projects, skills, experience, education, and certifications.
+The site includes a main CV download, selected projects, skills, experience, education, and certifications.

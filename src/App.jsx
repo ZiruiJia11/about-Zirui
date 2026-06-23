@@ -100,9 +100,11 @@ const projects = [
 ];
 
 const cvLinks = [
-  { label: "General Graduate CV", href: "/cv.pdf" },
   { label: "Software Engineer CV", href: "/cv-software-engineer.pdf" },
-  { label: "Test & Data CV", href: "/cv-test-data.pdf" },
+  { label: "Full Stack Developer CV", href: "/cv-full-stack.pdf" },
+  { label: "Web Developer CV", href: "/cv-web-developer.pdf" },
+  { label: "Data & AI Engineer CV", href: "/cv-data-ai.pdf" },
+  { label: "IT Support CV", href: "/cv-it-support.pdf" },
 ];
 
 function SectionHeader({ eyebrow, title, copy }) {
@@ -119,7 +121,7 @@ function App() {
   return (
     <>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Zirui Jia home">ZJ</a>
+        <a className="brand" href="#top" aria-label="Steven Jia home">SJ</a>
         <nav aria-label="Primary navigation">
           {navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}
         </nav>
@@ -129,7 +131,7 @@ function App() {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <p className="eyebrow">Wellington, New Zealand</p>
-            <h1 id="hero-title">Zirui Jia</h1>
+            <h1 id="hero-title">Steven Jia</h1>
             <p className="hero-role">Computer Science & AI Graduate | Software, Data, and Product-minded Engineering</p>
             <p className="hero-summary">I build reliable, user-focused systems with React, Next.js, TypeScript, Java, Python, Node.js, and SQL. My work spans full-stack web apps, job-tracking workflows, route-planning algorithms, testing, technical support, and AI/data projects.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
@@ -139,7 +141,7 @@ function App() {
             </div>
           </div>
           <div className="hero-visual" aria-label="Profile and quick facts">
-            <img src={profileImage} alt="Zirui Jia" />
+            <img src={profileImage} alt="Steven Jia" />
             <div className="quick-facts">
               <span><MapPin size={16} /> Wellington</span>
               <span><Phone size={16} /> 021 119 9859</span>
@@ -207,12 +209,12 @@ function App() {
         </section>
 
         <section id="cv" className="cv-section">
-          <div><p className="eyebrow">CV downloads</p><h2>Start with the general graduate CV</h2><p>The general graduate CV is the best default version for this website. I also keep targeted software engineering and test/data versions for roles that need a sharper technical angle.</p></div>
+          <div><p className="eyebrow">CV downloads</p><h2>Role-focused CV templates</h2><p>These are my own CV templates for software engineering, full-stack, web development, data and AI, and IT support roles.</p></div>
           <div className="cv-actions">{cvLinks.map((link) => <a className="button primary" href={link.href} download key={link.label}><Download size={18} /> {link.label}</a>)}</div>
         </section>
       </main>
 
-      <footer><p>© {new Date().getFullYear()} Zirui Jia. Built with React + Vite.</p><a href="mailto:steven5115115@gmail.com">steven5115115@gmail.com</a></footer>
+      <footer><p>© {new Date().getFullYear()} Steven Jia. Built with React + Vite.</p><a href="mailto:steven5115115@gmail.com">steven5115115@gmail.com</a></footer>
     </>
   );
 }
