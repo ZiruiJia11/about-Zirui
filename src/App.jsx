@@ -16,14 +16,16 @@ const navItems = ["Skills", "Experience", "Projects", "Education", "CV"];
 
 const skillGroups = [
   { title: "Frontend & Product", items: ["React", "Next.js", "Vue.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Responsive Design"] },
-  { title: "Backend & Data", items: ["Node.js", "Express", "REST APIs", "SQL", "PostgreSQL", "Prisma", "Supabase"] },
+  { title: "Backend & Data", items: ["Node.js", "Express", "REST APIs", "SQL", "PostgreSQL", "Prisma", "Database Design", "API Integration"] },
   { title: "Testing & Quality", items: ["JUnit", "Jest", "Test Case Design", "Fuzz Testing", "Debugging", "Defect Investigation"] },
   { title: "AI & Workflow", items: ["Python", "Machine Learning", "CNN", "Vision Transformer", "Data Validation", "AI-Assisted Development"] },
+  { title: "Developer Tools", items: ["VS Code", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm"] },
+  { title: "Cloud & Platforms", items: ["Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions", "Docker Basics"] },
 ];
 
 const highlights = [
   "Computer Science graduate with an AI minor from Victoria University of Wellington.",
-  "Builds practical web, backend, testing, data, and workflow tools with a product mindset.",
+  "Builds practical web, backend, testing, data, deployment, and workflow tools with a product mindset.",
   "AWS Certified Cloud Practitioner with tutoring, support, and customer-facing experience.",
 ];
 
