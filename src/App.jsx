@@ -16,16 +16,16 @@ import awsBadge from "../image/aws-certified-cloud-practitioner.png";
 const navItems = ["Skills", "Experience", "Projects", "Education", "CV"];
 
 const skillGroups = [
-  { title: "Frontend", items: ["React", "Vue.js", "JavaScript", "HTML5", "CSS3", "Responsive Design"] },
-  { title: "Software Engineering", items: ["Java", "Python", "SQL", "REST APIs", "Data Structures", "Algorithms"] },
-  { title: "Testing & Tools", items: ["JUnit", "Jest", "Git", "GitHub", "Figma", "Agile/Scrum"] },
-  { title: "AI & Data", items: ["Machine Learning", "CNN", "Vision Transformer", "Data Processing", "AI Fundamentals"] },
+  { title: "Frontend & Product", items: ["React", "Next.js", "Vue.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Responsive Design"] },
+  { title: "Backend & Data", items: ["Node.js", "Express", "REST APIs", "SQL", "PostgreSQL", "Prisma", "Supabase"] },
+  { title: "Testing & Quality", items: ["JUnit", "Jest", "Test Case Design", "Fuzz Testing", "Debugging", "Defect Investigation"] },
+  { title: "AI & Workflow", items: ["Python", "Machine Learning", "CNN", "Vision Transformer", "Data Validation", "AI-Assisted Development"] },
 ];
 
 const highlights = [
   "Computer Science graduate with an AI minor from Victoria University of Wellington.",
-  "Builds practical frontend, backend, testing, and data-processing projects.",
-  "AWS Certified Cloud Practitioner with hands-on support and teaching experience.",
+  "Builds practical web, backend, testing, data, and workflow tools with a product mindset.",
+  "AWS Certified Cloud Practitioner with tutoring, support, and customer-facing experience.",
 ];
 
 const experience = [
@@ -62,9 +62,14 @@ const experience = [
 
 const projects = [
   {
+    name: "JobTrack Fullstack",
+    summary: "Personal job application tracker for managing company details, roles, job links, sources, categories, status, dates, JD text, cover letters, CV files, filters, follow-up timing, and estimated success probability.",
+    tags: ["Next.js", "Supabase Auth", "PostgreSQL", "Route Handlers", "Full Stack", "Workflow Tool"],
+  },
+  {
     name: "Reel Local Cinema SaaS",
-    summary: "Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking pages, profile flows, and REST API support.",
-    tags: ["React", "TypeScript", "Node.js", "Express", "REST API", "Vite"],
+    summary: "Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking workflows, profile pages, backend APIs, and a PostgreSQL/Prisma roadmap.",
+    tags: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma"],
     link: "https://reel-local-project.vercel.app/",
   },
   {
@@ -83,9 +88,9 @@ const projects = [
     tags: ["Java", "JUnit", "Git", "Fuzz Testing"],
   },
   {
-    name: "Handwriting Recognition Prototype",
-    summary: "Python machine-learning prototype for classifying handwritten characters, including dataset preparation and CNN versus Vision Transformer comparison.",
-    tags: ["Python", "Machine Learning", "CNN", "Vision Transformer"],
+    name: "Data and AI Classification Projects",
+    summary: "Python projects for handwritten character recognition and text classification, including dataset preparation, preprocessing checks, model comparison, and class-level evaluation.",
+    tags: ["Python", "Machine Learning", "Data Processing", "Evaluation Metrics"],
   },
   {
     name: "Inclusive Transport UX Design",
@@ -95,9 +100,9 @@ const projects = [
 ];
 
 const cvLinks = [
-  { label: "Software Engineer CV", href: "/cv.pdf" },
-  { label: "Junior Web Developer CV", href: "/cv-web-developer.pdf" },
-  { label: "DOCX CV", href: "/Steven_CV.docx" },
+  { label: "General Graduate CV", href: "/cv.pdf" },
+  { label: "Software Engineer CV", href: "/cv-software-engineer.pdf" },
+  { label: "Test & Data CV", href: "/cv-test-data.pdf" },
 ];
 
 function SectionHeader({ eyebrow, title, copy }) {
@@ -125,8 +130,8 @@ function App() {
           <div className="hero-copy">
             <p className="eyebrow">Wellington, New Zealand</p>
             <h1 id="hero-title">Zirui Jia</h1>
-            <p className="hero-role">Graduate Software Engineer | Junior Web Developer</p>
-            <p className="hero-summary">I build reliable, user-focused software with Java, Python, JavaScript, React, and Vue. My work spans web applications, route-planning algorithms, testing, technical support, and AI/data projects.</p>
+            <p className="hero-role">Computer Science & AI Graduate | Software, Data, and Product-minded Engineering</p>
+            <p className="hero-summary">I build reliable, user-focused systems with React, Next.js, TypeScript, Java, Python, Node.js, and SQL. My work spans full-stack web apps, job-tracking workflows, route-planning algorithms, testing, technical support, and AI/data projects.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
               <a className="button secondary" href="https://github.com/ZiruiJia11" target="_blank" rel="noreferrer"><Code2 size={18} /> GitHub</a>
@@ -148,7 +153,7 @@ function App() {
         </section>
 
         <section id="skills" className="page-section">
-          <SectionHeader eyebrow="Technical profile" title="Skills that connect web, systems, and testing" copy="A practical stack for junior software, web, support, and configuration developer roles." />
+          <SectionHeader eyebrow="Technical profile" title="Skills that connect product, systems, data, and testing" copy="A practical stack for graduate software, web, test, data, support, and configuration developer roles." />
           <div className="skills-grid">
             {skillGroups.map((group) => (
               <article className="panel" key={group.title}>
@@ -176,7 +181,7 @@ function App() {
         </section>
 
         <section id="projects" className="page-section projects-section">
-          <SectionHeader eyebrow="Selected work" title="Projects with real implementation depth" copy="A mix of frontend applications, algorithms, testing, and machine-learning prototypes." />
+          <SectionHeader eyebrow="Selected work" title="Projects with real implementation depth" copy="A mix of full-stack applications, workflow tools, algorithms, testing, and machine-learning prototypes." />
           <div className="projects-grid">
             {projects.map((project) => (
               <article className="project" key={project.name}>
@@ -202,7 +207,7 @@ function App() {
         </section>
 
         <section id="cv" className="cv-section">
-          <div><p className="eyebrow">CV downloads</p><h2>Choose the version that fits the role</h2><p>I keep role-focused CV versions for software engineering and web developer applications, plus a DOCX copy for editing.</p></div>
+          <div><p className="eyebrow">CV downloads</p><h2>Start with the general graduate CV</h2><p>The general graduate CV is the best default version for this website. I also keep targeted software engineering and test/data versions for roles that need a sharper technical angle.</p></div>
           <div className="cv-actions">{cvLinks.map((link) => <a className="button primary" href={link.href} download key={link.label}><Download size={18} /> {link.label}</a>)}</div>
         </section>
       </main>
