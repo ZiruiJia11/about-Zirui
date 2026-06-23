@@ -457,10 +457,6 @@ li + li {
 }
 
 .cv-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: start;
   margin: 42px 0 80px;
   padding: clamp(24px, 5vw, 42px);
   border: 1px solid rgba(24, 33, 31, 0.12);
@@ -468,11 +464,23 @@ li + li {
   background: #eaf1ec;
 }
 
+.cv-section > div:first-child {
+  width: 100%;
+  max-width: 760px;
+}
+
+.cv-section .eyebrow,
+.cv-section h2,
+.cv-section p {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .cv-section .cv-actions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 0;
+  margin-top: 24px;
 }
 
 .cv-section .button {
