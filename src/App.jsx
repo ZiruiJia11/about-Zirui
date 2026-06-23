@@ -143,7 +143,6 @@ function App() {
             <img src={profileImage} alt="Steven Jia" />
             <div className="quick-facts">
               <span><Phone size={16} /> 021 119 9859</span>
-              <span><Sparkles size={16} /> Work visa</span>
             </div>
           </div>
         </section>
