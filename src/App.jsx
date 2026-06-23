@@ -6,7 +6,6 @@ import {
   Download,
   GraduationCap,
   Mail,
-  MapPin,
   Phone,
   Sparkles,
 } from "lucide-react";
@@ -130,7 +129,7 @@ function App() {
       <main id="top">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow">Wellington, New Zealand</p>
+            <p className="eyebrow">Open to graduate and junior roles</p>
             <h1 id="hero-title">Steven Jia</h1>
             <p className="hero-role">Computer Science & AI Graduate | Software, Data, and Product-minded Engineering</p>
             <p className="hero-summary">I build reliable, user-focused systems with React, Next.js, TypeScript, Java, Python, Node.js, and SQL. My work spans full-stack web apps, job-tracking workflows, route-planning algorithms, testing, technical support, and AI/data projects.</p>
@@ -143,7 +142,6 @@ function App() {
           <div className="hero-visual" aria-label="Profile and quick facts">
             <img src={profileImage} alt="Steven Jia" />
             <div className="quick-facts">
-              <span><MapPin size={16} /> Wellington</span>
               <span><Phone size={16} /> 021 119 9859</span>
               <span><Sparkles size={16} /> Work visa</span>
             </div>
