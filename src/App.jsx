@@ -35,6 +35,25 @@ const profileStats = [
   { value: "Full-stack", label: "React, Next.js, Node, SQL" },
 ];
 
+const dailyPractices = [
+  {
+    title: "Build and refine side projects",
+    copy: "I regularly turn job-search, workflow, and product ideas into small usable features, then improve them through testing, deployment, and feedback.",
+  },
+  {
+    title: "Use AI as an engineering assistant",
+    copy: "I use Codex and ChatGPT to speed up debugging, compare implementation options, review code, write clearer documentation, and learn unfamiliar tools faster.",
+  },
+  {
+    title: "Track progress and applications",
+    copy: "I keep my applications, CV versions, follow-ups, project notes, and learning tasks organized so I can make steady progress instead of guessing what to do next.",
+  },
+  {
+    title: "Practice fundamentals",
+    copy: "I keep sharpening core skills through React, SQL, Java, Python, testing, API work, cloud deployment, documentation, and reading official docs.",
+  },
+];
+
 const experience = [
   {
     role: "Coding & Robotics Tutor",
@@ -171,6 +190,21 @@ function App() {
 
         <section className="highlights" aria-label="Profile highlights">
           {highlights.map((item) => <article key={item}><Sparkles size={18} /><p>{item}</p></article>)}
+        </section>
+
+        <section className="page-section daily-section" aria-label="Daily practice">
+          <SectionHeader eyebrow="Daily practice" title="How I keep improving outside coursework" copy="My daily routine is built around shipping small improvements, learning from real tools, and keeping my job-search workflow organized." />
+          <div className="daily-grid">
+            {dailyPractices.map((item) => (
+              <article key={item.title} className="daily-card">
+                <Sparkles size={18} />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="skills" className="page-section">

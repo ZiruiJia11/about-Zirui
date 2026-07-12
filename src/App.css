@@ -300,6 +300,10 @@ h1 {
   padding: 72px 0;
 }
 
+.daily-section {
+  padding-top: 56px;
+}
+
 .section-header {
   max-width: 760px;
   margin-bottom: 28px;
@@ -360,6 +364,47 @@ h1 {
   background: #f5f1e9;
   border-color: rgba(180, 107, 42, 0.18);
   color: #704111;
+}
+
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.daily-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  min-height: 210px;
+  padding: 18px;
+  border: 1px solid rgba(24, 33, 31, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 12px 36px rgba(24, 33, 31, 0.05);
+}
+
+.daily-card svg {
+  color: var(--amber);
+}
+
+.daily-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.daily-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.daily-card h3,
+.daily-card p {
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .split-section {
@@ -631,6 +676,7 @@ footer a {
   }
 
   .highlights,
+  .daily-grid,
   .skills-grid,
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -673,6 +719,7 @@ footer a {
   }
 
   .highlights,
+  .daily-grid,
   .skills-grid,
   .projects-grid,
   .education-grid {
