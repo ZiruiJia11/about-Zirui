@@ -72,7 +72,7 @@ const projects = [
     name: "JobTrack Fullstack",
     summary: "Personal job application tracker for managing company details, roles, job links, sources, categories, status, dates, JD text, cover letters, CV files, filters, follow-up timing, and estimated success probability.",
     tags: ["Next.js", "Supabase Auth", "PostgreSQL", "Route Handlers", "Full Stack", "Workflow Tool"],
-    link: "https://jobtrack-fullstack.vercel.app/",
+    link: "https://jobtrack-fullstack-ashy.vercel.app/",
     source: "https://github.com/ZiruiJia11/jobtrack-fullstack",
     featured: true,
   },
