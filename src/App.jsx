@@ -29,6 +29,12 @@ const highlights = [
   "AWS Certified Cloud Practitioner with tutoring, support, and customer-facing experience.",
 ];
 
+const profileStats = [
+  { value: "7+", label: "portfolio projects" },
+  { value: "AWS", label: "cloud certified" },
+  { value: "Full-stack", label: "React, Next.js, Node, SQL" },
+];
+
 const experience = [
   {
     role: "Coding & Robotics Tutor",
@@ -66,12 +72,17 @@ const projects = [
     name: "JobTrack Fullstack",
     summary: "Personal job application tracker for managing company details, roles, job links, sources, categories, status, dates, JD text, cover letters, CV files, filters, follow-up timing, and estimated success probability.",
     tags: ["Next.js", "Supabase Auth", "PostgreSQL", "Route Handlers", "Full Stack", "Workflow Tool"],
+    link: "https://jobtrack-fullstack.vercel.app/",
+    source: "https://github.com/ZiruiJia11/jobtrack-fullstack",
+    featured: true,
   },
   {
     name: "Reel Local Cinema SaaS",
     summary: "Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking workflows, profile pages, backend APIs, and a PostgreSQL/Prisma roadmap.",
     tags: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma"],
     link: "https://reel-local-project.vercel.app/",
+    source: "https://github.com/ZiruiJia11/reel-local-project",
+    featured: true,
   },
   {
     name: "Event Management Web Application",
@@ -137,8 +148,17 @@ function App() {
             <p className="hero-summary">I build reliable, user-focused systems with React, Next.js, TypeScript, Java, Python, Node.js, and SQL. My work spans full-stack web apps, job-tracking workflows, route-planning algorithms, testing, technical support, and AI/data projects.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
+              <a className="button secondary" href="#projects"><ArrowUpRight size={18} /> View work</a>
               <a className="button secondary" href="https://github.com/ZiruiJia11" target="_blank" rel="noreferrer"><Code2 size={18} /> GitHub</a>
               <a className="button secondary" href="https://www.linkedin.com/in/zirui-jia-b78314231" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} /> LinkedIn</a>
+            </div>
+            <div className="profile-stats" aria-label="Profile quick proof">
+              {profileStats.map((stat) => (
+                <div key={stat.label}>
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                </div>
+              ))}
             </div>
           </div>
           <div className="hero-visual" aria-label="Profile and quick facts">
@@ -187,11 +207,20 @@ function App() {
             {projects.map((project) => (
               <article className="project" key={project.name}>
                 <div className="project-top">
-                  <Code2 size={20} />
+                  <div className="project-kicker">
+                    <Code2 size={20} />
+                    {project.featured ? <span>Featured</span> : null}
+                  </div>
                   {project.link ? <a href={project.link} target="_blank" rel="noreferrer" aria-label={`${project.name} live demo`}><ArrowUpRight size={18} /></a> : null}
                 </div>
                 <h3>{project.name}</h3>
                 <p>{project.summary}</p>
+                {(project.link || project.source) ? (
+                  <div className="project-links" aria-label={`${project.name} links`}>
+                    {project.link ? <a href={project.link} target="_blank" rel="noreferrer">Live demo</a> : null}
+                    {project.source ? <a href={project.source} target="_blank" rel="noreferrer">Source</a> : null}
+                  </div>
+                ) : null}
                 <div className="tags compact">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
               </article>
             ))}
@@ -210,6 +239,18 @@ function App() {
         <section id="cv" className="cv-section">
           <div><p className="eyebrow">CV downloads</p><h2>Role-focused CV templates</h2><p>These are my own CV templates for software engineering, full-stack, web development, data and AI, and IT support roles.</p></div>
           <div className="cv-actions">{cvLinks.map((link) => <a className="button primary" href={link.href} download key={link.label}><Download size={18} /> {link.label}</a>)}</div>
+        </section>
+
+        <section className="contact-section" aria-labelledby="contact-title">
+          <div>
+            <p className="eyebrow">Next step</p>
+            <h2 id="contact-title">Open to junior software, web, data, and support roles</h2>
+            <p>I am ready to talk through the projects above, share role-specific CVs, and discuss how I can contribute on a graduate or junior engineering team.</p>
+          </div>
+          <div className="contact-actions">
+            <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Contact me</a>
+            <a className="button secondary" href="https://github.com/ZiruiJia11" target="_blank" rel="noreferrer"><Code2 size={18} /> GitHub profile</a>
+          </div>
         </section>
       </main>
 

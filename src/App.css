@@ -161,6 +161,39 @@ h1 {
   margin-top: 28px;
 }
 
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 720px;
+  margin-top: 24px;
+}
+
+.profile-stats div {
+  padding: 14px;
+  border: 1px solid rgba(24, 33, 31, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.profile-stats strong,
+.profile-stats span {
+  display: block;
+}
+
+.profile-stats strong {
+  color: var(--forest);
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+.profile-stats span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -409,6 +442,23 @@ li + li {
   margin-bottom: 18px;
 }
 
+.project-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-kicker span {
+  padding: 4px 7px;
+  border: 1px solid rgba(30, 91, 72, 0.18);
+  border-radius: 8px;
+  background: #e7f0ea;
+  color: var(--forest);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
 .project-top a {
   display: inline-grid;
   width: 34px;
@@ -421,6 +471,27 @@ li + li {
 .project p {
   color: var(--muted);
   margin: 12px 0 0;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.project-links a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(24, 33, 31, 0.12);
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--forest);
+  font-size: 0.84rem;
+  font-weight: 850;
 }
 
 .project .tags {
@@ -491,6 +562,38 @@ li + li {
   line-height: 1.2;
 }
 
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin: -36px 0 80px;
+  padding: clamp(24px, 5vw, 42px);
+  border: 1px solid rgba(24, 33, 31, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.contact-section h2 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+  line-height: 1.05;
+}
+
+.contact-section p:not(.eyebrow) {
+  max-width: 720px;
+  margin: 14px 0 0;
+  color: var(--muted);
+}
+
+.contact-actions {
+  display: grid;
+  gap: 10px;
+  min-width: 190px;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -514,7 +617,8 @@ footer a {
 @media (max-width: 980px) {
   .hero,
   .split-section,
-  .cv-section {
+  .cv-section,
+  .contact-section {
     grid-template-columns: 1fr;
   }
 
@@ -558,6 +662,10 @@ footer a {
 
   .hero-actions .button {
     width: 100%;
+  }
+
+  .profile-stats {
+    grid-template-columns: 1fr;
   }
 
   .cv-section .cv-actions {
