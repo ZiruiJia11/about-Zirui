@@ -1,4 +1,5 @@
 import {
+  Activity,
   ArrowUpRight,
   Award,
   BriefcaseBusiness,
@@ -7,6 +8,7 @@ import {
   GraduationCap,
   Mail,
   Phone,
+  Rocket,
   Sparkles,
 } from "lucide-react";
 import profileImage from "../image/profile.jpg";
@@ -33,6 +35,12 @@ const profileStats = [
   { value: "7+", label: "portfolio projects" },
   { value: "AWS", label: "cloud certified" },
   { value: "Full-stack", label: "React, Next.js, Node, SQL" },
+];
+
+const workspaceSignals = [
+  { label: "Current build", value: "JobTrack", status: "Live" },
+  { label: "Stack focus", value: "Next.js + Supabase", status: "Shipping" },
+  { label: "Workflow", value: "CVs, apps, follow-ups", status: "Tracked" },
 ];
 
 const dailyPractices = [
@@ -181,7 +189,7 @@ function App() {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <p className="eyebrow">Open to graduate and junior roles</p>
-            <h1 id="hero-title">Steven Jia</h1>
+            <h1 id="hero-title">Steven <span>Jia</span></h1>
             <p className="hero-role">Computer Science & AI Graduate | Software, Data, and Product-minded Engineering</p>
             <p className="hero-summary">I build reliable, user-focused systems with React, Next.js, TypeScript, Java, Python, Node.js, and SQL. My work spans full-stack web apps, job-tracking workflows, route-planning algorithms, testing, technical support, and AI/data projects.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
@@ -200,7 +208,27 @@ function App() {
             </div>
           </div>
           <div className="hero-visual" aria-label="Profile and quick facts">
-            <img src={profileImage} alt="Steven Jia" />
+            <div className="portrait-shell">
+              <img src={profileImage} alt="Steven Jia" />
+              <div className="portrait-badge"><Rocket size={16} /> Building in public</div>
+            </div>
+            <div className="workspace-console" aria-label="Current work snapshot">
+              <div className="console-header">
+                <span><Activity size={16} /> Live workspace</span>
+                <strong>2026</strong>
+              </div>
+              <div className="signal-list">
+                {workspaceSignals.map((signal) => (
+                  <div className="signal-row" key={signal.label}>
+                    <div>
+                      <span>{signal.label}</span>
+                      <strong>{signal.value}</strong>
+                    </div>
+                    <em>{signal.status}</em>
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className="quick-facts">
               <span><Phone size={16} /> 021 119 9859</span>
             </div>
@@ -209,6 +237,20 @@ function App() {
 
         <section className="highlights" aria-label="Profile highlights">
           {highlights.map((item) => <article key={item}><Sparkles size={18} /><p>{item}</p></article>)}
+        </section>
+
+        <section className="feature-strip" aria-label="Featured build snapshot">
+          <div>
+            <p className="eyebrow">Featured build</p>
+            <h2>JobTrack turns my job search into a full-stack product.</h2>
+          </div>
+          <div className="feature-metrics">
+            <span>Supabase Auth</span>
+            <span>PostgreSQL</span>
+            <span>CV files</span>
+            <span>Follow-up timing</span>
+          </div>
+          <a href="https://jobtrack-fullstack-ashy.vercel.app/" target="_blank" rel="noreferrer" aria-label="Open JobTrack live demo"><ArrowUpRight size={20} /></a>
         </section>
 
         <section className="page-section daily-section" aria-label="Daily practice">
