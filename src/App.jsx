@@ -54,6 +54,25 @@ const dailyPractices = [
   },
 ];
 
+const lifeInterests = [
+  {
+    title: "Strategic board games",
+    copy: "I enjoy games that reward planning, pattern recognition, adaptation, and calm decision-making under uncertainty.",
+  },
+  {
+    title: "Skiing and outdoor challenges",
+    copy: "Skiing helps me stay active, focused, and comfortable working through fast-changing situations with control.",
+  },
+  {
+    title: "Nature and quiet reset time",
+    copy: "I like spending time outdoors because it builds patience, observation, and balance after long stretches of technical work.",
+  },
+  {
+    title: "Curiosity beyond assignments",
+    copy: "Outside formal coursework, I like trying new tools, reading product ideas, and noticing how real apps solve everyday problems.",
+  },
+];
+
 const experience = [
   {
     role: "Coding & Robotics Tutor",
@@ -202,6 +221,19 @@ function App() {
                   <h3>{item.title}</h3>
                   <p>{item.copy}</p>
                 </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="page-section life-section" aria-label="Beyond code">
+          <SectionHeader eyebrow="Beyond code" title="The habits and interests that shape how I work" copy="Outside projects and job applications, I keep a mix of strategic, outdoor, and curiosity-driven interests that help me stay balanced and thoughtful." />
+          <div className="life-grid">
+            {lifeInterests.map((item) => (
+              <article key={item.title} className="life-card">
+                <Sparkles size={18} />
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
               </article>
             ))}
           </div>

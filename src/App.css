@@ -304,6 +304,10 @@ h1 {
   padding-top: 56px;
 }
 
+.life-section {
+  padding-top: 0;
+}
+
 .section-header {
   max-width: 760px;
   margin-bottom: 28px;
@@ -403,6 +407,42 @@ h1 {
 
 .daily-card h3,
 .daily-card p {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.life-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.life-card {
+  min-height: 190px;
+  padding: 18px;
+  border: 1px solid rgba(24, 33, 31, 0.1);
+  border-radius: 8px;
+  background: #f5f1e9;
+}
+
+.life-card svg {
+  color: var(--forest);
+}
+
+.life-card h3 {
+  margin: 14px 0 0;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.life-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.life-card h3,
+.life-card p {
   overflow-wrap: normal;
   word-break: normal;
 }
@@ -677,6 +717,7 @@ footer a {
 
   .highlights,
   .daily-grid,
+  .life-grid,
   .skills-grid,
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -720,6 +761,7 @@ footer a {
 
   .highlights,
   .daily-grid,
+  .life-grid,
   .skills-grid,
   .projects-grid,
   .education-grid {
