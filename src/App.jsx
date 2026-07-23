@@ -17,30 +17,31 @@ import awsBadge from "../image/aws-certified-cloud-practitioner.png";
 const navItems = ["Skills", "Experience", "Projects", "Education", "CV"];
 
 const skillGroups = [
-  { title: "Frontend & Product", items: ["React", "Next.js", "Vue.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Responsive Design"] },
-  { title: "Backend & Data", items: ["Node.js", "Express", "REST APIs", "SQL", "PostgreSQL", "Prisma", "Database Design", "API Integration"] },
+  { title: "Frontend & Product", items: ["Blade", "Inertia.js", "TypeScript", "Vite", "Ziggy", "Laravel Precognition", "React", "Next.js", "Vue.js", "JavaScript", "HTML5", "CSS3"] },
+  { title: "Backend & Data", items: ["PHP", "Laravel", "Eloquent ORM", "PostgreSQL", "Meilisearch", "Valkey", "Node.js", "Express", "REST APIs", "SQL", "SQLite", "Prisma"] },
+  { title: "Laravel Ecosystem", items: ["Reverb", "Sail", "Tenancy", "Versionable", "Auditing", "Media Library", "Migrations", "Validation", "CRUD"] },
   { title: "Testing & Quality", items: ["JUnit", "Jest", "Test Case Design", "Fuzz Testing", "Debugging", "Defect Investigation"] },
   { title: "AI & Workflow", items: ["Python", "Machine Learning", "CNN", "Vision Transformer", "Data Validation", "AI-Assisted Development"] },
-  { title: "Developer Tools", items: ["VS Code", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm"] },
-  { title: "Cloud & Platforms", items: ["Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions", "Docker Basics"] },
+  { title: "Developer Tools", items: ["VS Code", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm", "Mailpit"] },
+  { title: "Cloud & Platforms", items: ["MinIO", "Gotenberg", "Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions", "Docker Basics"] },
 ];
 
 const highlights = [
+  "Full Stack Developer Intern at Ocular, building PHP and Laravel web application features.",
   "Computer Science graduate with an AI minor from Victoria University of Wellington.",
-  "Builds practical web, backend, testing, data, deployment, and workflow tools with a product mindset.",
   "AWS Certified Cloud Practitioner with tutoring, support, and customer-facing experience.",
 ];
 
 const profileStats = [
   { value: "7+", label: "portfolio projects" },
   { value: "AWS", label: "cloud certified" },
-  { value: "Full-stack", label: "React, Next.js, Node, SQL" },
+  { value: "Full-stack", label: "Laravel, React, Node, SQL" },
 ];
 
 const workspaceSignals = [
-  { label: "Current build", value: "JobTrack", status: "Live" },
-  { label: "Stack focus", value: "Next.js + Supabase", status: "Shipping" },
-  { label: "Workflow", value: "CVs, apps, follow-ups", status: "Tracked" },
+  { label: "Current role", value: "Ocular", status: "Interning" },
+  { label: "Stack focus", value: "PHP + Laravel", status: "Building" },
+  { label: "Current work", value: "MVC + CRUD workflows", status: "Shipping" },
 ];
 
 const dailyPractices = [
@@ -82,6 +83,16 @@ const lifeInterests = [
 ];
 
 const experience = [
+  {
+    role: "Full Stack Developer Intern",
+    company: "Ocular, Wellington",
+    period: "Jul 2026 - Present",
+    points: [
+      "Develop and maintain web application features using PHP and Laravel in a professional development environment.",
+      "Build Laravel MVC functionality with Blade, Inertia.js, TypeScript, Vite, Ziggy, Precognition, Eloquent, validation, migrations, and database-backed CRUD workflows.",
+      "Work with PostgreSQL, Meilisearch, Valkey, Reverb, MinIO, Mailpit, Gotenberg, Sail, tenancy, versioning, auditing, and media-management tooling across the development cycle.",
+    ],
+  },
   {
     role: "Coding & Robotics Tutor",
     company: "Scots College, Wellington",
@@ -190,8 +201,8 @@ function App() {
           <div className="hero-copy">
             <p className="eyebrow">Open to graduate and junior roles</p>
             <h1 id="hero-title">Steven <span>Jia</span></h1>
-            <p className="hero-role">Computer Science & AI Graduate | Software, Data, and Product-minded Engineering</p>
-            <p className="hero-summary">I build reliable, user-focused systems with React, Next.js, TypeScript, Java, Python, Node.js, and SQL. My work spans full-stack web apps, job-tracking workflows, route-planning algorithms, testing, technical support, and AI/data projects.</p>
+            <p className="hero-role">Full Stack Developer Intern at Ocular | Computer Science & AI Graduate</p>
+            <p className="hero-summary">I am currently building PHP and Laravel web application features at Ocular using Blade, MVC, Eloquent, validation, migrations, SQLite, SQL, and CRUD workflows. I also build reliable, user-focused systems with React, Next.js, TypeScript, Node.js, Java, and Python.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
               <a className="button secondary" href="#projects"><ArrowUpRight size={18} /> View work</a>
