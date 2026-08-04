@@ -207,7 +207,7 @@ function App() {
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
               <a className="button secondary" href="#projects"><ArrowUpRight size={18} /> View work</a>
               <a className="button secondary" href="https://github.com/ZiruiJia11" target="_blank" rel="noreferrer"><Code2 size={18} /> GitHub</a>
-              <a className="button secondary" href="https://www.linkedin.com/in/zirui-jia-b78314231" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} /> LinkedIn</a>
+              <a className="button secondary" href="https://www.linkedin.com/in/steven-jia-b78314231/" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} /> LinkedIn</a>
             </div>
             <div className="profile-stats" aria-label="Profile quick proof">
               {profileStats.map((stat) => (

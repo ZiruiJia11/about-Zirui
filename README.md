@@ -89,4 +89,4 @@ Important files:
 
 - Email: [steven5115115@gmail.com](mailto:steven5115115@gmail.com)
 - GitHub: [https://github.com/ZiruiJia11](https://github.com/ZiruiJia11)
-- LinkedIn: [https://www.linkedin.com/in/zirui-jia-b78314231](https://www.linkedin.com/in/zirui-jia-b78314231)
+- LinkedIn: [https://www.linkedin.com/in/steven-jia-b78314231/](https://www.linkedin.com/in/steven-jia-b78314231/)
