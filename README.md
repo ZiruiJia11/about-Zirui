@@ -34,6 +34,28 @@ Full-stack cinema booking platform for local film clubs and community screenings
 - Source: [https://github.com/ZiruiJia11/reel-local-project](https://github.com/ZiruiJia11/reel-local-project)
 - Stack: React, TypeScript, Node.js, Express, PostgreSQL, Prisma
 
+### Dependency Map
+
+Interactive dependency-graph workspace for organizing projects, nodes, and relationships, with authenticated CRUD workflows, scoped access, and persistent graph layouts.
+
+- Source: [https://github.com/ZiruiJia11/dependency-map](https://github.com/ZiruiJia11/dependency-map)
+- Stack: Laravel 13, Vue 3, Inertia.js, TypeScript, PostgreSQL, Docker
+
+### FitQuest - MSA 2026
+
+Gamified fitness quest tracker with workout quests, XP, levels, streaks, achievements, progress history, theme switching, and animated quest battles.
+
+- Live demo: [https://msa-2026-phase-2-software.vercel.app](https://msa-2026-phase-2-software.vercel.app)
+- Source: [https://github.com/ZiruiJia11/msa-2026-phase-2-software](https://github.com/ZiruiJia11/msa-2026-phase-2-software)
+- Stack: React, TypeScript, C#, ASP.NET Core, Entity Framework Core, SQLite
+
+### Power BI OData API Demo
+
+Multi-tenant Laravel integration exposing authenticated OData feeds, metadata, Power BI connection files, and downloadable report templates.
+
+- Source: [https://github.com/ZiruiJia11/power-bi-api-demo](https://github.com/ZiruiJia11/power-bi-api-demo)
+- Stack: Laravel 13, Vue 3, Inertia.js, OData, Power BI, multi-tenancy
+
 ## Tech Stack
 
 - React

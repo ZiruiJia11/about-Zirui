@@ -33,7 +33,7 @@ const highlights = [
 ];
 
 const profileStats = [
-  { value: "7+", label: "portfolio projects" },
+  { value: "10+", label: "portfolio projects" },
   { value: "AWS", label: "cloud certified" },
   { value: "Full-stack", label: "Laravel, React, Node, SQL" },
 ];
@@ -139,6 +139,28 @@ const projects = [
     tags: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma"],
     link: "https://reel-local-project.vercel.app/",
     source: "https://github.com/ZiruiJia11/reel-local-project",
+    featured: true,
+  },
+  {
+    name: "Dependency Map",
+    summary: "Interactive dependency-graph workspace for organizing projects, nodes, and relationships, with authenticated CRUD workflows, scoped resource access, and persistent graph layouts.",
+    tags: ["Laravel 13", "Vue 3", "Inertia.js", "TypeScript", "PostgreSQL", "Docker"],
+    source: "https://github.com/ZiruiJia11/dependency-map",
+    featured: true,
+  },
+  {
+    name: "FitQuest - MSA 2026",
+    summary: "Gamified fitness quest tracker with workout CRUD, XP and level progression, streaks, achievement badges, progress history, theme switching, and animated quest battles.",
+    tags: ["React", "TypeScript", "ASP.NET Core", "C#", "Entity Framework", "SQLite"],
+    link: "https://msa-2026-phase-2-software.vercel.app/",
+    source: "https://github.com/ZiruiJia11/msa-2026-phase-2-software",
+    featured: true,
+  },
+  {
+    name: "Power BI OData API Demo",
+    summary: "Multi-tenant Laravel integration that exposes authenticated OData feeds for Power BI, including metadata, filterable datasets, connection files, and downloadable report templates.",
+    tags: ["Laravel 13", "Vue 3", "Inertia.js", "OData", "Power BI", "Multi-tenancy"],
+    source: "https://github.com/ZiruiJia11/power-bi-api-demo",
     featured: true,
   },
   {
