@@ -67,12 +67,13 @@ Multi-tenant Laravel integration exposing authenticated OData feeds, metadata, P
 
 ## Skills Highlighted
 
-- Frontend: React, Next.js, Vue.js, TypeScript, JavaScript, HTML5, CSS3, responsive design
-- Backend and data: Node.js, Express, REST APIs, SQL, PostgreSQL, Prisma, database design
-- Testing and quality: JUnit, Jest, test case design, fuzz testing, debugging
+- Frontend: React, Vue 3, Inertia.js, Next.js, TypeScript, JavaScript, Vite, Zustand, HTML5, CSS3
+- Backend and data: PHP, Laravel, C#, ASP.NET Core, Node.js, Express, PostgreSQL, SQLite, Eloquent, Entity Framework Core
+- APIs and integration: REST, OData, Power BI, multi-tenancy, authentication, Meilisearch, Valkey, MinIO, Gotenberg
+- Testing and quality: Pest, xUnit, Vitest, React Testing Library, JUnit, Jest, fuzz testing, debugging
 - AI and workflow: Python, machine learning, CNN, Vision Transformer, data validation, AI-assisted development
 - Tools: VS Code, PyCharm, Codex, ChatGPT, Git, GitHub, Postman, npm
-- Cloud and platforms: Vercel, Render, Supabase, AWS, Snowflake, GitHub Pages, GitHub Actions, Docker basics
+- Cloud and platforms: Docker, Vercel, Render, Supabase, AWS, Snowflake, GitHub Pages, GitHub Actions
 
 ## Local Development
 

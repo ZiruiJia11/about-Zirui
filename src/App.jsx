@@ -17,25 +17,26 @@ import awsBadge from "../image/aws-certified-cloud-practitioner.png";
 const navItems = ["Skills", "Experience", "Projects", "Education", "CV"];
 
 const skillGroups = [
-  { title: "Frontend & Product", items: ["Blade", "Inertia.js", "TypeScript", "Vite", "Ziggy", "Laravel Precognition", "React", "Next.js", "Vue.js", "JavaScript", "HTML5", "CSS3"] },
-  { title: "Backend & Data", items: ["PHP", "Laravel", "Eloquent ORM", "PostgreSQL", "Meilisearch", "Valkey", "Node.js", "Express", "REST APIs", "SQL", "SQLite", "Prisma"] },
+  { title: "Frontend & Product", items: ["React", "Vue 3", "Inertia.js", "TypeScript", "JavaScript", "Vite", "Zustand", "Blade", "Next.js", "HTML5", "CSS3", "Responsive Design"] },
+  { title: "Backend & Data", items: ["PHP", "Laravel", "C#", "ASP.NET Core", "Node.js", "Express", "Eloquent ORM", "Entity Framework Core", "PostgreSQL", "SQLite", "SQL", "Prisma"] },
+  { title: "APIs & Integration", items: ["REST APIs", "OData", "Power BI", "Multi-tenancy", "Authentication", "API Rate Limiting", "Meilisearch", "Valkey", "MinIO", "Gotenberg"] },
   { title: "Laravel Ecosystem", items: ["Reverb", "Sail", "Tenancy", "Versionable", "Auditing", "Media Library", "Migrations", "Validation", "CRUD"] },
-  { title: "Testing & Quality", items: ["JUnit", "Jest", "Test Case Design", "Fuzz Testing", "Debugging", "Defect Investigation"] },
+  { title: "Testing & Quality", items: ["Pest", "xUnit", "Vitest", "React Testing Library", "JUnit", "Jest", "Test Case Design", "Fuzz Testing", "Debugging"] },
   { title: "AI & Workflow", items: ["Python", "Machine Learning", "CNN", "Vision Transformer", "Data Validation", "AI-Assisted Development"] },
   { title: "Developer Tools", items: ["VS Code", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm", "Mailpit"] },
-  { title: "Cloud & Platforms", items: ["MinIO", "Gotenberg", "Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions", "Docker Basics"] },
+  { title: "Cloud & Platforms", items: ["Docker", "Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions"] },
 ];
 
 const highlights = [
   "Full Stack Developer Intern at Ocular, building PHP and Laravel web application features.",
-  "Computer Science graduate with an AI minor from Victoria University of Wellington.",
+  "Builds full-stack products across Laravel/Vue, React/TypeScript, and C#/.NET ecosystems.",
   "AWS Certified Cloud Practitioner with tutoring, support, and customer-facing experience.",
 ];
 
 const profileStats = [
   { value: "10+", label: "portfolio projects" },
   { value: "AWS", label: "cloud certified" },
-  { value: "Full-stack", label: "Laravel, React, Node, SQL" },
+  { value: "Full-stack", label: "Laravel, React, Vue, .NET" },
 ];
 
 const workspaceSignals = [
@@ -223,8 +224,8 @@ function App() {
           <div className="hero-copy">
             <p className="eyebrow">Open to graduate and junior roles</p>
             <h1 id="hero-title">Steven <span>Jia</span></h1>
-            <p className="hero-role">Full Stack Developer Intern at Ocular | Computer Science & AI Graduate</p>
-            <p className="hero-summary">I am currently building PHP and Laravel web application features at Ocular using Blade, MVC, Eloquent, validation, migrations, SQLite, SQL, and CRUD workflows. I also build reliable, user-focused systems with React, Next.js, TypeScript, Node.js, Java, and Python.</p>
+            <p className="hero-role">Full Stack Developer Intern | Laravel, Vue, React & .NET</p>
+            <p className="hero-summary">I build reliable, user-focused products across PHP and Laravel, Vue and Inertia, React and TypeScript, and C# with ASP.NET Core. My recent work includes dependency visualization, gamified full-stack systems, multi-tenant OData integrations for Power BI, relational data, testing, and cloud deployment.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
               <a className="button secondary" href="#projects"><ArrowUpRight size={18} /> View work</a>
