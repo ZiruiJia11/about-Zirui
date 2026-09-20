@@ -20,15 +20,15 @@ Key sections include:
 
 ### JobTrack Fullstack
 
-Personal job application tracker for managing company details, roles, job links, sources, categories, status, dates, JD text, cover letters, CV files, filters, follow-up timing, and estimated success probability.
+Full-stack job application tracker with job-page importing, private CV storage, and an AI Match Agent that grounds structured fit reports in reviewed candidate CV evidence.
 
 - Live demo: [https://jobtrack-fullstack-ashy.vercel.app](https://jobtrack-fullstack-ashy.vercel.app)
 - Source: [https://github.com/ZiruiJia11/jobtrack-fullstack](https://github.com/ZiruiJia11/jobtrack-fullstack)
-- Stack: Next.js, Supabase Auth, PostgreSQL, Route Handlers
+- Stack: Next.js, Supabase, PostgreSQL, Vercel AI SDK, OpenAI Responses API, Zod
 
 ### Reel Local Cinema SaaS
 
-Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking workflows, profile pages, backend APIs, and a PostgreSQL/Prisma roadmap.
+Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking workflows, profile pages, Express APIs, and PostgreSQL persistence through Prisma.
 
 - Live demo: [https://reel-local-project.vercel.app](https://reel-local-project.vercel.app)
 - Source: [https://github.com/ZiruiJia11/reel-local-project](https://github.com/ZiruiJia11/reel-local-project)

@@ -22,7 +22,7 @@ const skillGroups = [
   { title: "APIs & Integration", items: ["REST APIs", "OData", "Power BI", "Multi-tenancy", "Authentication", "API Rate Limiting", "Meilisearch", "Valkey", "MinIO", "Gotenberg"] },
   { title: "Laravel Ecosystem", items: ["Reverb", "Sail", "Tenancy", "Versionable", "Auditing", "Media Library", "Migrations", "Validation", "CRUD"] },
   { title: "Testing & Quality", items: ["Pest", "xUnit", "Vitest", "React Testing Library", "JUnit", "Jest", "Test Case Design", "Fuzz Testing", "Debugging"] },
-  { title: "AI & Workflow", items: ["Python", "Machine Learning", "CNN", "Vision Transformer", "Data Validation", "AI-Assisted Development"] },
+  { title: "AI & Workflow", items: ["Vercel AI SDK", "OpenAI Responses API", "Tool-using Agents", "Zod", "Python", "Machine Learning", "CNN", "Vision Transformer", "AI-Assisted Development"] },
   { title: "Developer Tools", items: ["VS Code", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm", "Mailpit"] },
   { title: "Cloud & Platforms", items: ["Docker", "Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions"] },
 ];
@@ -128,15 +128,15 @@ const experience = [
 const projects = [
   {
     name: "JobTrack Fullstack",
-    summary: "Personal job application tracker for managing company details, roles, job links, sources, categories, status, dates, JD text, cover letters, CV files, filters, follow-up timing, and estimated success probability.",
-    tags: ["Next.js", "Supabase Auth", "PostgreSQL", "Route Handlers", "Full Stack", "Workflow Tool"],
+    summary: "Full-stack job application tracker with authenticated workflows, job-page importing, private CV storage, and an AI Match Agent that grounds structured fit reports in reviewed candidate CV evidence.",
+    tags: ["Next.js", "Supabase", "PostgreSQL", "Vercel AI SDK", "OpenAI API", "Zod"],
     link: "https://jobtrack-fullstack-ashy.vercel.app/",
     source: "https://github.com/ZiruiJia11/jobtrack-fullstack",
     featured: true,
   },
   {
     name: "Reel Local Cinema SaaS",
-    summary: "Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking workflows, profile pages, backend APIs, and a PostgreSQL/Prisma roadmap.",
+    summary: "Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking workflows, profile pages, Express APIs, and PostgreSQL persistence through Prisma.",
     tags: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma"],
     link: "https://reel-local-project.vercel.app/",
     source: "https://github.com/ZiruiJia11/reel-local-project",
@@ -276,13 +276,13 @@ function App() {
         <section className="feature-strip" aria-label="Featured build snapshot">
           <div>
             <p className="eyebrow">Featured build</p>
-            <h2>JobTrack turns my job search into a full-stack product.</h2>
+            <h2>JobTrack combines application workflows with evidence-grounded AI matching.</h2>
           </div>
           <div className="feature-metrics">
-            <span>Supabase Auth</span>
-            <span>PostgreSQL</span>
-            <span>CV files</span>
-            <span>Follow-up timing</span>
+            <span>AI Match Agent</span>
+            <span>CV evidence</span>
+            <span>Job URL import</span>
+            <span>Supabase</span>
           </div>
           <a href="https://jobtrack-fullstack-ashy.vercel.app/" target="_blank" rel="noreferrer" aria-label="Open JobTrack live demo"><ArrowUpRight size={20} /></a>
         </section>
