@@ -1,0 +1,15 @@
+.shiny-text {
+  display: inline-block;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text {
+    background: none !important;
+    color: #98620a;
+    -webkit-text-fill-color: currentColor;
+  }
+}

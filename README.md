@@ -63,6 +63,8 @@ Multi-tenant Laravel integration exposing authenticated OData feeds, metadata, P
 - JavaScript
 - CSS3
 - lucide-react
+- React Bits-inspired SpotlightCard and ShinyText components
+- Motion
 - GitHub Pages
 
 ## Skills Highlighted
