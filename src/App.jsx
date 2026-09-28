@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import {
   Activity,
   ArrowUpRight,
   Award,
   BriefcaseBusiness,
   Code2,
-  Download,
+  FileText,
+  Gamepad2,
   GraduationCap,
   Mail,
   Phone,
@@ -18,6 +19,9 @@ import ShinyText from "./components/ShinyText/ShinyText.jsx";
 import SpotlightCard from "./components/SpotlightCard/SpotlightCard.jsx";
 import ShapeWaves from "./components/ShapeWaves/ShapeWaves.jsx";
 import GooeyNav from "./components/GooeyNav/GooeyNav.jsx";
+import DepthText from "./components/DepthText/DepthText.jsx";
+
+const PortfolioTour = lazy(() => import("./components/PortfolioTour/PortfolioTour.jsx"));
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -202,14 +206,6 @@ const projects = [
   },
 ];
 
-const cvLinks = [
-  { label: "Software Engineer CV", href: "/cv-software-engineer.pdf" },
-  { label: "Full Stack Developer CV", href: "/cv-full-stack.pdf" },
-  { label: "Web Developer CV", href: "/cv-web-developer.pdf" },
-  { label: "Data & AI Engineer CV", href: "/cv-data-ai.pdf" },
-  { label: "IT Support CV", href: "/cv-it-support.pdf" },
-];
-
 function SectionHeader({ eyebrow, title, copy }) {
   return (
     <div className="section-header">
@@ -227,21 +223,125 @@ function CardSurface({ children }) {
 function App() {
   const getPath = () => {
     const path = window.location.hash.replace(/^#/, "") || "/";
-    return navItems.some((item) => item.path === path) ? path : "/";
+    return navItems.some((item) => item.path === path) || path === "/tour" ? path : "/";
   };
   const [currentPath, setCurrentPath] = useState(getPath);
+  const [showExperiencePicker, setShowExperiencePicker] = useState(() => {
+    try {
+      return getPath() === "/" && window.sessionStorage.getItem("portfolio-experience-selected") !== "true";
+    } catch {
+      return getPath() === "/";
+    }
+  });
+
+  const rememberExperienceChoice = () => {
+    try {
+      window.sessionStorage.setItem("portfolio-experience-selected", "true");
+    } catch {
+      // The choice still works when browser storage is unavailable.
+    }
+  };
+
+  const chooseStandardExperience = () => {
+    rememberExperienceChoice();
+    setShowExperiencePicker(false);
+  };
+
+  const chooseTourExperience = () => {
+    rememberExperienceChoice();
+    setShowExperiencePicker(false);
+    window.location.hash = "/tour";
+  };
+
+  const openCvPopup = () => {
+    const cvUrl = new URL(`${import.meta.env.BASE_URL}cv-complete.pdf`, window.location.origin).href;
+    const width = Math.min(1100, window.screen.availWidth - 80);
+    const height = Math.min(860, window.screen.availHeight - 80);
+    const left = Math.max(0, Math.round((window.screen.availWidth - width) / 2));
+    const top = Math.max(0, Math.round((window.screen.availHeight - height) / 2));
+    const popup = window.open(
+      cvUrl,
+      "steven-jia-complete-cv",
+      `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`,
+    );
+    popup?.focus();
+  };
 
   useEffect(() => {
     const handleRouteChange = () => {
-      setCurrentPath(getPath());
+      const nextPath = getPath();
+      setCurrentPath(nextPath);
+      if (nextPath === "/") {
+        try {
+          setShowExperiencePicker(window.sessionStorage.getItem("portfolio-experience-selected") !== "true");
+        } catch {
+          setShowExperiencePicker(true);
+        }
+      }
       window.scrollTo({ top: 0, behavior: "instant" });
     };
     window.addEventListener("hashchange", handleRouteChange);
     return () => window.removeEventListener("hashchange", handleRouteChange);
   }, []);
 
+  useEffect(() => {
+    if (!showExperiencePicker) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") chooseStandardExperience();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showExperiencePicker]);
+
+  if (currentPath === "/tour") {
+    return (
+      <Suspense fallback={<div className="tour-route-loading" role="status"><span /> Loading guided tour</div>}>
+        <PortfolioTour />
+      </Suspense>
+    );
+  }
+
   return (
     <>
+      {showExperiencePicker ? (
+        <div className="experience-picker-backdrop" role="presentation">
+          <section className="experience-picker" role="dialog" aria-modal="true" aria-labelledby="experience-picker-title">
+            <header className="experience-picker-header">
+              <p className="eyebrow">Choose your experience</p>
+              <h1 id="experience-picker-title">How would you like to explore?</h1>
+              <p>Both paths contain the same portfolio. Choose the version that suits your time and device.</p>
+            </header>
+
+            <div className="experience-picker-options">
+              <button type="button" className="experience-option standard" onClick={chooseStandardExperience} autoFocus>
+                <span className="experience-option-icon"><Code2 size={25} /></span>
+                <span className="experience-option-label">QUICK &amp; SMOOTH</span>
+                <strong>Standard portfolio</strong>
+                <span className="experience-option-copy">The fastest way to review my experience, projects, skills, and CV.</span>
+                <span className="experience-option-note">Recommended if you are short on time or want to avoid performance issues.</span>
+                <span className="experience-option-action">ENTER STANDARD <ArrowUpRight size={18} /></span>
+              </button>
+
+              <button type="button" className="experience-option immersive" onClick={chooseTourExperience}>
+                <span className="experience-option-icon"><Gamepad2 size={25} /></span>
+                <span className="experience-option-label">BEST EXPERIENCE</span>
+                <strong>3D guided tour</strong>
+                <span className="experience-option-copy">An interactive cyber-world journey with animated scenes and project exhibits.</span>
+                <span className="experience-option-note">Choose this for the full visual experience on a capable device.</span>
+                <span className="experience-option-action">ENTER 3D TOUR <ArrowUpRight size={18} /></span>
+              </button>
+            </div>
+
+            <p className="experience-picker-footnote">You can switch between both versions at any time from the navigation.</p>
+          </section>
+        </div>
+      ) : null}
+
       <div className="site-waves" aria-hidden="true">
         <ShapeWaves
           text="STEVEN JIA"
@@ -272,16 +372,22 @@ function App() {
       </div>
       <header className="site-header">
         <a className="brand" href="#/" aria-label="Steven Jia home">SJ</a>
-        <GooeyNav
-          items={navItems.map((item) => ({ label: item.label, href: `#${item.path}` }))}
-          particleCount={15}
-          particleDistances={[90, 10]}
-          particleR={100}
-          initialActiveIndex={Math.max(0, navItems.findIndex((item) => item.path === currentPath))}
-          animationTime={600}
-          timeVariance={300}
-          colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-        />
+        <div className="site-header-nav">
+          <GooeyNav
+            items={navItems.map((item) => ({ label: item.label, href: `#${item.path}` }))}
+            particleCount={15}
+            particleDistances={[90, 10]}
+            particleR={100}
+            initialActiveIndex={Math.max(0, navItems.findIndex((item) => item.path === currentPath))}
+            animationTime={600}
+            timeVariance={300}
+            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+          />
+          <a className="header-tour-button" href="#/tour" aria-label="Enter the 3D guided tour">
+            <Gamepad2 size={17} />
+            <span>3D Tour</span>
+          </a>
+        </div>
       </header>
 
       <main id="top" className="site-main">
@@ -289,7 +395,24 @@ function App() {
           <section className="hero" aria-labelledby="hero-title">
             <div className="hero-copy">
             <p className="eyebrow"><ShinyText text="Open to graduate and junior roles" /></p>
-            <h1 id="hero-title">Steven <span>Jia</span></h1>
+            <h1 id="hero-title">
+              <DepthText
+                text="Steven Jia"
+                layers={34}
+                depth={2.4}
+                faceColor="#1455d9"
+                depthColor="#ff7a45"
+                tilt={7.5}
+                pointerTracking
+                smoothing={0.14}
+                perspective={900}
+                autoOrbit
+                orbitSpeed={0.35}
+                fontSize="clamp(3rem, 8vw, 6.4rem)"
+                fontWeight={900}
+                shadow
+              />
+            </h1>
             <p className="hero-role">Full Stack Developer Intern | Laravel, Vue, React & .NET</p>
             <p className="hero-summary">I build reliable, user-focused products across PHP and Laravel, Vue and Inertia, React and TypeScript, and C# with ASP.NET Core. My recent work includes dependency visualization, gamified full-stack systems, multi-tenant OData integrations for Power BI, relational data, testing, and cloud deployment.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
@@ -297,6 +420,7 @@ function App() {
               <a className="button secondary" href="#/projects"><ArrowUpRight size={18} /> View work</a>
               <a className="button secondary" href="https://github.com/ZiruiJia11" target="_blank" rel="noreferrer"><Code2 size={18} /> GitHub</a>
               <a className="button secondary" href="https://www.linkedin.com/in/steven-jia-b78314231/" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} /> LinkedIn</a>
+              <a className="button game" href="#/tour"><Gamepad2 size={18} /> 3D guided tour</a>
             </div>
             <div className="profile-stats" aria-label="Profile quick proof">
               {profileStats.map((stat) => (
@@ -334,7 +458,7 @@ function App() {
             <div className="quick-facts">
               <span><Phone size={16} /> 021 119 9859</span>
             </div>
-            </div>
+          </div>
           </section>
 
           <section className="highlights" aria-label="Profile highlights">
@@ -470,17 +594,25 @@ function App() {
         </div> : null}
 
         {currentPath === "/cv" ? <div className="route-page">
-          <SectionHeader eyebrow="CV & contact" title="Choose the CV that fits the role" copy="Role-focused versions are available below, along with direct contact and profile links." />
+          <SectionHeader eyebrow="CV & contact" title="View my CV" copy="Open my complete CV in a dedicated window, then use the contact links below if you would like to talk." />
           <section className="cv-section">
-          <div><p className="eyebrow">CV downloads</p><h2>Role-focused CV templates</h2><p>These are my own CV templates for software engineering, full-stack, web development, data and AI, and IT support roles.</p></div>
-          <div className="cv-actions">{cvLinks.map((link) => <a className="button primary" href={link.href} download key={link.label}><Download size={18} /> {link.label}</a>)}</div>
+            <div>
+              <p className="eyebrow">Complete profile / PDF</p>
+              <h2>Steven Jia — Complete CV</h2>
+              <p>Experience, education, projects, technical skills, certifications, and contact details in one current document.</p>
+            </div>
+            <button type="button" className="cv-view-button" onClick={openCvPopup}>
+              <span><FileText size={22} /> Current CV</span>
+              <strong>VIEW MY CV</strong>
+              <em>OPEN DOCUMENT <ArrowUpRight size={20} /></em>
+            </button>
           </section>
 
           <section className="contact-section" aria-labelledby="contact-title">
           <div>
             <p className="eyebrow">Next step</p>
             <h2 id="contact-title">Open to junior software, web, data, and support roles</h2>
-            <p>I am ready to talk through the projects above, share role-specific CVs, and discuss how I can contribute on a graduate or junior engineering team.</p>
+            <p>I am ready to talk through the projects above, share my experience, and discuss how I can contribute on a graduate or junior engineering team.</p>
           </div>
           <div className="contact-actions">
             <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Contact me</a>

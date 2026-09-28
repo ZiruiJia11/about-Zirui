@@ -1,0 +1,1 @@
+.falling-text-container{z-index:1;cursor:pointer;text-align:center;width:100%;height:100%;padding-top:2em;position:relative}.falling-text-target{display:inline-block}.word{-webkit-user-select:none;user-select:none;margin:0 2px;display:inline-block}.highlighted{color:#0ff;font-weight:700}.falling-text-canvas{z-index:0;position:absolute;top:0;left:0}

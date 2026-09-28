@@ -5,15 +5,24 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/prepare-build.mjs && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.8.1",
+    "@react-three/postprocessing": "^3.1.2",
     "@vitejs/plugin-react": "latest",
+    "face-api.js": "^0.22.2",
+    "gsap": "^3.15.0",
     "lucide-react": "latest",
+    "matter-js": "^0.20.0",
     "motion": "^13.4.1",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.39.5",
     "react": "latest",
     "react-dom": "latest",
+    "three": "^0.180.0",
     "vgpu": "^0.3.1",
     "vite": "latest"
   }

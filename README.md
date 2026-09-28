@@ -6,7 +6,7 @@ Live site: [https://zirui-jia.dev](https://zirui-jia.dev)
 
 ## Overview
 
-This portfolio is built to present my technical profile, selected projects, experience, education, certifications, and role-focused CV downloads in one clean React + Vite site.
+This portfolio presents my technical profile, selected projects, experience, education, certifications, and current CV through both a standard React interface and an interactive 3D guided tour.
 
 Key sections include:
 
@@ -14,7 +14,8 @@ Key sections include:
 - Technical skills across frontend, backend, data, AI, testing, developer tools, and cloud platforms
 - Selected projects with live demo and source links where available
 - Work experience, education, and AWS certification
-- CV downloads for software engineering, full-stack, web development, data/AI, and IT support roles
+- A single current CV with an in-browser popup viewer
+- A standard portfolio and an optional interactive 3D guided tour
 
 ## Featured Projects
 
@@ -108,7 +109,7 @@ Important files:
 - `src/App.css` - responsive layout and visual styling
 - `image/profile.jpg` - profile image
 - `image/aws-certified-cloud-practitioner.png` - AWS certification badge
-- `cv-*.pdf` - role-focused CV downloads
+- `public/cv-complete.pdf` - current complete CV
 
 ## Contact
 
