@@ -32,19 +32,19 @@ const navItems = [
 ];
 
 const skillGroups = [
-  { title: "Frontend & Product", items: ["React", "Vue 3", "Inertia.js", "TypeScript", "JavaScript", "Vite", "Zustand", "Blade", "Next.js", "HTML5", "CSS3", "Responsive Design"] },
-  { title: "Backend & Data", items: ["PHP", "Laravel", "C#", "ASP.NET Core", "Node.js", "Express", "Eloquent ORM", "Entity Framework Core", "PostgreSQL", "SQLite", "SQL", "Prisma"] },
-  { title: "APIs & Integration", items: ["REST APIs", "OData", "Power BI", "Multi-tenancy", "Authentication", "API Rate Limiting", "Meilisearch", "Valkey", "MinIO", "Gotenberg"] },
+  { title: "Frontend & Product", items: ["React", "Vue 3", "Inertia.js", "TypeScript", "JavaScript", "Vite", "Zustand", "Next.js", "HTML5", "CSS3", "Responsive Design", "Progressive Web Apps", "Three.js", "React Three Fiber", "WebGL"] },
+  { title: "Backend & Data", items: ["PHP", "Laravel", "C#", "ASP.NET Core", "Node.js", "Express", "Eloquent ORM", "Entity Framework Core", "PostgreSQL", "SQLite", "SQL", "Prisma", "Relational Data Modelling"] },
+  { title: "APIs & Integration", items: ["REST APIs", "OData", "Power BI", "Multi-tenancy", "Authentication", "Authorisation", "API Rate Limiting", "Queues", "Real-time Features", "Meilisearch", "Valkey", "MinIO", "Gotenberg"] },
   { title: "Laravel Ecosystem", items: ["Reverb", "Sail", "Tenancy", "Versionable", "Auditing", "Media Library", "Migrations", "Validation", "CRUD"] },
-  { title: "Testing & Quality", items: ["Pest", "xUnit", "Vitest", "React Testing Library", "JUnit", "Jest", "Test Case Design", "Fuzz Testing", "Debugging"] },
-  { title: "AI & Workflow", items: ["Vercel AI SDK", "OpenAI Responses API", "Tool-using Agents", "Zod", "Python", "Machine Learning", "CNN", "Vision Transformer", "AI-Assisted Development"] },
+  { title: "Testing & Quality", items: ["Pest", "xUnit", "Vitest", "React Testing Library", "JUnit", "Jest", "Unit Testing", "Integration Testing", "Feature Testing", "Static Analysis", "Fuzz Testing", "Debugging", "CI/CD"] },
+  { title: "AI, Data & Automation", items: ["Vercel AI SDK", "OpenAI Responses API", "Tool-using Agents", "Zod", "Python", "Machine Learning", "NLP", "Computer Vision", "CNN", "Vision Transformer", "Model Evaluation", "Error Analysis", "Data Automation", "Explainable Systems"] },
   { title: "Developer Tools", items: ["VS Code", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm", "Mailpit"] },
   { title: "Cloud & Platforms", items: ["Docker", "Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions"] },
 ];
 
 const highlights = [
-  "Full Stack Developer Intern at Ocular, building PHP and Laravel web application features.",
-  "Builds full-stack products across Laravel/Vue, React/TypeScript, and C#/.NET ecosystems.",
+  "Full Stack Developer Intern at Ocular, building multi-tenant features across Vue 3, TypeScript, Laravel, and PostgreSQL.",
+  "Builds deployed products across Laravel/Vue, React/TypeScript, Next.js/Supabase, and C#/.NET ecosystems.",
   "AWS Certified Cloud Practitioner with tutoring, support, and customer-facing experience.",
 ];
 
@@ -56,8 +56,8 @@ const profileStats = [
 
 const workspaceSignals = [
   { label: "Current role", value: "Ocular", status: "Interning" },
-  { label: "Stack focus", value: "PHP + Laravel", status: "Building" },
-  { label: "Current work", value: "MVC + CRUD workflows", status: "Shipping" },
+  { label: "Stack focus", value: "Vue + Laravel", status: "Building" },
+  { label: "Current work", value: "Multi-tenant features", status: "Shipping" },
 ];
 
 const dailyPractices = [
@@ -104,9 +104,9 @@ const experience = [
     company: "Ocular, Wellington",
     period: "Jul 2026 - Present",
     points: [
-      "Develop and maintain web application features using PHP and Laravel in a professional development environment.",
-      "Build Laravel MVC functionality with Blade, Inertia.js, TypeScript, Vite, Ziggy, Precognition, Eloquent, validation, migrations, and database-backed CRUD workflows.",
-      "Work with PostgreSQL, Meilisearch, Valkey, Reverb, MinIO, Mailpit, Gotenberg, Sail, tenancy, versioning, auditing, and media-management tooling across the development cycle.",
+      "Develop multi-tenant application features using Vue 3, TypeScript, Inertia.js, PHP, Laravel, Eloquent ORM, and PostgreSQL.",
+      "Deliver complete request lifecycles across reusable interfaces, REST APIs, validation, middleware, business logic, migrations, and ownership-aware database queries.",
+      "Integrate authentication and authorisation, search, storage, email, document generation, queues, and real-time services through Docker, Laravel Sail, and Git-based delivery workflows.",
     ],
   },
   {
@@ -143,8 +143,8 @@ const experience = [
 const projects = [
   {
     name: "JobTrack Fullstack",
-    summary: "Full-stack job application tracker with authenticated workflows, job-page importing, private CV storage, and an AI Match Agent that grounds structured fit reports in reviewed candidate CV evidence.",
-    tags: ["Next.js", "Supabase", "PostgreSQL", "Vercel AI SDK", "OpenAI API", "Zod"],
+    summary: "Full-stack job tracker with SEEK and LinkedIn importing, browser-extension capture, editable records, private CV storage, and an OpenAI agent that returns structured fit reports grounded in the latest reviewed CV evidence.",
+    tags: ["Next.js", "Supabase", "PostgreSQL", "Vercel AI SDK", "OpenAI Responses API", "Zod"],
     link: "https://jobtrack-fullstack-ashy.vercel.app/",
     source: "https://github.com/ZiruiJia11/jobtrack-fullstack",
     featured: true,
@@ -159,50 +159,49 @@ const projects = [
   },
   {
     name: "Dependency Map",
-    summary: "Interactive dependency-graph workspace for organizing projects, nodes, and relationships, with authenticated CRUD workflows, scoped resource access, and persistent graph layouts.",
-    tags: ["Laravel 13", "Vue 3", "Inertia.js", "TypeScript", "PostgreSQL", "Docker"],
+    summary: "Authenticated dependency-graph workspace with scoped project, node, and relationship CRUD, persistent layouts, 31 domain-focused feature tests, and a CI pipeline backed by PostgreSQL integration.",
+    tags: ["Laravel 13", "Vue 3", "Inertia.js", "TypeScript", "PostgreSQL", "Pest", "GitHub Actions"],
     source: "https://github.com/ZiruiJia11/dependency-map",
     featured: true,
   },
   {
     name: "FitQuest - MSA 2026",
-    summary: "Gamified fitness quest tracker with workout CRUD, XP and level progression, streaks, achievement badges, progress history, theme switching, and animated quest battles.",
-    tags: ["React", "TypeScript", "ASP.NET Core", "C#", "Entity Framework", "SQLite"],
+    summary: "Deployed gamified fitness tracker with quest CRUD, XP progression, streaks, achievements, responsive navigation, animated feedback, request validation, API rate limiting, and frontend and backend tests.",
+    tags: ["React", "TypeScript", "ASP.NET Core", "C#", "Entity Framework Core", "SQLite", "xUnit"],
     link: "https://msa-2026-phase-2-software.vercel.app/",
     source: "https://github.com/ZiruiJia11/msa-2026-phase-2-software",
     featured: true,
   },
   {
     name: "Power BI OData API Demo",
-    summary: "Multi-tenant Laravel integration that exposes authenticated OData feeds for Power BI, including metadata, filterable datasets, connection files, and downloadable report templates.",
-    tags: ["Laravel 13", "Vue 3", "Inertia.js", "OData", "Power BI", "Multi-tenancy"],
+    summary: "Tenant-isolated Laravel integration exposing discoverable OData feeds with filters, Basic and Bearer authentication, rate limiting, downloadable PBIDS/PBIT assets, and 11 domain-focused feature tests.",
+    tags: ["Laravel", "Vue 3", "Inertia.js", "OData", "Power BI", "Multi-tenancy", "Pest"],
     source: "https://github.com/ZiruiJia11/power-bi-api-demo",
     featured: true,
   },
   {
-    name: "Event Management Web Application",
-    summary: "Responsive Vue application for event creation, authentication flows, RSVP management, form validation, and backend service integration.",
-    tags: ["Vue.js", "JavaScript", "HTML5", "CSS3", "REST APIs"],
-  },
-  {
-    name: "Transport Route Planning Application",
-    summary: "Java route-planning system that processes structured transport data and calculates optimal routes using DFS, BFS, and A* algorithms.",
-    tags: ["Java", "Algorithms", "Data Structures", "Testing"],
-  },
-  {
-    name: "Java Maze Game & Testing Project",
-    summary: "Team-based 2D maze game focused on reliable system behavior, gameplay debugging, JUnit coverage, and a custom fuzz testing tool.",
-    tags: ["Java", "JUnit", "Git", "Fuzz Testing"],
+    name: "Kiwi Supplement Watch",
+    summary: "New Zealand supplement price-monitoring dashboard with live retailer collectors, source-health reporting, price history, stale-data fallback, and automated daily collection, smoke testing, dataset updates, and deployment.",
+    tags: ["React", "Vite", "JavaScript", "GitHub Actions", "Data Automation", "Vercel"],
+    link: "https://kiwi-supplement-watch.vercel.app/",
+    source: "https://github.com/ZiruiJia11/kiwi-supplement-watch",
+    featured: true,
   },
   {
     name: "Data and AI Classification Projects",
-    summary: "Python projects for handwritten character recognition and text classification, including dataset preparation, preprocessing checks, model comparison, and class-level evaluation.",
-    tags: ["Python", "Machine Learning", "Data Processing", "Evaluation Metrics"],
+    summary: "Prepared image and text datasets, compared CNN, Vision Transformer, traditional ML, and transformer approaches, and used class-level error analysis to improve models; the strongest AG News model reached about 94.7% test accuracy.",
+    tags: ["Python", "Machine Learning", "NLP", "CNN", "Vision Transformer", "Model Evaluation"],
+    source: "https://github.com/ZiruiJia11/hand-written-letter-recognizer",
   },
   {
-    name: "Inclusive Transport UX Design",
-    summary: "Public transport app concept shaped through user research, wireframes, high-fidelity prototypes, and accessibility-minded interface decisions.",
-    tags: ["Figma", "UX Design", "HCI", "Accessibility"],
+    name: "Tax Case Triage Assistant",
+    summary: "Explainable case-prioritisation prototype using synthetic data, deterministic risk rules, visible evidence, mandatory human approval, timestamped audit logging, local-only data handling, and automated tests.",
+    tags: ["Python", "SQLite", "JavaScript", "Explainable Rules", "Audit Logging", "Human in the Loop"],
+  },
+  {
+    name: "Java Algorithms and Automated Testing",
+    summary: "Route-planning application using DFS, BFS, and A* over structured transport data, paired with a team-built 2D maze game, JUnit test cases, and a custom fuzzing tool for regressions and edge cases.",
+    tags: ["Java", "Algorithms", "Data Structures", "JUnit", "Git", "Fuzz Testing"],
   },
 ];
 
@@ -413,8 +412,8 @@ function App() {
                 shadow
               />
             </h1>
-            <p className="hero-role">Full Stack Developer Intern | Laravel, Vue, React & .NET</p>
-            <p className="hero-summary">I build reliable, user-focused products across PHP and Laravel, Vue and Inertia, React and TypeScript, and C# with ASP.NET Core. My recent work includes dependency visualization, gamified full-stack systems, multi-tenant OData integrations for Power BI, relational data, testing, and cloud deployment.</p>
+            <p className="hero-role">Software Engineer &amp; Full Stack Developer Intern | Laravel, Vue, React &amp; .NET</p>
+            <p className="hero-summary">I build reliable, data-backed products across Vue and Laravel, React and TypeScript, Next.js and Supabase, and C# with ASP.NET Core. Recent work includes multi-tenant product features, evidence-grounded AI workflows, live data automation, OData integrations, automated testing, CI/CD, and cloud deployment.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
               <a className="button secondary" href="#/projects"><ArrowUpRight size={18} /> View work</a>
@@ -520,7 +519,7 @@ function App() {
           </section>
 
           <section className="page-section">
-          <SectionHeader eyebrow="Technical profile" title="Skills that connect product, systems, data, and testing" copy="A practical stack for graduate software, web, test, data, support, and configuration developer roles." />
+          <SectionHeader eyebrow="Technical profile" title="Skills that connect product, systems, data, AI, and testing" copy="A practical stack for graduate and junior software, full-stack, web, data, automation, and applied AI roles." />
           <div className="skills-grid">
             {skillGroups.map((group) => (
               <CardSurface key={group.title} accentColor="#a7d9ff">
@@ -544,7 +543,7 @@ function App() {
         </div> : null}
 
         {currentPath === "/experience" ? <div className="route-page experience-page">
-          <SectionHeader eyebrow="Experience" title="Professional work, teaching, and technical support" copy="Hands-on development at Ocular, backed by tutoring, repair, and customer-facing experience." />
+          <SectionHeader eyebrow="Experience" title="Professional product development, teaching, and technical support" copy="Multi-tenant application work at Ocular, backed by tutoring, repair, and customer-facing problem solving." />
           <section className="page-section">
           <div className="timeline">
             {experience.map((job, index) => (
@@ -564,7 +563,7 @@ function App() {
         </div> : null}
 
         {currentPath === "/projects" ? <div className="route-page">
-          <SectionHeader eyebrow="Selected work" title="Projects with real implementation depth" copy="Full-stack products, integrations, testing work, algorithms, and machine-learning prototypes." />
+          <SectionHeader eyebrow="Selected work" title="Projects with real implementation depth" copy="Deployed full-stack products, evidence-grounded AI, live data automation, integrations, testing, algorithms, and machine-learning prototypes." />
           <section className="page-section projects-section">
           <div className="projects-grid">
             {projects.map((project) => (
@@ -611,8 +610,8 @@ function App() {
           <section className="contact-section" aria-labelledby="contact-title">
           <div>
             <p className="eyebrow">Next step</p>
-            <h2 id="contact-title">Open to junior software, web, data, and support roles</h2>
-            <p>I am ready to talk through the projects above, share my experience, and discuss how I can contribute on a graduate or junior engineering team.</p>
+            <h2 id="contact-title">Open to graduate and junior software, full-stack, web, data, and applied AI roles</h2>
+            <p>I am ready to discuss the engineering decisions behind these projects and how I can contribute across product development, data-backed systems, testing, automation, and technical problem solving.</p>
           </div>
           <div className="contact-actions">
             <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Contact me</a>

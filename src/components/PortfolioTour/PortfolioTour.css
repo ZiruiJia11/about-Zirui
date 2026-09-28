@@ -176,9 +176,9 @@
 .contact-signal {
   position: absolute;
   top: 50%;
-  left: clamp(34px, 8vw, 128px);
+  left: clamp(24px, 4vw, 64px);
   z-index: 7;
-  width: min(760px, calc(100vw - 120px));
+  width: clamp(320px, 30vw, 430px);
   color: #f3fff9;
   pointer-events: none;
   transform: translateY(-45%);
@@ -187,7 +187,7 @@
 
 .contact-signal-kicker {
   display: flex;
-  margin: 0 0 18px;
+  margin: 0 0 12px;
   align-items: center;
   gap: 10px;
   color: rgba(151, 235, 202, 0.64);
@@ -203,8 +203,8 @@
   display: grid;
   margin: 0;
   color: #f3fff9;
-  font-size: clamp(3.5rem, 8vw, 7.8rem);
-  line-height: 0.82;
+  font-size: clamp(2.7rem, 4.3vw, 4.7rem);
+  line-height: 0.88;
   letter-spacing: -0.07em;
   text-transform: uppercase;
 }
@@ -213,7 +213,7 @@
   position: relative;
   width: max-content;
   max-width: 100%;
-  margin-top: 12px;
+  margin-top: 8px;
   color: #61dca3;
   font: inherit;
   text-shadow: 0 0 16px rgba(97, 220, 163, 0.48), 0 0 54px rgba(97, 220, 163, 0.24);
@@ -232,34 +232,34 @@
 }
 
 .contact-signal-summary {
-  max-width: 610px;
-  margin: 30px 0 0;
+  max-width: 410px;
+  margin: 18px 0 0;
   color: rgba(224, 248, 237, 0.72);
-  font-size: clamp(0.9rem, 1.3vw, 1.08rem);
-  line-height: 1.65;
+  font-size: clamp(0.78rem, 0.92vw, 0.92rem);
+  line-height: 1.5;
 }
 
 .contact-signal-lines {
   display: grid;
-  max-width: 700px;
+  max-width: 420px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 24px;
+  gap: 6px;
+  margin-top: 16px;
 }
 
 .contact-signal-lines a {
   display: grid;
-  min-height: 46px;
-  padding: 9px 12px;
+  min-height: 40px;
+  padding: 7px 9px;
   margin: 0;
   grid-template-columns: auto auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 9px;
+  gap: 7px;
   border: 1px solid rgba(97, 220, 163, 0.2);
   border-radius: 8px;
   background: rgba(5, 24, 18, 0.54);
   color: rgba(220, 247, 235, 0.76);
-  font: 700 0.66rem/1.25 "SFMono-Regular", Consolas, monospace;
+  font: 700 0.59rem/1.2 "SFMono-Regular", Consolas, monospace;
   pointer-events: auto;
   transition: color 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
@@ -336,16 +336,50 @@
   transform: translateY(-1px);
 }
 
+.contact-signal-lines a:last-child {
+  grid-column: 1 / -1;
+}
+
+.contact-portal-status {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  z-index: 6;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 12px rgba(103, 232, 249, 0.28))
+    drop-shadow(0 0 30px rgba(82, 39, 255, 0.36));
+  transform: translateX(-50%) scale(0.82);
+  transform-origin: top center;
+}
+
+.contact-portal-status > span {
+  color: rgba(207, 250, 254, 0.68);
+  font: 800 0.62rem/1 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.16em;
+}
+
+.contact-portal-status .split-flap-text__tile {
+  border-color: rgba(103, 232, 249, 0.16);
+  box-shadow:
+    0 0 0 1px rgba(103, 232, 249, 0.08),
+    0 0.16em 0.38em rgba(0, 0, 0, 0.42),
+    0 0 18px rgba(82, 39, 255, 0.1);
+}
+
 .contact-cv-showcase {
   position: absolute;
   top: auto;
-  right: clamp(34px, 5vw, 82px);
-  bottom: clamp(76px, 10vh, 106px);
+  right: clamp(24px, 3vw, 48px);
+  bottom: clamp(72px, 9vh, 92px);
   z-index: 8;
   display: grid;
-  width: clamp(330px, 33vw, 500px);
-  min-height: 238px;
-  padding: 24px 26px 22px;
+  width: clamp(280px, 24vw, 350px);
+  min-height: 180px;
+  padding: 19px 20px 17px;
   align-content: space-between;
   overflow: hidden;
   border: 1px solid rgba(97, 220, 163, 0.5);
@@ -440,6 +474,103 @@
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.contact-cv-showcase .contact-cv-fold-text,
+.contact-cv-showcase .contact-cv-placeholder {
+  font-size: clamp(2rem, 3vw, 3.25rem) !important;
+}
+
+.portal-exit-transition {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  overflow: hidden;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(255, 255, 255, 0.96) 0 1%, rgba(103, 232, 249, 0.76) 3%, rgba(124, 58, 237, 0.38) 13%, transparent 34%),
+    #03040a;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.portal-exit-transition i {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: 20vmin;
+  height: 20vmin;
+  border: 2px solid rgba(103, 232, 249, 0.8);
+  border-radius: 50%;
+  box-shadow:
+    0 0 28px rgba(103, 232, 249, 0.8),
+    0 0 82px rgba(168, 85, 247, 0.68),
+    inset 0 0 32px rgba(103, 232, 249, 0.52);
+  transform: translate(-50%, -50%) scale(0.18);
+}
+
+.portal-exit-transition span {
+  position: absolute;
+  bottom: 12%;
+  color: rgba(232, 252, 255, 0.86);
+  font: 800 0.66rem/1 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.18em;
+  opacity: 0;
+}
+
+.portfolio-tour.is-portal-exiting .portal-exit-transition {
+  pointer-events: auto;
+  animation: portal-exit-wash 1120ms cubic-bezier(0.65, 0, 0.3, 1) both;
+}
+
+.portfolio-tour.is-portal-exiting .portal-exit-transition i {
+  animation: portal-exit-ring 920ms cubic-bezier(0.2, 0.74, 0.15, 1) both;
+}
+
+.portfolio-tour.is-portal-exiting .portal-exit-transition span {
+  animation: portal-exit-label 720ms ease 160ms both;
+}
+
+.portfolio-tour.is-portal-exiting .tour-canvas {
+  transform-origin: 50% 52%;
+  animation: portal-world-dive 1120ms cubic-bezier(0.65, 0, 0.3, 1) both;
+}
+
+.portfolio-tour.is-portal-exiting .tour-header,
+.portfolio-tour.is-portal-exiting .contact-signal,
+.portfolio-tour.is-portal-exiting .contact-portal-status,
+.portfolio-tour.is-portal-exiting .contact-cv-showcase {
+  animation: portal-interface-fade 320ms ease both;
+}
+
+@keyframes portal-exit-wash {
+  0% { opacity: 0; transform: scale(0.68); }
+  36% { opacity: 0.34; }
+  74% { opacity: 0.88; transform: scale(1.42); }
+  100% { opacity: 1; transform: scale(2.6); }
+}
+
+@keyframes portal-exit-ring {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.16) rotate(0deg); }
+  28% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(8.5) rotate(210deg); }
+}
+
+@keyframes portal-exit-label {
+  0% { opacity: 0; transform: translateY(12px); }
+  35%, 72% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes portal-world-dive {
+  0% { filter: brightness(1) saturate(1); transform: scale(1); }
+  58% { filter: brightness(1.38) saturate(1.35); transform: scale(1.16); }
+  100% { filter: brightness(2.8) saturate(0.65); transform: scale(2.25); }
+}
+
+@keyframes portal-interface-fade {
+  to { opacity: 0; transform: translateY(-10px); }
 }
 
 .tour-static-backdrop {
@@ -2920,28 +3051,37 @@
   .portfolio-tour::after { inset: 58px 0 0; }
 
   .contact-signal {
-    right: 20px;
-    left: 20px;
+    top: auto;
+    right: 14px;
+    bottom: 68px;
+    left: 14px;
     width: auto;
-    transform: translateY(-42%);
+    transform: none;
+    animation: none;
   }
 
-  .contact-signal h1 {
-    font-size: clamp(2.5rem, 13vw, 4.2rem);
-    line-height: 0.88;
-  }
-
-  .contact-signal h1 strong {
-    width: auto;
-  }
-
+  .contact-signal-kicker,
+  .contact-signal h1,
   .contact-signal-summary {
-    margin-top: 22px;
-    font-size: 0.86rem;
+    display: none;
   }
 
   .contact-signal-lines {
-    margin-top: 18px;
+    max-width: none;
+    margin-top: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .contact-signal-lines a {
+    min-height: 36px;
+    padding: 6px 7px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 6px;
+  }
+
+  .contact-signal-lines em {
+    display: none;
   }
 
   .contact-signal-finish {
@@ -2950,14 +3090,28 @@
 
   .contact-signal-actions { margin-top: 22px; flex-wrap: wrap; gap: 10px; }
 
+  .contact-portal-status {
+    top: 72px;
+    transform: translateX(-50%) scale(0.5);
+    transform-origin: top center;
+  }
+
   .contact-cv-showcase {
-    top: auto;
-    right: 20px;
-    bottom: 74px;
-    width: min(390px, calc(100vw - 40px));
-    min-height: 126px;
-    padding: 15px 18px;
+    top: 132px;
+    right: 14px;
+    bottom: auto;
+    width: 168px;
+    min-height: 82px;
+    padding: 10px 12px;
     transform: none;
+  }
+
+  .contact-cv-showcase-meta {
+    display: none;
+  }
+
+  .contact-cv-showcase-cta {
+    font-size: 0.56rem;
   }
 
   .contact-cv-showcase:hover {
@@ -2970,7 +3124,7 @@
 
   .contact-cv-showcase .contact-cv-fold-text,
   .contact-cv-placeholder {
-    font-size: clamp(1.7rem, 8vw, 2.5rem) !important;
+    font-size: 1.35rem !important;
   }
 
   @keyframes contact-cv-frame-enter {
@@ -3244,6 +3398,16 @@
 }
 
 @media (max-width: 560px) {
+  .contact-portal-status {
+    top: 68px;
+    transform: translateX(-50%) scale(0.4);
+  }
+
+  .contact-cv-showcase {
+    top: 118px;
+    width: 148px;
+  }
+
   .tour-brand strong { display: none; }
   .tour-header-tools { gap: 6px; }
   .tour-command { height: 36px; padding-inline: 8px; }

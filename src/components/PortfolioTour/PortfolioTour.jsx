@@ -22,6 +22,7 @@ import Folder from "../Folder/Folder.jsx";
 import GlowCursor from "../GlowCursor.jsx";
 import GlitchText from "../GlitchText.jsx";
 import FoldText from "../FoldText.jsx";
+import SplitFlapText from "../SplitFlapText.jsx";
 import tourScenes from "./tourScenes.js";
 import "./PortfolioTour.css";
 
@@ -116,7 +117,7 @@ const experienceRecords = [
     points: [
       "Develop features using Vue 3, TypeScript, Inertia.js, PHP, Laravel, Eloquent ORM, and PostgreSQL.",
       "Work across frontend components, business logic, REST APIs, validation, migrations, authentication, authorisation, and search.",
-      "Deliver storage, email, queue, and real-time features through Docker, Laravel Sail, Git workflows, and structured debugging.",
+      "Deliver search, storage, email, document-generation, queue, and real-time features through Docker, Laravel Sail, Git workflows, and structured debugging.",
     ],
   },
   {
@@ -174,7 +175,7 @@ const skillModules = [
     title: "Services & integration",
     subtitle: "Connected application systems",
     color: "#a78bfa",
-    items: ["Node.js", "Express", "REST APIs", "OData", "PWA", "Multi-tenancy"],
+    items: ["Node.js", "Express", "REST APIs", "OData", "Authentication", "Multi-tenancy"],
   },
   {
     number: "04",
@@ -190,7 +191,7 @@ const skillModules = [
     title: "Testing & engineering",
     subtitle: "Reliable implementation",
     color: "#f472b6",
-    items: ["Pest", "xUnit", "Vitest", "React Testing Library", "JUnit", "Fuzz testing"],
+    items: ["Pest", "xUnit", "Vitest", "Integration testing", "Static analysis", "Fuzz testing"],
   },
   {
     number: "06",
@@ -641,12 +642,26 @@ function ContactSignal({ onFinish }) {
             </a>
           ))}
         </div>
-        <div className="contact-signal-actions">
-          <button type="button" className="contact-signal-finish" onClick={onFinish}>
-            Return to main portfolio <ArrowRight size={17} />
-          </button>
-        </div>
       </section>
+
+      <div className="contact-portal-status" aria-label="Return to homepage portal">
+        <span>HOMEBOUND GATE / CLICK TO RETURN</span>
+        <SplitFlapText
+          words={['RETURN HOME', 'BACK TO MAIN', 'PORTAL READY']}
+          flipDuration={0.12}
+          stagger={0.06}
+          cycleDelay={2400}
+          charset="alphanumeric"
+          flipsPerChar={8}
+          tileColor="#111827"
+          textColor="#f8fafc"
+          tileRadius={8}
+          gap={6}
+          fontSize={52}
+          loop
+          padTo={12}
+        />
+      </div>
 
       <button type="button" className="contact-cv-showcase" onClick={openCvPopup} aria-label="View my CV">
         <span className="contact-cv-showcase-meta"><FileText size={16} aria-hidden="true" /> PERSONNEL FILE / PDF</span>
@@ -691,9 +706,11 @@ export default function PortfolioTour() {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [webGLReady, setWebGLReady] = useState(null);
   const [moving, setMoving] = useState(false);
+  const [portalExiting, setPortalExiting] = useState(false);
   const [selectedExperienceIndex, setSelectedExperienceIndex] = useState(null);
   const [revealedSceneIndex, setRevealedSceneIndex] = useState(0);
   const shellRef = useRef(null);
+  const portalExitTimerRef = useRef(null);
   const activeScene = tourScenes[activeIndex];
   const isLast = activeIndex === tourScenes.length - 1;
   const sceneContentReady = ![1, 2].includes(activeIndex) || revealedSceneIndex === activeIndex;
@@ -706,6 +723,10 @@ export default function PortfolioTour() {
     media.addEventListener?.("change", syncMotion);
     setWebGLReady(supportsWebGL());
     return () => media.removeEventListener?.("change", syncMotion);
+  }, []);
+
+  useEffect(() => () => {
+    if (portalExitTimerRef.current) window.clearTimeout(portalExitTimerRef.current);
   }, []);
 
   useEffect(() => {
@@ -730,9 +751,17 @@ export default function PortfolioTour() {
   }, [activeIndex, reducedMotion, webGLReady]);
 
   const changeScene = (nextIndex) => setActiveIndex(Math.max(0, Math.min(tourScenes.length - 1, nextIndex)));
+  const returnToMainPortfolio = () => {
+    if (portalExitTimerRef.current) return;
+    setPortalExiting(true);
+    portalExitTimerRef.current = window.setTimeout(() => {
+      window.location.hash = "/";
+      portalExitTimerRef.current = null;
+    }, reducedMotion ? 180 : 1120);
+  };
   const handleNext = () => {
     if (isLast) {
-      window.location.hash = "/";
+      returnToMainPortfolio();
       return;
     }
     changeScene(activeIndex + 1);
@@ -777,7 +806,7 @@ export default function PortfolioTour() {
       blendMode="screen"
     >
       <section
-      className={`portfolio-tour${moving ? " is-moving" : ""}${activeScene.id === "projects" ? " is-project-scene" : ""}${activeScene.id === "experience" ? " is-experience-scene" : ""}${activeScene.id === "skills" ? " is-skills-scene" : ""}${activeScene.id === "hobbies" ? " is-hobbies-scene" : ""}${[0, 1, 2, 3, 4, 5].includes(activeIndex) ? " has-react-bits-background" : ""}`}
+      className={`portfolio-tour${moving ? " is-moving" : ""}${portalExiting ? " is-portal-exiting" : ""}${activeScene.id === "projects" ? " is-project-scene" : ""}${activeScene.id === "experience" ? " is-experience-scene" : ""}${activeScene.id === "skills" ? " is-skills-scene" : ""}${activeScene.id === "hobbies" ? " is-hobbies-scene" : ""}${[0, 1, 2, 3, 4, 5].includes(activeIndex) ? " has-react-bits-background" : ""}`}
       ref={shellRef}
       tabIndex={0}
       onKeyDown={handleKeyDown}
@@ -919,9 +948,15 @@ export default function PortfolioTour() {
               reducedMotion={reducedMotion}
               moving={moving}
               onNext={handleNext}
+              portalExiting={portalExiting}
             />
           </Suspense>
         ) : <div className="tour-static-backdrop" />}
+      </div>
+
+      <div className="portal-exit-transition" aria-hidden="true">
+        <i />
+        <span>RETURNING TO MAIN PORTFOLIO</span>
       </div>
 
       <header className="tour-header">

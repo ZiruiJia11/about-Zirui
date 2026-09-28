@@ -1,6 +1,7 @@
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Billboard, Float, RoundedBox, Stars, useTexture } from "@react-three/drei";
+import { Billboard, ContactShadows, Float, MeshReflectorMaterial, RoundedBox, Stars, useTexture } from "@react-three/drei";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 import profileImage from "../../../image/profile.jpg";
 import tourScenes from "./tourScenes.js";
@@ -332,6 +333,289 @@ function ZonePlatform({ color, shape = "octagon", scale = 1 }) {
   );
 }
 
+const skylineBuildings = [
+  { x: -7.4, z: -7.8, width: 1.5, depth: 1.3, height: 5.8, accent: "#22d3ee" },
+  { x: -5.6, z: -6.4, width: 1.2, depth: 1.1, height: 3.9, accent: "#a855f7" },
+  { x: -4.1, z: -8.4, width: 1.7, depth: 1.5, height: 7.4, accent: "#ec4899" },
+  { x: -2.1, z: -6.9, width: 1.25, depth: 1.2, height: 4.8, accent: "#22d3ee" },
+  { x: 0.2, z: -8.8, width: 1.9, depth: 1.55, height: 7.9, accent: "#8b5cf6" },
+  { x: 2.5, z: -6.8, width: 1.3, depth: 1.2, height: 4.5, accent: "#22d3ee" },
+  { x: 4.2, z: -8.1, width: 1.7, depth: 1.4, height: 6.7, accent: "#ec4899" },
+  { x: 6.3, z: -6.5, width: 1.2, depth: 1.1, height: 4.2, accent: "#a855f7" },
+  { x: 7.9, z: -8.3, width: 1.55, depth: 1.35, height: 6.1, accent: "#22d3ee" },
+];
+
+function makeNeonSignTexture(title, subtitle, color) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 768;
+  canvas.height = 384;
+  const context = canvas.getContext("2d");
+  const gradient = context.createLinearGradient(0, 0, 768, 384);
+  gradient.addColorStop(0, "rgba(4, 9, 20, 0.98)");
+  gradient.addColorStop(1, "rgba(20, 7, 29, 0.98)");
+  context.fillStyle = gradient;
+  context.fillRect(0, 0, 768, 384);
+  context.strokeStyle = color;
+  context.lineWidth = 10;
+  context.strokeRect(16, 16, 736, 352);
+  context.strokeStyle = "rgba(255,255,255,0.14)";
+  context.lineWidth = 2;
+  for (let y = 48; y < 360; y += 24) context.beginPath(), context.moveTo(28, y), context.lineTo(740, y), context.stroke();
+  context.shadowColor = color;
+  context.shadowBlur = 28;
+  context.fillStyle = color;
+  context.font = "900 72px Inter, Arial, sans-serif";
+  context.fillText(title, 54, 174);
+  context.shadowBlur = 12;
+  context.fillStyle = "#f8fbff";
+  context.font = "700 26px SFMono-Regular, Consolas, monospace";
+  context.fillText(subtitle, 58, 234);
+  context.fillStyle = "rgba(255,255,255,0.48)";
+  context.font = "600 18px SFMono-Regular, Consolas, monospace";
+  context.fillText("SECTOR 01  /  IDENTITY NETWORK", 58, 306);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.minFilter = THREE.LinearFilter;
+  texture.anisotropy = 8;
+  return texture;
+}
+
+function NeonBillboard({ position, color }) {
+  const texture = useMemo(() => makeNeonSignTexture("OPEN TO WORK", "SOFTWARE / WEB / DATA", color), [color]);
+  useEffect(() => () => texture.dispose(), [texture]);
+  return (
+    <Billboard position={position} follow>
+      <group scale={0.62}>
+        <mesh position={[0, 0, -0.08]}>
+          <boxGeometry args={[3.7, 1.92, 0.16]} />
+          <meshStandardMaterial color="#070912" metalness={0.82} roughness={0.26} />
+        </mesh>
+        <mesh>
+          <planeGeometry args={[3.52, 1.72]} />
+          <meshBasicMaterial map={texture} toneMapped={false} />
+        </mesh>
+        <pointLight color={color} distance={4.5} intensity={2.8} position={[0, -0.2, 0.8]} />
+      </group>
+    </Billboard>
+  );
+}
+
+function CyberpunkSkyline() {
+  return (
+    <group position={[0, -0.42, 0]}>
+      {skylineBuildings.map((building, index) => (
+        <group key={`${building.x}-${building.z}`} position={[building.x, building.height / 2, building.z]}>
+          <mesh castShadow>
+            <boxGeometry args={[building.width, building.height, building.depth]} />
+            <meshStandardMaterial
+              color={index % 2 ? "#0a0e18" : "#0c0b15"}
+              emissive={building.accent}
+              emissiveIntensity={0.035}
+              metalness={0.72}
+              roughness={0.42}
+            />
+          </mesh>
+          {Array.from({ length: Math.max(3, Math.floor(building.height / 0.72)) }, (_, row) => (
+            <mesh key={row} position={[0, -building.height / 2 + 0.56 + row * 0.72, building.depth / 2 + 0.008]}>
+              <planeGeometry args={[building.width * 0.62, 0.055]} />
+              <meshBasicMaterial color={row % 3 === 0 ? building.accent : "#17253d"} toneMapped={false} transparent opacity={row % 3 === 0 ? 0.72 : 0.46} />
+            </mesh>
+          ))}
+          <mesh position={[0, building.height / 2 + 0.42, 0]}>
+            <cylinderGeometry args={[0.025, 0.04, 0.84, 8]} />
+            <meshBasicMaterial color={building.accent} toneMapped={false} />
+          </mesh>
+        </group>
+      ))}
+      <NeonBillboard position={[3.9, 3.25, -4.65]} color="#22d3ee" />
+    </group>
+  );
+}
+
+function CyberStreetInfrastructure({ color }) {
+  const cables = useMemo(() => [
+    new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-4.3, 3.4, -1.7),
+      new THREE.Vector3(-1.8, 2.82, -2.1),
+      new THREE.Vector3(1.8, 2.96, -2.15),
+      new THREE.Vector3(4.35, 3.52, -1.8),
+    ]),
+    new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-4.3, 3.12, -1.62),
+      new THREE.Vector3(-1.3, 2.5, -1.84),
+      new THREE.Vector3(2.2, 2.72, -1.92),
+      new THREE.Vector3(4.35, 3.22, -1.72),
+    ]),
+  ], []);
+  return (
+    <group>
+      {[-4.3, 4.35].map((x) => (
+        <group key={x} position={[x, 1.45, -1.7]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.09, 0.13, 3.8, 10]} />
+            <meshStandardMaterial color="#10131b" metalness={0.86} roughness={0.34} />
+          </mesh>
+          <mesh position={[0, 1.56, 0]}>
+            <boxGeometry args={[0.24, 0.7, 0.2]} />
+            <meshStandardMaterial color="#111827" emissive={color} emissiveIntensity={1.8} metalness={0.72} roughness={0.24} toneMapped={false} />
+          </mesh>
+        </group>
+      ))}
+      {cables.map((curve, index) => (
+        <mesh key={index}>
+          <tubeGeometry args={[curve, 48, 0.018, 8, false]} />
+          <meshStandardMaterial color="#111827" metalness={0.9} roughness={0.3} />
+        </mesh>
+      ))}
+      {[-3.1, 3.15].map((x, index) => (
+        <group key={x} position={[x, -0.18, 0.25 + index * 0.18]}>
+          <RoundedBox args={[0.72, 0.52, 0.76]} radius={0.06} smoothness={3}>
+            <meshStandardMaterial color="#10131b" metalness={0.78} roughness={0.38} />
+          </RoundedBox>
+          <mesh position={[0, 0.05, 0.39]}>
+            <planeGeometry args={[0.42, 0.08]} />
+            <meshBasicMaterial color={index ? "#ec4899" : "#22d3ee"} toneMapped={false} />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+}
+
+function CyberRain({ reducedMotion }) {
+  const pointsRef = useRef();
+  const { size } = useThree();
+  const count = size.width <= 820 ? 260 : 620;
+  const positions = useMemo(() => {
+    const data = new Float32Array(count * 3);
+    for (let index = 0; index < count; index += 1) {
+      data[index * 3] = (Math.random() - 0.5) * 18;
+      data[index * 3 + 1] = Math.random() * 10 - 0.4;
+      data[index * 3 + 2] = (Math.random() - 0.5) * 13 - 1;
+    }
+    return data;
+  }, [count]);
+  useFrame((_, delta) => {
+    if (reducedMotion || !pointsRef.current) return;
+    const positionAttribute = pointsRef.current.geometry.attributes.position;
+    for (let index = 0; index < count; index += 1) {
+      const yIndex = index * 3 + 1;
+      positionAttribute.array[yIndex] -= delta * 5.6;
+      if (positionAttribute.array[yIndex] < -0.45) positionAttribute.array[yIndex] = 9.6;
+    }
+    positionAttribute.needsUpdate = true;
+  });
+  if (reducedMotion) return null;
+  return (
+    <points ref={pointsRef} frustumCulled={false}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+      </bufferGeometry>
+      <pointsMaterial color="#8be9ff" size={0.028} sizeAttenuation transparent opacity={0.48} depthWrite={false} blending={THREE.AdditiveBlending} />
+    </points>
+  );
+}
+
+function makeWetNeonTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1024;
+  canvas.height = 1024;
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, 1024, 1024);
+  context.globalCompositeOperation = "screen";
+
+  const reflections = [
+    { x: 118, width: 72, start: 170, end: 970, color: "34, 211, 238", alpha: 0.58 },
+    { x: 272, width: 42, start: 360, end: 900, color: "168, 85, 247", alpha: 0.42 },
+    { x: 502, width: 94, start: 130, end: 990, color: "236, 72, 153", alpha: 0.56 },
+    { x: 704, width: 54, start: 310, end: 930, color: "34, 211, 238", alpha: 0.48 },
+    { x: 876, width: 78, start: 210, end: 982, color: "139, 92, 246", alpha: 0.52 },
+  ];
+
+  context.filter = "blur(20px)";
+  reflections.forEach(({ x, width, start, end, color, alpha }) => {
+    const gradient = context.createLinearGradient(0, start, 0, end);
+    gradient.addColorStop(0, `rgba(${color}, ${alpha})`);
+    gradient.addColorStop(0.22, `rgba(${color}, ${alpha * 0.7})`);
+    gradient.addColorStop(0.72, `rgba(${color}, ${alpha * 0.2})`);
+    gradient.addColorStop(1, `rgba(${color}, 0)`);
+    context.fillStyle = gradient;
+    context.fillRect(x - width / 2, start, width, end - start);
+  });
+
+  context.filter = "blur(5px)";
+  reflections.forEach(({ x, width, start, end, color, alpha }) => {
+    context.fillStyle = `rgba(${color}, ${alpha * 0.48})`;
+    for (let y = start + 80; y < end; y += 68) {
+      const spread = width * (0.68 + ((y / 68) % 3) * 0.18);
+      context.fillRect(x - spread / 2, y, spread, 3 + (y % 5));
+    }
+  });
+
+  context.filter = "none";
+  context.globalCompositeOperation = "source-over";
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.anisotropy = 8;
+  return texture;
+}
+
+function WetNeonReflections({ compact }) {
+  const texture = useMemo(() => makeWetNeonTexture(), []);
+  useEffect(() => () => texture.dispose(), [texture]);
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.405, -1.45]} renderOrder={2}>
+      <planeGeometry args={[compact ? 15 : 19, 15]} />
+      <meshBasicMaterial
+        map={texture}
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+        opacity={compact ? 0.58 : 0.76}
+        toneMapped={false}
+        transparent
+      />
+    </mesh>
+  );
+}
+
+function WetStreet({ compact }) {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.43, -1.8]} receiveShadow>
+      <planeGeometry args={[21, 18]} />
+      <MeshReflectorMaterial
+        blur={compact ? [72, 22] : [150, 48]}
+        color="#07111a"
+        depthScale={0.42}
+        maxDepthThreshold={1.45}
+        metalness={0.88}
+        minDepthThreshold={0.28}
+        mirror={0.82}
+        mixBlur={1.2}
+        mixStrength={2.35}
+        resolution={compact ? 256 : 512}
+        roughness={0.3}
+      />
+    </mesh>
+  );
+}
+
+function CyberpunkIdentityEnvironment({ color, reducedMotion }) {
+  const { size } = useThree();
+  const compact = size.width <= 820;
+  return (
+    <group>
+      <WetStreet compact={compact} />
+      <WetNeonReflections compact={compact} />
+      <CyberpunkSkyline />
+      {!compact ? <CyberStreetInfrastructure color={color} /> : null}
+      <CyberRain reducedMotion={reducedMotion} />
+      <ContactShadows position={[0, -0.405, 0]} scale={9} blur={2.4} opacity={0.48} far={5} frames={1} color="#03040a" />
+    </group>
+  );
+}
+
 function HologramCurtain({ color }) {
   const revealRef = useRef();
   const startedAt = useRef(null);
@@ -393,7 +677,7 @@ function HologramCurtain({ color }) {
   );
 }
 
-function IdentityDock({ color }) {
+function IdentityDock({ color, reducedMotion }) {
   const portrait = useTexture(profileImage);
   const portraitRevealRef = useRef();
   const { size } = useThree();
@@ -405,6 +689,7 @@ function IdentityDock({ color }) {
   }, [portrait]);
   return (
     <>
+      <CyberpunkIdentityEnvironment color={color} reducedMotion={reducedMotion} />
       <ZonePlatform color={color} scale={0.56} />
       {!compact ? <HologramCurtain color={color} /> : null}
       <Float speed={1.2} rotationIntensity={0.025} floatIntensity={0.12}>
@@ -508,7 +793,213 @@ function BuildDistrict({ color }) {
   );
 }
 
-function CyberLocation({ scene, index, onNext }) {
+function StackForgeLandmark({ color, reducedMotion }) {
+  const coreRef = useRef();
+  const ringRef = useRef();
+  const crownRef = useRef();
+  useFrame((state, delta) => {
+    if (reducedMotion) return;
+    if (coreRef.current) coreRef.current.rotation.y += delta * 0.34;
+    if (ringRef.current) ringRef.current.rotation.z -= delta * 0.22;
+    if (crownRef.current) {
+      crownRef.current.rotation.y += delta * 0.16;
+      crownRef.current.position.y = 2.72 + Math.sin(state.clock.elapsedTime * 1.1) * 0.08;
+    }
+  });
+  return (
+    <>
+      <ZonePlatform color={color} shape="circle" scale={0.76} />
+      <group ref={coreRef} position={[0, 1.18, -0.55]}>
+        <mesh>
+          <cylinderGeometry args={[0.62, 0.82, 2.35, 12]} />
+          <meshStandardMaterial color="#0d1222" emissive={color} emissiveIntensity={0.34} metalness={0.86} roughness={0.22} />
+        </mesh>
+        {[-0.72, -0.2, 0.32, 0.82].map((y, index) => (
+          <mesh key={y} position={[0, y, 0]} rotation={[Math.PI / 2, 0, index * 0.16]}>
+            <torusGeometry args={[0.72 + index * 0.04, 0.035, 8, 56]} />
+            <meshBasicMaterial color={index % 2 ? "#22d3ee" : color} toneMapped={false} transparent opacity={0.82} />
+          </mesh>
+        ))}
+        <pointLight color={color} distance={7} intensity={4.2} position={[0, 0.25, 0.8]} />
+      </group>
+      <group ref={ringRef} position={[0, 1.32, -0.55]} rotation={[Math.PI / 2.8, 0.15, 0]}>
+        <mesh>
+          <torusGeometry args={[1.45, 0.045, 8, 84]} />
+          <meshBasicMaterial color="#22d3ee" toneMapped={false} transparent opacity={0.66} />
+        </mesh>
+        <mesh rotation={[0.35, 0.2, 0.5]}>
+          <torusGeometry args={[1.82, 0.018, 6, 96]} />
+          <meshBasicMaterial color={color} toneMapped={false} transparent opacity={0.42} />
+        </mesh>
+      </group>
+      <group ref={crownRef} position={[0, 2.72, -0.55]}>
+        <mesh>
+          <octahedronGeometry args={[0.32, 1]} />
+          <meshStandardMaterial color="#dbeafe" emissive="#22d3ee" emissiveIntensity={2.4} metalness={0.3} roughness={0.16} toneMapped={false} />
+        </mesh>
+      </group>
+      {[-2.15, -1.35, 1.35, 2.15].map((x, index) => (
+        <group key={x} position={[x, 0.66 + (index % 2) * 0.18, -1.18 + Math.abs(x) * 0.1]}>
+          <RoundedBox args={[0.48, 1.5 + (index % 2) * 0.34, 0.58]} radius={0.055} smoothness={3}>
+            <meshStandardMaterial color="#111827" emissive={index % 2 ? "#22d3ee" : color} emissiveIntensity={0.12} metalness={0.8} roughness={0.3} />
+          </RoundedBox>
+          {[0.18, 0.48, 0.78].map((y) => (
+            <mesh key={y} position={[0, y - 0.62, 0.3]}>
+              <planeGeometry args={[0.3, 0.035]} />
+              <meshBasicMaterial color={index % 2 ? "#22d3ee" : color} toneMapped={false} />
+            </mesh>
+          ))}
+        </group>
+      ))}
+    </>
+  );
+}
+
+function LeisureObservatory({ color, reducedMotion }) {
+  const orbitRef = useRef();
+  const satelliteRef = useRef();
+  useFrame((state, delta) => {
+    if (reducedMotion) return;
+    if (orbitRef.current) orbitRef.current.rotation.z += delta * 0.11;
+    if (satelliteRef.current) {
+      satelliteRef.current.rotation.y -= delta * 0.24;
+      satelliteRef.current.position.y = 2.34 + Math.sin(state.clock.elapsedTime * 0.82) * 0.1;
+    }
+  });
+  return (
+    <>
+      <ZonePlatform color={color} shape="hex" scale={0.74} />
+      <group position={[0, 0.02, -0.72]}>
+        <mesh position={[0, 0.78, 0]}>
+          <sphereGeometry args={[1.22, 32, 18, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshStandardMaterial color="#081622" emissive={color} emissiveIntensity={0.12} metalness={0.76} opacity={0.58} roughness={0.24} transparent wireframe />
+        </mesh>
+        <mesh position={[0, 0.12, 0]}>
+          <cylinderGeometry args={[1.32, 1.48, 0.24, 32]} />
+          <meshStandardMaterial color="#101923" metalness={0.82} roughness={0.32} />
+        </mesh>
+        <group position={[0.35, 1.16, 0.1]} rotation={[0.22, -0.58, -0.16]}>
+          <mesh rotation={[0, 0, Math.PI / 2]}>
+            <cylinderGeometry args={[0.2, 0.3, 1.45, 16]} />
+            <meshStandardMaterial color="#152433" emissive="#22d3ee" emissiveIntensity={0.24} metalness={0.84} roughness={0.24} />
+          </mesh>
+          <mesh position={[0.72, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+            <cylinderGeometry args={[0.32, 0.32, 0.08, 24]} />
+            <meshBasicMaterial color="#67e8f9" toneMapped={false} transparent opacity={0.86} />
+          </mesh>
+        </group>
+      </group>
+      <group ref={orbitRef} position={[0, 1.68, -0.65]} rotation={[0.72, 0.15, 0]}>
+        <mesh>
+          <torusGeometry args={[2.05, 0.018, 6, 96]} />
+          <meshBasicMaterial color={color} toneMapped={false} transparent opacity={0.42} />
+        </mesh>
+        {[0, Math.PI * 0.72, Math.PI * 1.38].map((angle) => (
+          <mesh key={angle} position={[Math.cos(angle) * 2.05, Math.sin(angle) * 2.05, 0]}>
+            <sphereGeometry args={[0.085, 12, 12]} />
+            <meshBasicMaterial color={angle > 3 ? "#ec4899" : "#67e8f9"} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+      <group ref={satelliteRef} position={[0, 2.34, -0.68]}>
+        <mesh>
+          <icosahedronGeometry args={[0.3, 1]} />
+          <meshStandardMaterial color="#dff8ff" emissive={color} emissiveIntensity={1.9} metalness={0.46} roughness={0.18} toneMapped={false} />
+        </mesh>
+      </group>
+      <pointLight color={color} distance={7} intensity={3.4} position={[0, 2.1, 0.6]} />
+    </>
+  );
+}
+
+function SignalGate({ color, reducedMotion, onActivate, active }) {
+  const gateRef = useRef();
+  const innerRef = useRef();
+  const portalMaterialRef = useRef();
+  const portalLightRef = useRef();
+  const activationStartedAt = useRef(null);
+  const [activated, setActivated] = useState(false);
+  useFrame((state, delta) => {
+    if (activated || active) {
+      if (activationStartedAt.current === null) activationStartedAt.current = state.clock.elapsedTime;
+      const progress = smoothstep((state.clock.elapsedTime - activationStartedAt.current) / 0.95);
+      if (gateRef.current) gateRef.current.rotation.z += delta * (0.9 + progress * 3.8);
+      if (innerRef.current) {
+        innerRef.current.rotation.z -= delta * (1.8 + progress * 5.2);
+        innerRef.current.scale.setScalar(1 + progress * 0.58 + Math.sin(state.clock.elapsedTime * 14) * 0.025);
+      }
+      if (portalMaterialRef.current) portalMaterialRef.current.opacity = 0.12 + progress * 0.8;
+      if (portalLightRef.current) portalLightRef.current.intensity = 5.2 + progress * 12;
+      return;
+    }
+    if (reducedMotion) return;
+    if (gateRef.current) gateRef.current.rotation.z += delta * 0.055;
+    if (innerRef.current) {
+      innerRef.current.rotation.z -= delta * 0.12;
+      innerRef.current.scale.setScalar(1 + Math.sin(state.clock.elapsedTime * 1.35) * 0.025);
+    }
+  });
+  useEffect(() => () => { document.body.style.cursor = ""; }, []);
+  const activatePortal = (event) => {
+    event.stopPropagation();
+    if (activated) return;
+    setActivated(true);
+    document.body.style.cursor = "";
+    onActivate?.();
+  };
+  return (
+    <>
+      <ZonePlatform color={color} shape="circle" scale={0.82} />
+      <group
+        position={[0, 2.12, -0.95]}
+        onClick={activatePortal}
+        onPointerOver={(event) => { event.stopPropagation(); document.body.style.cursor = "pointer"; }}
+        onPointerOut={() => { document.body.style.cursor = ""; }}
+      >
+        <group ref={gateRef}>
+          <mesh>
+            <torusGeometry args={[1.72, 0.16, 12, 96]} />
+            <meshStandardMaterial color="#131022" emissive={color} emissiveIntensity={0.72} metalness={0.88} roughness={0.2} />
+          </mesh>
+          {[0, Math.PI / 2, Math.PI, Math.PI * 1.5].map((angle) => (
+            <mesh key={angle} position={[Math.cos(angle) * 1.72, Math.sin(angle) * 1.72, 0.02]} rotation={[0, 0, angle]}>
+              <boxGeometry args={[0.62, 0.13, 0.22]} />
+              <meshBasicMaterial color={angle % Math.PI ? "#22d3ee" : color} toneMapped={false} />
+            </mesh>
+          ))}
+        </group>
+        <group ref={innerRef}>
+          <mesh>
+            <torusGeometry args={[1.34, 0.035, 8, 96]} />
+            <meshBasicMaterial color="#67e8f9" toneMapped={false} transparent opacity={0.92} />
+          </mesh>
+          <mesh position={[0, 0, -0.08]}>
+            <circleGeometry args={[1.28, 64]} />
+            <meshBasicMaterial ref={portalMaterialRef} blending={THREE.AdditiveBlending} color="#8b5cf6" depthWrite={false} opacity={0.12} transparent />
+          </mesh>
+        </group>
+        <mesh position={[0, 0, -0.02]} rotation={[0, 0, Math.PI / 4]}>
+          <planeGeometry args={[0.045, 2.34]} />
+          <meshBasicMaterial blending={THREE.AdditiveBlending} color="#67e8f9" depthWrite={false} opacity={0.54} transparent toneMapped={false} />
+        </mesh>
+        <pointLight ref={portalLightRef} color={color} distance={9} intensity={5.2} position={[0, 0, 1.1]} />
+      </group>
+      {[-2.2, 2.2].map((x, index) => (
+        <group key={x} position={[x, 1.18, -1]}>
+          <RoundedBox args={[0.48, 2.7, 0.62]} radius={0.07} smoothness={3}>
+            <meshStandardMaterial color="#11101c" emissive={index ? "#22d3ee" : color} emissiveIntensity={0.18} metalness={0.84} roughness={0.28} />
+          </RoundedBox>
+          <mesh position={[0, 0.72, 0.33]}>
+            <planeGeometry args={[0.26, 0.62]} />
+            <meshBasicMaterial color={index ? "#22d3ee" : color} toneMapped={false} transparent opacity={0.82} />
+          </mesh>
+        </group>
+      ))}
+    </>
+  );
+}
+
+function CyberLocation({ scene, index, onNext, reducedMotion, portalExiting }) {
   const group = useRef();
   const environmentColor = index === 0 ? "#6f7cff" : scene.color;
   const verticalOffset = index === 1 ? -1.62 : 0;
@@ -522,9 +1013,12 @@ function CyberLocation({ scene, index, onNext }) {
       position={[scene.position[0], baseY, scene.position[2]]}
       scale={index === 0 ? 1.18 : index === 1 ? 0.78 : 1}
     >
-      {index === 0 ? <IdentityDock color={environmentColor} /> : null}
+      {index === 0 ? <IdentityDock color={environmentColor} reducedMotion={reducedMotion} /> : null}
       {index === 1 ? <MemoryVault color={scene.color} /> : null}
       {index === 2 ? <BuildDistrict color={scene.color} /> : null}
+      {index === 3 ? <StackForgeLandmark color={scene.color} reducedMotion={reducedMotion} /> : null}
+      {index === 4 ? <LeisureObservatory color={scene.color} reducedMotion={reducedMotion} /> : null}
+      {index === 5 ? <SignalGate color={scene.color} reducedMotion={reducedMotion} onActivate={onNext} active={portalExiting} /> : null}
       {index === 0 ? <InfoTerminal scene={scene} isLast={false} onTrigger={onNext} /> : null}
     </group>
   );
@@ -569,7 +1063,7 @@ function TransitGate({ scene, moving, reducedMotion }) {
   );
 }
 
-function World({ activeIndex, reducedMotion, moving, onNext }) {
+function World({ activeIndex, reducedMotion, moving, onNext, portalExiting }) {
   const scene = tourScenes[activeIndex];
   const theme = zoneThemes[scene.id];
   const isContact = activeIndex === tourScenes.length - 1;
@@ -582,7 +1076,7 @@ function World({ activeIndex, reducedMotion, moving, onNext }) {
       <directionalLight position={[4, 9, 6]} color="#efe7ff" intensity={1.3} />
       {!isContact ? <Stars radius={52} depth={32} count={1100} factor={2.2} saturation={0.6} fade speed={reducedMotion ? 0 : 0.18} /> : null}
       <CinematicCamera scene={scene} reducedMotion={reducedMotion} />
-      {!isContact ? <CyberLocation key={scene.id} scene={scene} index={activeIndex} onNext={onNext} /> : null}
+      <CyberLocation key={scene.id} scene={scene} index={activeIndex} onNext={onNext} reducedMotion={reducedMotion} portalExiting={portalExiting} />
       {!isContact ? <TransitGate scene={scene} moving={moving} reducedMotion={reducedMotion} /> : null}
       {!hasAnimatedBackground ? (
         <>
@@ -593,15 +1087,27 @@ function World({ activeIndex, reducedMotion, moving, onNext }) {
           </mesh>
         </>
       ) : null}
+      <EffectComposer multisampling={0}>
+        <Bloom intensity={activeIndex === 0 ? 0.72 : 0.34} luminanceThreshold={0.72} luminanceSmoothing={0.22} mipmapBlur radius={0.58} />
+      </EffectComposer>
     </>
   );
 }
 
-export default function CyberWorld({ activeIndex, reducedMotion, moving, onNext }) {
+export default function CyberWorld({ activeIndex, reducedMotion, moving, onNext, portalExiting }) {
   return (
-    <Canvas camera={{ position: tourScenes[0].camera, fov: 46 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}>
+    <Canvas
+      camera={{ position: tourScenes[0].camera, fov: 46 }}
+      dpr={[1, 1.5]}
+      gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+      onCreated={({ gl }) => {
+        gl.toneMapping = THREE.ACESFilmicToneMapping;
+        gl.toneMappingExposure = 0.92;
+      }}
+      shadows
+    >
       <Suspense fallback={null}>
-        <World activeIndex={activeIndex} reducedMotion={reducedMotion} moving={moving} onNext={onNext} />
+        <World activeIndex={activeIndex} reducedMotion={reducedMotion} moving={moving} onNext={onNext} portalExiting={portalExiting} />
       </Suspense>
     </Canvas>
   );

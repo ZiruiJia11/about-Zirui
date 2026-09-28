@@ -1,6 +1,6 @@
 # Steven Jia Portfolio
 
-Personal portfolio website for Steven Jia, a Computer Science and AI graduate focused on junior and graduate software, web, data, and technical support roles.
+Personal portfolio website for Steven Jia, a Computer Science and AI graduate and current Full Stack Developer Intern focused on graduate and junior software, full-stack, web, data, automation, and applied AI roles.
 
 Live site: [https://zirui-jia.dev](https://zirui-jia.dev)
 
@@ -11,7 +11,7 @@ This portfolio presents my technical profile, selected projects, experience, edu
 Key sections include:
 
 - Profile summary and quick proof points
-- Technical skills across frontend, backend, data, AI, testing, developer tools, and cloud platforms
+- Technical skills across frontend, backend, data, AI, automation, testing, developer tools, and cloud platforms
 - Selected projects with live demo and source links where available
 - Work experience, education, and AWS certification
 - A single current CV with an in-browser popup viewer
@@ -57,6 +57,20 @@ Multi-tenant Laravel integration exposing authenticated OData feeds, metadata, P
 - Source: [https://github.com/ZiruiJia11/power-bi-api-demo](https://github.com/ZiruiJia11/power-bi-api-demo)
 - Stack: Laravel 13, Vue 3, Inertia.js, OData, Power BI, multi-tenancy
 
+### Kiwi Supplement Watch
+
+New Zealand supplement price-monitoring dashboard with live retailer collectors, source-health reporting, price history, stale-data fallback, and automated daily collection and deployment.
+
+- Live demo: [https://kiwi-supplement-watch.vercel.app](https://kiwi-supplement-watch.vercel.app)
+- Source: [https://github.com/ZiruiJia11/kiwi-supplement-watch](https://github.com/ZiruiJia11/kiwi-supplement-watch)
+- Stack: React, Vite, JavaScript, GitHub Actions, Vercel
+
+## Additional CV Projects
+
+- Data and AI Classification Projects - Python, NLP, CNN and Vision Transformer experiments with class-level evaluation and an AG News model reaching about 94.7% test accuracy.
+- Tax Case Triage Assistant - Explainable, human-reviewed prioritisation prototype with deterministic rules, audit logging, local-only data handling and automated tests.
+- Java Algorithms and Automated Testing - DFS, BFS and A* route planning plus JUnit and fuzz testing work on a team-built 2D maze game.
+
 ## Tech Stack
 
 - React
@@ -66,6 +80,7 @@ Multi-tenant Laravel integration exposing authenticated OData feeds, metadata, P
 - lucide-react
 - React Bits-inspired SpotlightCard and ShinyText components
 - Motion
+- Three.js and React Three Fiber
 - GitHub Pages
 
 ## Skills Highlighted

@@ -4,7 +4,7 @@ const tourScenes = [
     number: "01",
     eyebrow: "Player profile",
     title: "Steven Jia",
-    summary: "Software Engineer and Full Stack Developer building web and data applications across Laravel, Vue, React, TypeScript, .NET, and PostgreSQL.",
+    summary: "Software Engineer and Full Stack Developer Intern building multi-tenant, web, data, and AI-assisted applications across Laravel, Vue, React, TypeScript, .NET, and PostgreSQL.",
     facts: [
       "Full Stack Developer Intern at Ocular",
       "BSc Computer Science, Minor in AI · VUW · 2023–2025",
@@ -21,7 +21,7 @@ const tourScenes = [
     title: "Building, teaching, and solving",
     summary: "Professional experience spanning multi-tenant product development, technical teaching, device diagnostics, and customer-focused problem solving.",
     facts: [
-      "Vue 3, TypeScript, Laravel, REST APIs, and PostgreSQL at Ocular",
+      "Multi-tenant Vue 3, TypeScript, Laravel, REST API, and PostgreSQL work at Ocular",
       "Python, coding, robotics, and RoboCup tutoring at Scots College",
       "Hardware, software, OS, data-transfer, and customer support at UR Tech",
     ],
@@ -83,7 +83,7 @@ const tourScenes = [
     number: "06",
     eyebrow: "Final checkpoint",
     title: "Let’s build something useful",
-    summary: "I am ready to discuss software, web, data, and technical support opportunities, project decisions, and implementation trade-offs.",
+    summary: "I am ready to discuss software, full-stack, web, data, automation, and applied AI opportunities, project decisions, and implementation trade-offs.",
     facts: [
       "021 119 9859 · steven5115115@gmail.com",
       "github.com/ZiruiJia11 · linkedin.com/in/steven-jia-b78314231",
