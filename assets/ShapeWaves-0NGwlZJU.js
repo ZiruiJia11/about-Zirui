@@ -1,4 +1,4 @@
-import{_ as e,a as t,c as n,i as r,l as i,n as a,o,r as s,s as c,u as l,x as u}from"./index-DRBy0dh-.js";var d=u(e(),1),f=l(),ee={mixed:0,squares:1,circles:2,triangles:3},p=2,te=1024,ne=32,re=.1,ie=1/60,ae=.42,oe=.94,se=.972,ce=.01,m=.2,h=.3,g=.16,_=1.66,le=`
+import{_ as e,a as t,c as n,i as r,l as i,n as a,o,r as s,s as c,u as l,x as u}from"./index-Da3YUQbu.js";var d=u(e(),1),f=l(),ee={mixed:0,squares:1,circles:2,triangles:3},p=2,te=1024,ne=32,re=.1,ie=1/60,ae=.42,oe=.94,se=.972,ce=.01,m=.2,h=.3,g=.16,_=1.66,le=`
 struct Params {
   resolution: vec4f,
   placement: vec4f,

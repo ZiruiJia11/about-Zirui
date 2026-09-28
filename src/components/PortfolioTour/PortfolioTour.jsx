@@ -110,7 +110,7 @@ const experienceRecords = [
     tag: "CURRENT",
     company: "Ocular",
     location: "Wellington",
-    role: "Full Stack Developer",
+    role: "Full Stack Developer Intern",
     period: "Jul 2026 — Present",
     summary: "Developing multi-tenant application features across a Vue 3 frontend and Laravel/PostgreSQL backend.",
     points: [
@@ -332,13 +332,13 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
       <header className="project-archive-header">
         <div className="project-folder-tab">
           <FolderOpen size={18} />
-          <span><strong>Project archive</strong><em>Selected work / 2026</em></span>
+          <span><strong>Project archive</strong><em>Selected CV projects / 2026</em></span>
         </div>
         <div className="project-file-count">6 FILES / AUTO SWAP</div>
       </header>
       <div className="project-card-swap-stage" style={{ height: "600px", position: "relative" }}>
-        <aside className="project-stroke-intro" aria-label="My selected projects">
-          <span>03 / SELECTED WORK</span>
+        <aside className="project-stroke-intro" aria-label="My selected CV projects">
+          <span>03 / SELECTED CV PROJECTS</span>
           <Suspense fallback={<h2>MY PROJECTS</h2>}>
             <div className="project-stroke-lines">
               <StrokeText
@@ -388,7 +388,7 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
               />
             </div>
           </Suspense>
-          <p>Six selected builds across full-stack systems, AI workflows, live data, and machine learning.</p>
+          <p>Six selected CV projects across full-stack systems, AI workflows, live data, and machine learning.</p>
         </aside>
         <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false}>
           {projectPages.map((project) => (

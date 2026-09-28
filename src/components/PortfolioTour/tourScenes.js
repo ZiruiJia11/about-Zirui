@@ -6,9 +6,8 @@ const tourScenes = [
     title: "Steven Jia",
     summary: "Software Engineer and Full Stack Developer building web and data applications across Laravel, Vue, React, TypeScript, .NET, and PostgreSQL.",
     facts: [
-      "Full Stack Developer at Ocular",
+      "Full Stack Developer Intern at Ocular",
       "BSc Computer Science, Minor in AI · VUW · 2023–2025",
-      "New Zealand work eligible and open to relocation",
     ],
     label: "IDENTITY DOCK",
     color: "#a855f7",
@@ -36,7 +35,7 @@ const tourScenes = [
     number: "03",
     eyebrow: "Build archive",
     title: "Products backed by engineering depth",
-    summary: "Six selected builds spanning multi-tenant workflows, AI-assisted job tracking, fitness, live data collection, machine learning, and OData integration.",
+    summary: "Six selected CV projects spanning multi-tenant workflows, AI-assisted job tracking, fitness, live data collection, machine learning, and OData integration.",
     facts: [
       "Dependency Map and Power BI OData Demo — tenant-isolated Laravel systems",
       "JobTrack and Kiwi Supplement Watch — AI workflows and live data automation",
