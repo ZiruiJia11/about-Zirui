@@ -220,9 +220,16 @@ function CardSurface({ children }) {
 }
 
 function App() {
+  const normalizePath = (value) => {
+    const path = value || "/";
+    if (navItems.some((item) => item.path === path) || path === "/tour") return path;
+    return "/";
+  };
+
   const getPath = () => {
-    const path = window.location.hash.replace(/^#/, "") || "/";
-    return navItems.some((item) => item.path === path) || path === "/tour" ? path : "/";
+    const hashPath = window.location.hash.replace(/^#/, "");
+    const pathname = window.location.pathname.replace(/\/$/, "") || "/";
+    return normalizePath(hashPath || pathname);
   };
   const [currentPath, setCurrentPath] = useState(getPath);
   const [showExperiencePicker, setShowExperiencePicker] = useState(() => {
@@ -249,7 +256,8 @@ function App() {
   const chooseTourExperience = () => {
     rememberExperienceChoice();
     setShowExperiencePicker(false);
-    window.location.hash = "/tour";
+    window.history.pushState({}, "", "/tour");
+    window.dispatchEvent(new PopStateEvent("popstate"));
   };
 
   const openCvPopup = () => {
@@ -269,6 +277,9 @@ function App() {
   useEffect(() => {
     const handleRouteChange = () => {
       const nextPath = getPath();
+      if (window.location.hash) {
+        window.history.replaceState({}, "", nextPath);
+      }
       setCurrentPath(nextPath);
       if (nextPath === "/") {
         try {
@@ -279,8 +290,13 @@ function App() {
       }
       window.scrollTo({ top: 0, behavior: "instant" });
     };
+    window.addEventListener("popstate", handleRouteChange);
     window.addEventListener("hashchange", handleRouteChange);
-    return () => window.removeEventListener("hashchange", handleRouteChange);
+    handleRouteChange();
+    return () => {
+      window.removeEventListener("popstate", handleRouteChange);
+      window.removeEventListener("hashchange", handleRouteChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -370,10 +386,10 @@ function App() {
         />
       </div>
       <header className="site-header">
-        <a className="brand" href="#/" aria-label="Steven Jia home">SJ</a>
+        <a className="brand" href="/" aria-label="Steven Jia home">SJ</a>
         <div className="site-header-nav">
           <GooeyNav
-            items={navItems.map((item) => ({ label: item.label, href: `#${item.path}` }))}
+            items={navItems.map((item) => ({ label: item.label, href: item.path }))}
             particleCount={15}
             particleDistances={[90, 10]}
             particleR={100}
@@ -382,7 +398,7 @@ function App() {
             timeVariance={300}
             colors={[1, 2, 3, 1, 2, 3, 1, 4]}
           />
-          <a className="header-tour-button" href="#/tour" aria-label="Enter the 3D guided tour">
+          <a className="header-tour-button" href="/tour" aria-label="Enter the 3D guided tour">
             <Gamepad2 size={17} />
             <span>3D Tour</span>
           </a>
@@ -416,10 +432,10 @@ function App() {
             <p className="hero-summary">I build reliable, data-backed products across Vue and Laravel, React and TypeScript, Next.js and Supabase, and C# with ASP.NET Core. Recent work includes multi-tenant product features, evidence-grounded AI workflows, live data automation, OData integrations, automated testing, CI/CD, and cloud deployment.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
-              <a className="button secondary" href="#/projects"><ArrowUpRight size={18} /> View work</a>
+              <a className="button secondary" href="/projects"><ArrowUpRight size={18} /> View work</a>
               <a className="button secondary" href="https://github.com/ZiruiJia11" target="_blank" rel="noreferrer"><Code2 size={18} /> GitHub</a>
               <a className="button secondary" href="https://www.linkedin.com/in/steven-jia-b78314231/" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} /> LinkedIn</a>
-              <a className="button game" href="#/tour"><Gamepad2 size={18} /> 3D guided tour</a>
+              <a className="button game" href="/tour"><Gamepad2 size={18} /> 3D guided tour</a>
             </div>
             <div className="profile-stats" aria-label="Profile quick proof">
               {profileStats.map((stat) => (
@@ -482,9 +498,9 @@ function App() {
           <section className="home-next">
             <div><p className="eyebrow">Explore the portfolio</p><h2>Each part now has room to breathe.</h2></div>
             <div className="home-next-links">
-              <a href="#/experience">Experience <ArrowUpRight size={18} /></a>
-              <a href="#/projects">Projects <ArrowUpRight size={18} /></a>
-              <a href="#/profile">Technical profile <ArrowUpRight size={18} /></a>
+              <a href="/experience">Experience <ArrowUpRight size={18} /></a>
+              <a href="/projects">Projects <ArrowUpRight size={18} /></a>
+              <a href="/profile">Technical profile <ArrowUpRight size={18} /></a>
             </div>
           </section>
         </> : null}

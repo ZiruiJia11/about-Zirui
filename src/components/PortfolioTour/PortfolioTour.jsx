@@ -755,7 +755,8 @@ export default function PortfolioTour() {
     if (portalExitTimerRef.current) return;
     setPortalExiting(true);
     portalExitTimerRef.current = window.setTimeout(() => {
-      window.location.hash = "/";
+      window.history.pushState({}, "", "/");
+      window.dispatchEvent(new PopStateEvent("popstate"));
       portalExitTimerRef.current = null;
     }, reducedMotion ? 180 : 1120);
   };
@@ -960,12 +961,12 @@ export default function PortfolioTour() {
       </div>
 
       <header className="tour-header">
-        <a className="tour-brand" href="#/" aria-label="Return to Steven Jia portfolio"><span className="tour-logo"><Orbit size={21} strokeWidth={2.4} /></span><strong>Steven<span> / Lab</span></strong></a>
+        <a className="tour-brand" href="/" aria-label="Return to Steven Jia portfolio"><span className="tour-logo"><Orbit size={21} strokeWidth={2.4} /></span><strong>Steven<span> / Lab</span></strong></a>
         <nav className="tour-nav" aria-label="Tour information"><span className="is-active">Journey</span><span>Cyber world</span><span>Portfolio</span></nav>
         <div className="tour-header-tools">
           <div className="tour-command"><Search size={15} /><span>Zone</span><kbd>{activeScene.number} / 06</kbd></div>
           <button className="tour-settings" type="button" aria-label="Interactive WebGL experience"><SlidersHorizontal size={17} /></button>
-          <a className="tour-exit" href="#/"><Home size={16} /> <span>Exit tour</span></a>
+          <a className="tour-exit" href="/"><Home size={16} /> <span>Exit tour</span></a>
         </div>
       </header>
 
