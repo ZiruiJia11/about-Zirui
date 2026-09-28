@@ -87,7 +87,7 @@ const tourScenes = [
     facts: [
       "021 119 9859 · steven5115115@gmail.com",
       "github.com/ZiruiJia11 · linkedin.com/in/steven-jia-b78314231",
-      "Portfolio: zirui-jia.dev",
+      "Portfolio: stevenjia.co.nz",
     ],
     label: "SIGNAL GATE",
     color: "#c084fc",

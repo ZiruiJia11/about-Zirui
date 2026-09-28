@@ -2,7 +2,7 @@
 
 Personal portfolio website for Steven Jia, a Computer Science and AI graduate and current Full Stack Developer Intern focused on graduate and junior software, full-stack, web, data, automation, and applied AI roles.
 
-Live site: [https://zirui-jia.dev](https://zirui-jia.dev)
+Live site: [https://stevenjia.co.nz](https://stevenjia.co.nz)
 
 ## Overview
 

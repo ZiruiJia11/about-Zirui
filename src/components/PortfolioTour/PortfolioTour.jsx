@@ -597,7 +597,7 @@ function ContactSignal({ onFinish }) {
     { label: "EMAIL", value: "steven5115115@gmail.com", href: "mailto:steven5115115@gmail.com" },
     { label: "GITHUB", value: "ZiruiJia11", href: "https://github.com/ZiruiJia11", external: true },
     { label: "LINKEDIN", value: "Steven Jia", href: "https://www.linkedin.com/in/steven-jia-b78314231/", external: true },
-    { label: "PORTFOLIO", value: "zirui-jia.dev", href: "https://zirui-jia.dev/", external: true },
+    { label: "PORTFOLIO", value: "stevenjia.co.nz", href: "https://stevenjia.co.nz/", external: true },
   ];
   const openCvPopup = () => {
     const cvUrl = new URL(`${import.meta.env.BASE_URL}cv-complete.pdf`, window.location.origin).href;

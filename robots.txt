@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zirui-jia.dev/sitemap.xml
+Sitemap: https://stevenjia.co.nz/sitemap.xml
