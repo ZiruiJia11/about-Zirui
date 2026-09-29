@@ -434,6 +434,14 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
         <div className="experience-folder-count">3 FILES / INTERACTIVE</div>
       </header>
       <div className="experience-folder-stage" style={{ position: "relative" }}>
+        <aside className="experience-signal-rail experience-signal-rail-left" aria-label="Experience telemetry">
+          <div className="experience-signal-card"><span>STATUS</span><strong>ONLINE</strong><i className="signal-bars" /></div>
+          <div className="experience-signal-card"><span>STACK TRACE</span><strong>VUE / LARAVEL</strong><em>tenant systems</em></div>
+        </aside>
+        <aside className="experience-signal-rail experience-signal-rail-right" aria-label="Experience highlights">
+          <div className="experience-signal-card"><span>YEARS ACTIVE</span><strong>03+</strong><em>building + teaching</em></div>
+          <div className="experience-signal-card"><span>CORE LOOP</span><strong>SHIP → LEARN</strong><em>debug · test · iterate</em></div>
+        </aside>
         <div className="experience-falling-prompt" aria-label="Open this file">
           <Suspense fallback={<span>OPEN THIS FILE</span>}>
             <FallingText
