@@ -1273,6 +1273,21 @@
 @keyframes holo-orbit { to { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(360deg); } }
 @keyframes holo-orbit-alt { to { transform: translate(-50%, -50%) rotateY(68deg) rotateZ(-360deg); } }
 
+.experience-drone { position: absolute; top: 35%; z-index: 6; width: 150px; height: 120px; transform-style: preserve-3d; pointer-events: none; filter: drop-shadow(0 0 14px rgba(103, 232, 249, 0.48)); }
+.experience-drone-left { left: 5%; animation: drone-patrol-left 7s ease-in-out infinite; }
+.experience-drone-right { right: 5%; animation: drone-patrol-right 7s ease-in-out infinite -3.5s; }
+.drone-body { position: absolute; top: 28px; left: 34px; display: grid; place-items: center; width: 82px; height: 42px; border: 1px solid rgba(103, 232, 249, 0.9); border-radius: 45% 45% 30% 30%; background: linear-gradient(145deg, rgba(91, 33, 182, 0.9), rgba(8, 18, 46, 0.95)); box-shadow: inset 0 0 16px rgba(103, 232, 249, 0.26), 0 0 20px rgba(103, 232, 249, 0.35); transform: rotateX(18deg); }
+.drone-body i { width: 11px; height: 11px; border-radius: 50%; background: #67e8f9; box-shadow: 0 0 14px #67e8f9; animation: drone-eye 1.2s ease-in-out infinite; }
+.drone-body b { position: absolute; top: 47px; color: rgba(186, 230, 253, 0.75); font: 600 0.48rem "SFMono-Regular", Consolas, monospace; letter-spacing: 0.15em; white-space: nowrap; }
+.drone-rotor { position: absolute; top: 14px; width: 54px; height: 8px; border: 1px solid rgba(192, 132, 252, 0.75); border-radius: 50%; background: rgba(168, 85, 247, 0.16); box-shadow: 0 0 10px rgba(192, 132, 252, 0.55); animation: rotor-spin 0.45s linear infinite; }
+.rotor-a { left: 0; }.rotor-b { right: 0; }
+.drone-beam { position: absolute; top: 72px; left: 59px; width: 24px; height: 85px; background: linear-gradient(180deg, rgba(103, 232, 249, 0.52), rgba(103, 232, 249, 0)); clip-path: polygon(35% 0, 65% 0, 100% 100%, 0 100%); opacity: 0.68; animation: beam-pulse 1.7s ease-in-out infinite; transform-origin: top; }
+@keyframes drone-patrol-left { 0%, 100% { transform: translate3d(0, 16px, 0) rotate(-3deg); } 50% { transform: translate3d(80px, -34px, 30px) rotate(5deg); } }
+@keyframes drone-patrol-right { 0%, 100% { transform: translate3d(0, -20px, 0) rotate(3deg) scaleX(-1); } 50% { transform: translate3d(-80px, 30px, 30px) rotate(-5deg) scaleX(-1); } }
+@keyframes rotor-spin { to { transform: rotate(360deg); } }
+@keyframes drone-eye { 50% { opacity: 0.35; transform: scale(0.7); } }
+@keyframes beam-pulse { 50% { opacity: 0.18; transform: scaleY(0.55); } }
+
 .experience-falling-prompt {
   position: absolute;
   top: 8px;
@@ -3308,6 +3323,9 @@
   }
 
   .experience-holo-array { opacity: 0.55; transform: translate(-50%, -50%) scale(0.82); }
+  .experience-drone { opacity: 0.62; transform: scale(0.72); }
+  .experience-drone-left { left: -2%; }
+  .experience-drone-right { right: -2%; }
 
   .experience-folder-count { display: none; }
   .experience-folder-label { min-width: 0; }

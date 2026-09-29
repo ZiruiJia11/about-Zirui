@@ -441,6 +441,12 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
           <span className="holo-cube holo-cube-two"><b>L</b></span>
           <span className="holo-cube holo-cube-three"><b>R</b></span>
         </div>
+        <div className="experience-drone experience-drone-left" aria-hidden="true">
+          <span className="drone-body"><i /><b>SCAN-01</b></span><span className="drone-rotor rotor-a" /><span className="drone-rotor rotor-b" /><span className="drone-beam" />
+        </div>
+        <div className="experience-drone experience-drone-right" aria-hidden="true">
+          <span className="drone-body"><i /><b>SCAN-02</b></span><span className="drone-rotor rotor-a" /><span className="drone-rotor rotor-b" /><span className="drone-beam" />
+        </div>
         <div className="experience-falling-prompt" aria-label="Open this file">
           <Suspense fallback={<span>OPEN THIS FILE</span>}>
             <FallingText
