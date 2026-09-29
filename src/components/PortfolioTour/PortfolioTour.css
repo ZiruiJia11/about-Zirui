@@ -1273,20 +1273,88 @@
 @keyframes holo-orbit { to { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(360deg); } }
 @keyframes holo-orbit-alt { to { transform: translate(-50%, -50%) rotateY(68deg) rotateZ(-360deg); } }
 
-.experience-drone { position: absolute; top: 35%; z-index: 6; width: 150px; height: 120px; transform-style: preserve-3d; pointer-events: none; filter: drop-shadow(0 0 14px rgba(103, 232, 249, 0.48)); }
+.experience-drone { position: absolute; top: 35%; z-index: 6; width: 168px; height: 132px; transform-style: preserve-3d; pointer-events: none; filter: drop-shadow(0 0 16px rgba(103, 232, 249, 0.42)); }
 .experience-drone-left { left: 5%; animation: drone-patrol-left 7s ease-in-out infinite; }
 .experience-drone-right { right: 5%; animation: drone-patrol-right 7s ease-in-out infinite -3.5s; }
-.drone-body { position: absolute; top: 28px; left: 34px; display: grid; place-items: center; width: 82px; height: 42px; border: 1px solid rgba(103, 232, 249, 0.9); border-radius: 45% 45% 30% 30%; background: linear-gradient(145deg, rgba(91, 33, 182, 0.9), rgba(8, 18, 46, 0.95)); box-shadow: inset 0 0 16px rgba(103, 232, 249, 0.26), 0 0 20px rgba(103, 232, 249, 0.35); transform: rotateX(18deg); }
-.drone-body i { width: 11px; height: 11px; border-radius: 50%; background: #67e8f9; box-shadow: 0 0 14px #67e8f9; animation: drone-eye 1.2s ease-in-out infinite; }
-.drone-body b { position: absolute; top: 47px; color: rgba(186, 230, 253, 0.75); font: 600 0.48rem "SFMono-Regular", Consolas, monospace; letter-spacing: 0.15em; white-space: nowrap; }
-.drone-rotor { position: absolute; top: 14px; width: 54px; height: 8px; border: 1px solid rgba(192, 132, 252, 0.75); border-radius: 50%; background: rgba(168, 85, 247, 0.16); box-shadow: 0 0 10px rgba(192, 132, 252, 0.55); animation: rotor-spin 0.45s linear infinite; }
-.rotor-a { left: 0; }.rotor-b { right: 0; }
-.drone-beam { position: absolute; top: 72px; left: 59px; width: 24px; height: 85px; background: linear-gradient(180deg, rgba(103, 232, 249, 0.52), rgba(103, 232, 249, 0)); clip-path: polygon(35% 0, 65% 0, 100% 100%, 0 100%); opacity: 0.68; animation: beam-pulse 1.7s ease-in-out infinite; transform-origin: top; }
+.drone-body { position: absolute; top: 30px; left: 43px; display: grid; place-items: center; width: 82px; height: 56px; border: 1px solid rgba(125, 211, 252, 0.9); border-radius: 18px 18px 28px 28px; background: linear-gradient(155deg, rgba(56, 189, 248, 0.2), rgba(76, 29, 149, 0.92) 45%, rgba(7, 12, 31, 0.98)); box-shadow: inset 0 0 18px rgba(125, 211, 252, 0.2), 0 0 24px rgba(56, 189, 248, 0.28); transform: rotateX(18deg) rotateZ(-2deg); }
+.drone-body::before { position: absolute; top: -10px; left: 18px; width: 44px; height: 20px; border: 1px solid rgba(216, 180, 254, 0.65); border-bottom: 0; border-radius: 24px 24px 0 0; background: linear-gradient(180deg, rgba(192, 132, 252, 0.3), rgba(56, 189, 248, 0.05)); content: ""; }
+.drone-body::after { position: absolute; right: 10px; bottom: 9px; left: 10px; height: 2px; border-radius: 50%; background: linear-gradient(90deg, transparent, #67e8f9, transparent); box-shadow: 0 0 9px #67e8f9; content: ""; }
+.drone-body i { width: 15px; height: 15px; border: 2px solid rgba(224, 242, 254, 0.9); border-radius: 50%; background: #67e8f9; box-shadow: 0 0 8px #67e8f9, 0 0 22px rgba(34, 211, 238, 0.8); animation: drone-eye 1.2s ease-in-out infinite; }
+.drone-body b { display: none; }
+.drone-rotor { position: absolute; top: 38px; width: 48px; height: 48px; border: 1px solid rgba(192, 132, 252, 0.72); border-radius: 50%; background: radial-gradient(circle, rgba(192, 132, 252, 0.22) 0 10%, transparent 11% 100%); box-shadow: 0 0 13px rgba(192, 132, 252, 0.46), inset 0 0 9px rgba(103, 232, 249, 0.24); animation: rotor-spin 1.2s linear infinite; }
+.rotor-a { left: 3px; }.rotor-b { right: 3px; animation-direction: reverse; }
+.drone-beam { position: absolute; top: 86px; left: 72px; width: 25px; height: 92px; background: linear-gradient(180deg, rgba(103, 232, 249, 0.62), rgba(103, 232, 249, 0)); clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); opacity: 0.62; animation: beam-pulse 1.7s ease-in-out infinite; transform-origin: top; }
 @keyframes drone-patrol-left { 0%, 100% { transform: translate3d(0, 16px, 0) rotate(-3deg); } 50% { transform: translate3d(80px, -34px, 30px) rotate(5deg); } }
 @keyframes drone-patrol-right { 0%, 100% { transform: translate3d(0, -20px, 0) rotate(3deg) scaleX(-1); } 50% { transform: translate3d(-80px, 30px, 30px) rotate(-5deg) scaleX(-1); } }
 @keyframes rotor-spin { to { transform: rotate(360deg); } }
 @keyframes drone-eye { 50% { opacity: 0.35; transform: scale(0.7); } }
 @keyframes beam-pulse { 50% { opacity: 0.18; transform: scaleY(0.55); } }
+
+/* Four-rotor drone: a separate silhouette from the earlier shuttle design. */
+.experience-drone { width: 184px; height: 156px; filter: drop-shadow(0 0 16px rgba(34, 211, 238, 0.32)); animation-name: drone-hover-new; }
+.experience-drone-right { animation-name: drone-hover-new-right; }
+.drone-chassis { position: absolute; top: 47px; left: 67px; z-index: 3; width: 52px; height: 42px; border: 1px solid rgba(226, 232, 240, 0.82); border-radius: 13px 13px 18px 18px; background: linear-gradient(145deg, rgba(226, 232, 240, 0.34), rgba(51, 65, 85, 0.94) 36%, rgba(15, 23, 42, 0.98)); box-shadow: inset 0 -8px 12px rgba(2, 6, 23, 0.72), 0 0 16px rgba(148, 163, 184, 0.34); transform: perspective(400px) rotateX(22deg); }
+.drone-chassis::before { position: absolute; top: -7px; left: 11px; width: 28px; height: 12px; border: 1px solid rgba(103, 232, 249, 0.82); border-radius: 9px 9px 2px 2px; background: rgba(8, 47, 73, 0.74); content: ""; }
+.drone-chassis::after { position: absolute; right: 8px; bottom: 7px; left: 8px; height: 2px; border-radius: 50%; background: #67e8f9; box-shadow: 0 0 10px #67e8f9; content: ""; }
+.drone-lens { position: absolute; top: 14px; left: 19px; width: 14px; height: 14px; border: 2px solid rgba(224, 242, 254, 0.92); border-radius: 50%; background: #22d3ee; box-shadow: 0 0 7px #22d3ee, 0 0 18px rgba(34, 211, 238, 0.8); animation: drone-eye-new 1.4s ease-in-out infinite; }
+.drone-arm { position: absolute; z-index: 2; width: 69px; height: 8px; border: 1px solid rgba(129, 140, 248, 0.82); border-radius: 99px; background: linear-gradient(90deg, rgba(129, 140, 248, 0.14), rgba(103, 232, 249, 0.62), rgba(129, 140, 248, 0.14)); box-shadow: 0 0 10px rgba(99, 102, 241, 0.44); transform-origin: 5px 50%; }
+.drone-arm i { position: absolute; top: -16px; width: 39px; height: 39px; border: 1px solid rgba(192, 132, 252, 0.82); border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(192, 132, 252, 0.42) 0 9deg, transparent 9deg 22deg); box-shadow: 0 0 13px rgba(192, 132, 252, 0.44); animation: rotor-new 0.65s linear infinite; }
+.arm-nw { top: 37px; left: 24px; transform: rotate(-33deg); }.arm-nw i { left: -18px; }
+.arm-ne { top: 37px; left: 91px; transform: rotate(33deg); }.arm-ne i { right: -18px; }
+.arm-sw { top: 90px; left: 24px; transform: rotate(33deg); }.arm-sw i { left: -18px; }
+.arm-se { top: 90px; left: 91px; transform: rotate(-33deg); }.arm-se i { right: -18px; }
+.drone-scan-grid { position: absolute; top: 91px; left: 76px; width: 34px; height: 65px; border: 1px solid rgba(103, 232, 249, 0.55); background: repeating-linear-gradient(0deg, transparent 0 9px, rgba(103, 232, 249, 0.38) 10px 11px), linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.24), transparent); clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%); opacity: 0.72; animation: scan-grid-new 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes drone-hover-new { 0%, 100% { transform: translate3d(0, 14px, 0) rotate(-3deg); } 50% { transform: translate3d(62px, -27px, 20px) rotate(4deg); } }
+@keyframes drone-hover-new-right { 0%, 100% { transform: translate3d(0, -17px, 0) rotate(3deg) scaleX(-1); } 50% { transform: translate3d(-62px, 27px, 20px) rotate(-4deg) scaleX(-1); } }
+@keyframes rotor-new { to { transform: rotate(360deg); } }
+@keyframes drone-eye-new { 50% { opacity: 0.38; transform: scale(0.65); } }
+@keyframes scan-grid-new { 50% { opacity: 0.18; transform: scaleY(0.62); } }
+
+/* Minimal scanner body — intentionally no wings or exposed rotors. */
+.experience-drone { width: 112px; height: 132px; filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.3)); }
+.experience-drone-left { left: 8%; }
+.experience-drone-right { right: 8%; }
+.drone-chassis { top: 27px; left: 16px; width: 80px; height: 50px; border-radius: 28px 28px 20px 20px; background: linear-gradient(155deg, rgba(186, 230, 253, 0.36), rgba(51, 65, 85, 0.96) 42%, rgba(8, 12, 28, 0.98)); box-shadow: 0 5px 0 #182238, 0 10px 0 #0b1120, 0 15px 22px rgba(0, 0, 0, 0.62), inset 0 2px 5px rgba(224, 242, 254, 0.32); transform: perspective(300px) rotateX(54deg) rotateZ(-2deg); transform-style: preserve-3d; }
+.drone-chassis::before { top: -5px; left: 22px; width: 30px; height: 9px; border-radius: 50% 50% 0 0; }
+.drone-top-panel { position: absolute; top: 6px; left: 12px; width: 56px; height: 28px; border: 1px solid rgba(125, 211, 252, 0.52); border-radius: 18px 18px 12px 12px; background: linear-gradient(145deg, rgba(125, 211, 252, 0.18), rgba(15, 23, 42, 0.3)); box-shadow: inset 0 1px rgba(255, 255, 255, 0.28), 0 0 9px rgba(34, 211, 238, 0.18); transform: translateZ(9px); }
+.drone-depth { position: absolute; right: 7px; bottom: -11px; left: 7px; height: 17px; border: 1px solid rgba(71, 85, 105, 0.8); border-top: 0; border-radius: 0 0 17px 17px; background: linear-gradient(180deg, #1e293b, #050816); box-shadow: inset 0 -3px 7px rgba(0, 0, 0, 0.58), 0 4px 10px rgba(0, 0, 0, 0.5); transform: translateZ(-8px) rotateX(-18deg); transform-origin: top; }
+.drone-lens { top: 14px; left: 31px; z-index: 3; transform: translateZ(15px); }
+.drone-scan-grid { top: 78px; left: 39px; width: 34px; height: 52px; }
+
+/* Four scanners stay in the outer corners, leaving the archive unobstructed. */
+.experience-drone-left { top: 68%; left: 8%; animation: scanner-arrive-left 1.35s cubic-bezier(0.16, 0.82, 0.24, 1) both, scanner-hover-left 5.8s ease-in-out 1.35s infinite; }
+.experience-drone-right { top: 68%; right: 8%; animation: scanner-arrive-right 1.35s cubic-bezier(0.16, 0.82, 0.24, 1) 0.14s both, scanner-hover-right 5.8s ease-in-out 1.49s infinite; }
+.experience-drone-left-secondary { top: 5%; left: 12%; opacity: 0.76; animation: scanner-arrive-upper-left 1.5s cubic-bezier(0.16, 0.82, 0.24, 1) 0.28s both, scanner-hover-upper 6.4s ease-in-out 1.78s infinite; transform: scale(0.78); }
+.experience-drone-right-secondary { top: 14%; right: 2%; opacity: 0.76; animation: scanner-arrive-upper-right 1.5s cubic-bezier(0.16, 0.82, 0.24, 1) 0.42s both, scanner-hover-upper-right 6.4s ease-in-out 1.92s infinite; transform: scale(0.78); }
+@keyframes scanner-arrive-left { 0% { opacity: 0; filter: blur(7px); transform: translate3d(230px, -145px, -620px) scale(0.12); } 72% { opacity: 1; filter: blur(0); transform: translate3d(-8px, 5px, 20px) scale(1.06); } 100% { opacity: 1; filter: blur(0); transform: translate3d(0, 4px, 0) scale(1); } }
+@keyframes scanner-arrive-right { 0% { opacity: 0; filter: blur(7px); transform: translate3d(-230px, -145px, -620px) scale(0.12); } 72% { opacity: 1; filter: blur(0); transform: translate3d(8px, -5px, 20px) scale(1.06); } 100% { opacity: 1; filter: blur(0); transform: translate3d(0, -4px, 0) scale(1); } }
+@keyframes scanner-arrive-upper-left { 0% { opacity: 0; filter: blur(7px); transform: translate3d(170px, 120px, -620px) scale(0.08); } 72% { opacity: 0.84; filter: blur(0); transform: translate3d(-6px, 4px, 16px) scale(0.83); } 100% { opacity: 0.76; filter: blur(0); transform: translate3d(0, 3px, 0) scale(0.78); } }
+@keyframes scanner-arrive-upper-right { 0% { opacity: 0; filter: blur(7px); transform: translate3d(-170px, 120px, -620px) scale(0.08); } 72% { opacity: 0.84; filter: blur(0); transform: translate3d(6px, -4px, 16px) scale(0.83); } 100% { opacity: 0.76; filter: blur(0); transform: translate3d(0, -3px, 0) scale(0.78); } }
+@keyframes scanner-hover-left { 0%, 100% { transform: translate3d(0, 4px, 0); } 50% { transform: translate3d(10px, -8px, 10px); } }
+@keyframes scanner-hover-right { 0%, 100% { transform: translate3d(0, -4px, 0); } 50% { transform: translate3d(-10px, 8px, 10px); } }
+@keyframes scanner-hover-upper { 0%, 100% { transform: translate3d(0, 3px, 0) scale(0.78); } 50% { transform: translate3d(8px, -6px, 8px) scale(0.78); } }
+@keyframes scanner-hover-upper-right { 0%, 100% { transform: translate3d(0, -3px, 0) scale(0.78); } 50% { transform: translate3d(-8px, 6px, 8px) scale(0.78); } }
+
+.drone-scan-grid {
+  left: 25px;
+  width: 62px;
+  height: 60px;
+  border-color: rgba(103, 232, 249, 0.62);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 8px, currentColor 9px 11px),
+    linear-gradient(90deg, transparent, currentColor, transparent);
+  color: #22d3ee;
+  box-shadow: 0 0 14px currentColor;
+  animation: scanner-neon-wave 2.5s ease-in-out infinite;
+}
+.experience-drone-right .drone-scan-grid { animation-delay: -0.6s; }
+.experience-drone-left-secondary .drone-scan-grid { animation-delay: -1.2s; }
+.experience-drone-right-secondary .drone-scan-grid { animation-delay: -1.8s; }
+@keyframes scanner-neon-wave {
+  0%, 100% { color: #22d3ee; opacity: 0.72; transform: scaleX(0.86) scaleY(0.72); }
+  33% { color: #c084fc; opacity: 0.92; transform: scaleX(1.08) scaleY(1); }
+  66% { color: #f472b6; opacity: 0.58; transform: scaleX(0.96) scaleY(0.82); }
+}
 
 .experience-falling-prompt {
   position: absolute;

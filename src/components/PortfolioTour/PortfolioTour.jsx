@@ -418,6 +418,7 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
 }
 
 function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) {
+  const [dropText, setDropText] = useState(false);
   const experienceFiles = experienceRecords.map((experience) => (
     <article className="experience-paper-file" key={experience.id}>
       <span>{experience.number} / {experience.tag}</span>
@@ -442,10 +443,16 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
           <span className="holo-cube holo-cube-three"><b>R</b></span>
         </div>
         <div className="experience-drone experience-drone-left" aria-hidden="true">
-          <span className="drone-body"><i /><b>SCAN-01</b></span><span className="drone-rotor rotor-a" /><span className="drone-rotor rotor-b" /><span className="drone-beam" />
+          <span className="drone-chassis"><i className="drone-top-panel" /><i className="drone-depth" /><i className="drone-lens" /></span><span className="drone-scan-grid" />
         </div>
         <div className="experience-drone experience-drone-right" aria-hidden="true">
-          <span className="drone-body"><i /><b>SCAN-02</b></span><span className="drone-rotor rotor-a" /><span className="drone-rotor rotor-b" /><span className="drone-beam" />
+          <span className="drone-chassis"><i className="drone-top-panel" /><i className="drone-depth" /><i className="drone-lens" /></span><span className="drone-scan-grid" />
+        </div>
+        <div className="experience-drone experience-drone-left-secondary" aria-hidden="true">
+          <span className="drone-chassis"><i className="drone-top-panel" /><i className="drone-depth" /><i className="drone-lens" /></span><span className="drone-scan-grid" />
+        </div>
+        <div className="experience-drone experience-drone-right-secondary" aria-hidden="true">
+          <span className="drone-chassis"><i className="drone-top-panel" /><i className="drone-depth" /><i className="drone-lens" /></span><span className="drone-scan-grid" />
         </div>
         <div className="experience-falling-prompt" aria-label="Open this file">
           <Suspense fallback={<span>OPEN THIS FILE</span>}>
@@ -453,8 +460,8 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
               text="OPEN THIS FILE"
               highlightWords={["O", "F"]}
               highlightClass="highlighted"
-              trigger="auto"
-              triggerDelay={3000}
+              trigger={dropText ? "auto" : "manual"}
+              triggerDelay={0}
               backgroundColor="transparent"
               wireframes={false}
               gravity={0.56}
@@ -463,7 +470,7 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
             />
           </Suspense>
         </div>
-        <Folder size={2.58} color="#5227FF" className="custom-folder" items={experienceFiles} onItemClick={onSelectExperience} />
+        <Folder size={2.58} color="#5227FF" className="custom-folder" items={experienceFiles} onItemClick={onSelectExperience} onMouseEnter={() => setDropText(true)} />
         <p className="experience-folder-instruction"><i /> Click the folder to reveal three roles</p>
       </div>
       <footer className="experience-folder-footer">
