@@ -118,12 +118,13 @@ const GooeyNav = ({
   };
 
   const handleKeyDown = (e, index) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === ' ') {
       e.preventDefault();
       const liEl = e.currentTarget.parentElement;
       if (liEl) {
         handleClick({ currentTarget: liEl }, index);
       }
+      window.location.assign(items[index].href);
     }
   };
 

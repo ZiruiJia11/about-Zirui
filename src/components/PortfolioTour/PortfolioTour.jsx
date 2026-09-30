@@ -724,6 +724,12 @@ function supportsWebGL() {
 export default function PortfolioTour() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [liteMode, setLiteMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth <= 820
+      || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
+      || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
   const [webGLReady, setWebGLReady] = useState(null);
   const [moving, setMoving] = useState(false);
   const [portalExiting, setPortalExiting] = useState(false);
@@ -827,7 +833,7 @@ export default function PortfolioTour() {
       blendMode="screen"
     >
       <section
-      className={`portfolio-tour${moving ? " is-moving" : ""}${portalExiting ? " is-portal-exiting" : ""}${activeScene.id === "projects" ? " is-project-scene" : ""}${activeScene.id === "experience" ? " is-experience-scene" : ""}${activeScene.id === "skills" ? " is-skills-scene" : ""}${activeScene.id === "hobbies" ? " is-hobbies-scene" : ""}${[0, 1, 2, 3, 4, 5].includes(activeIndex) ? " has-react-bits-background" : ""}`}
+      className={`portfolio-tour${moving ? " is-moving" : ""}${portalExiting ? " is-portal-exiting" : ""}${liteMode ? " is-lite-mode" : ""}${activeScene.id === "projects" ? " is-project-scene" : ""}${activeScene.id === "experience" ? " is-experience-scene" : ""}${activeScene.id === "skills" ? " is-skills-scene" : ""}${activeScene.id === "hobbies" ? " is-hobbies-scene" : ""}${!liteMode && [0, 1, 2, 3, 4, 5].includes(activeIndex) ? " has-react-bits-background" : ""}`}
       ref={shellRef}
       tabIndex={0}
       onKeyDown={handleKeyDown}
@@ -836,7 +842,8 @@ export default function PortfolioTour() {
       aria-label="Guided 3D portfolio tour"
     >
       <div className="tour-canvas" aria-hidden="true">
-        {activeIndex === 0 ? (
+        {liteMode ? <div className={`tour-lite-background is-${activeScene.id}`} /> : null}
+        {!liteMode && activeIndex === 0 ? (
           <div className="tour-prism-background">
             <Suspense fallback={null}>
               <Prism
@@ -853,7 +860,7 @@ export default function PortfolioTour() {
             </Suspense>
           </div>
         ) : null}
-        {activeIndex === 1 ? (
+        {!liteMode && activeIndex === 1 ? (
           <div className="tour-gridscan-background">
             <Suspense fallback={null}>
               <GridScan
@@ -871,7 +878,7 @@ export default function PortfolioTour() {
             </Suspense>
           </div>
         ) : null}
-        {activeIndex === 2 ? (
+        {!liteMode && activeIndex === 2 ? (
           <div className="tour-dither-background">
             <Suspense fallback={null}>
               <Dither
@@ -888,7 +895,7 @@ export default function PortfolioTour() {
             </Suspense>
           </div>
         ) : null}
-        {activeIndex === 3 ? (
+        {!liteMode && activeIndex === 3 ? (
           <div className="tour-acid-background">
             <Suspense fallback={null}>
               <AcidSquares
@@ -918,7 +925,7 @@ export default function PortfolioTour() {
             </Suspense>
           </div>
         ) : null}
-        {activeIndex === 4 ? (
+        {!liteMode && activeIndex === 4 ? (
           <div className="tour-shape-waves-background">
             <Suspense fallback={null}>
               <ShapeWaves
@@ -950,7 +957,7 @@ export default function PortfolioTour() {
             </Suspense>
           </div>
         ) : null}
-        {isLast ? (
+        {!liteMode && isLast ? (
           <div className="tour-letter-glitch-background">
             <Suspense fallback={null}>
               <LetterGlitch
@@ -966,7 +973,8 @@ export default function PortfolioTour() {
           <Suspense fallback={<div className="tour-static-backdrop" />}>
             <CyberWorld
               activeIndex={activeIndex}
-              reducedMotion={reducedMotion}
+              reducedMotion={reducedMotion || liteMode}
+              liteMode={liteMode}
               moving={moving}
               onNext={handleNext}
               portalExiting={portalExiting}
@@ -982,10 +990,23 @@ export default function PortfolioTour() {
 
       <header className="tour-header">
         <a className="tour-brand" href="/" aria-label="Return to Steven Jia portfolio"><span className="tour-logo"><Orbit size={21} strokeWidth={2.4} /></span><strong>Steven<span> / Lab</span></strong></a>
-        <nav className="tour-nav" aria-label="Tour information"><span className="is-active">Journey</span><span>Cyber world</span><span>Portfolio</span></nav>
+        <div className="tour-world-heading" aria-label="Cyber World — interactive VR 3D portfolio">
+          <span>VR / 3D portfolio</span>
+          <strong>Cyber World</strong>
+        </div>
         <div className="tour-header-tools">
           <div className="tour-command"><Search size={15} /><span>Zone</span><kbd>{activeScene.number} / 06</kbd></div>
-          <button className="tour-settings" type="button" aria-label="Interactive WebGL experience"><SlidersHorizontal size={17} /></button>
+          <button
+            className="tour-settings"
+            type="button"
+            aria-label={`Switch to ${liteMode ? "full" : "lite"} visual effects`}
+            aria-pressed={liteMode}
+            title={`Visual effects: ${liteMode ? "Lite" : "Full"}`}
+            onClick={() => setLiteMode((current) => !current)}
+          >
+            <SlidersHorizontal size={17} />
+            <span>{liteMode ? "Lite" : "Full"}</span>
+          </button>
           <a className="tour-exit" href="/"><Home size={16} /> <span>Exit tour</span></a>
         </div>
       </header>
@@ -1008,7 +1029,7 @@ export default function PortfolioTour() {
 
       <ExperienceDetail selectedIndex={selectedExperienceIndex} onClose={closeExperienceDetail} />
 
-      {!isLast ? <div className="tour-mode"><i /> {reducedMotion || webGLReady === false ? "Accessible view" : moving ? "Travelling" : activeScene.label}</div> : null}
+      {!isLast ? <div className="tour-mode"><i /> {liteMode ? "Lite effects" : reducedMotion || webGLReady === false ? "Accessible view" : moving ? "Travelling" : activeScene.label}</div> : null}
       </section>
     </GlowCursor>
   );

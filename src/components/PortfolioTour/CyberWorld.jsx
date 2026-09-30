@@ -1063,7 +1063,7 @@ function TransitGate({ scene, moving, reducedMotion }) {
   );
 }
 
-function World({ activeIndex, reducedMotion, moving, onNext, portalExiting }) {
+function World({ activeIndex, reducedMotion, moving, onNext, portalExiting, liteMode }) {
   const scene = tourScenes[activeIndex];
   const theme = zoneThemes[scene.id];
   const isContact = activeIndex === tourScenes.length - 1;
@@ -1074,7 +1074,7 @@ function World({ activeIndex, reducedMotion, moving, onNext, portalExiting }) {
       <fog attach="fog" args={[theme.background, 8, 24]} />
       <ambientLight intensity={0.42} />
       <directionalLight position={[4, 9, 6]} color="#efe7ff" intensity={1.3} />
-      {!isContact ? <Stars radius={52} depth={32} count={1100} factor={2.2} saturation={0.6} fade speed={reducedMotion ? 0 : 0.18} /> : null}
+      {!isContact ? <Stars radius={52} depth={32} count={liteMode ? 420 : 1100} factor={2.2} saturation={0.6} fade speed={reducedMotion ? 0 : 0.18} /> : null}
       <CinematicCamera scene={scene} reducedMotion={reducedMotion} />
       <CyberLocation key={scene.id} scene={scene} index={activeIndex} onNext={onNext} reducedMotion={reducedMotion} portalExiting={portalExiting} />
       {!isContact ? <TransitGate scene={scene} moving={moving} reducedMotion={reducedMotion} /> : null}
@@ -1087,27 +1087,27 @@ function World({ activeIndex, reducedMotion, moving, onNext, portalExiting }) {
           </mesh>
         </>
       ) : null}
-      <EffectComposer multisampling={0}>
+      {!liteMode ? <EffectComposer multisampling={0}>
         <Bloom intensity={activeIndex === 0 ? 0.72 : 0.34} luminanceThreshold={0.72} luminanceSmoothing={0.22} mipmapBlur radius={0.58} />
-      </EffectComposer>
+      </EffectComposer> : null}
     </>
   );
 }
 
-export default function CyberWorld({ activeIndex, reducedMotion, moving, onNext, portalExiting }) {
+export default function CyberWorld({ activeIndex, reducedMotion, moving, onNext, portalExiting, liteMode = false }) {
   return (
     <Canvas
       camera={{ position: tourScenes[0].camera, fov: 46 }}
-      dpr={[1, 1.5]}
+      dpr={liteMode ? [0.75, 1] : [1, 1.5]}
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 0.92;
       }}
-      shadows
+      shadows={!liteMode}
     >
       <Suspense fallback={null}>
-        <World activeIndex={activeIndex} reducedMotion={reducedMotion} moving={moving} onNext={onNext} portalExiting={portalExiting} />
+        <World activeIndex={activeIndex} reducedMotion={reducedMotion} moving={moving} onNext={onNext} portalExiting={portalExiting} liteMode={liteMode} />
       </Suspense>
     </Canvas>
   );

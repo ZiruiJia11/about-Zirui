@@ -26,6 +26,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #102730;
   color: var(--ink);
@@ -53,6 +54,13 @@ body::before {
     radial-gradient(circle at 76% 82%, rgba(255, 171, 64, 0.1), transparent 34%),
     linear-gradient(180deg, rgba(6, 20, 38, 0.02), rgba(6, 20, 38, 0.18));
   pointer-events: none;
+}
+
+.site-waves.is-static {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(38, 214, 199, 0.18), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgba(255, 191, 91, 0.13), transparent 26%),
+    linear-gradient(160deg, #071b33 0%, #0b2341 48%, #07182c 100%);
 }
 
 a {
@@ -750,6 +758,7 @@ h1 {
   margin-bottom: 28px;
 }
 
+.section-header h1,
 .section-header h2,
 .cv-section h2 {
   margin: 0;
@@ -1053,6 +1062,70 @@ li + li {
   flex-direction: column;
   padding: 20px;
   border-top: 4px solid var(--blue);
+}
+
+.project-visual {
+  position: relative;
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  min-height: 96px;
+  margin: -4px -4px 18px;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 24%, transparent);
+  border-radius: 10px;
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--project-accent) 14%, white), rgba(255, 255, 255, 0.9)),
+    #f6f9fc;
+}
+
+.project-visual::after {
+  position: absolute;
+  inset: auto -18px -28px auto;
+  width: 104px;
+  height: 104px;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 24%, transparent);
+  border-radius: 50%;
+  content: "";
+  box-shadow: 0 0 0 16px color-mix(in srgb, var(--project-accent) 5%, transparent);
+}
+
+.project-visual > span {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--project-accent);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 950;
+  letter-spacing: -0.04em;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--project-accent) 28%, transparent);
+}
+
+.project-visual div {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 5px;
+}
+
+.project-visual small {
+  color: var(--project-accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-visual strong {
+  max-width: 28ch;
+  color: #17212a;
+  font-size: 0.88rem;
+  line-height: 1.25;
 }
 
 .project:nth-child(1) {
@@ -1366,6 +1439,12 @@ footer a {
 
   .site-header {
     align-items: flex-start;
+    gap: 8px;
+    width: calc(100% - 24px);
+  }
+
+  .brand {
+    flex: 0 0 auto;
   }
 
   .site-header .gooey-nav-container {
@@ -1376,6 +1455,9 @@ footer a {
   }
 
   .site-header-nav {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    overflow: hidden;
     gap: 7px;
   }
 
@@ -1402,7 +1484,61 @@ footer a {
   }
 
   .route-page {
+    width: 100%;
+    min-width: 0;
     padding-top: 48px;
+  }
+
+  .route-page > .section-header:first-child {
+    width: 100%;
+    min-width: 0;
+    padding: 22px 20px;
+  }
+
+  .route-page > .section-header:first-child h1 {
+    overflow-wrap: anywhere;
+    font-size: clamp(2rem, 10vw, 2.55rem);
+    line-height: 1.02;
+  }
+
+  .route-page .page-section {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 18px;
+  }
+
+  .projects-grid {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .project p {
+    overflow-wrap: anywhere;
+  }
+
+  .project-visual {
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 11px;
+    padding: 12px;
+  }
+
+  .project-visual > span {
+    width: 50px;
+    height: 50px;
+  }
+
+  .project-visual strong {
+    overflow-wrap: anywhere;
+    font-size: 0.82rem;
   }
 
   .hero::after {

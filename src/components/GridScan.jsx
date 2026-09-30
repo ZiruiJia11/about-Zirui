@@ -1,4 +1,3 @@
-import * as faceapi from 'face-api.js';
 import { BloomEffect, ChromaticAberrationEffect, EffectComposer, EffectPass, RenderPass } from 'postprocessing';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -312,6 +311,7 @@ export const GridScan = ({
 }) => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
+  const faceApiRef = useRef(null);
 
   const rendererRef = useRef(null);
   const materialRef = useRef(null);
@@ -687,6 +687,8 @@ export const GridScan = ({
     let canceled = false;
     const load = async () => {
       try {
+        const faceapi = await import('face-api.js');
+        faceApiRef.current = faceapi;
         await Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri(modelsPath),
           faceapi.nets.faceLandmark68TinyNet.loadFromUri(modelsPath)
@@ -710,6 +712,8 @@ export const GridScan = ({
     const start = async () => {
       if (!enableWebcam || !modelsReady) return;
       if (!video) return;
+      const faceapi = faceApiRef.current;
+      if (!faceapi) return;
 
       try {
         const stream = await navigator.mediaDevices.getUserMedia({

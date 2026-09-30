@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node scripts/prepare-build.mjs && vite build",
-    "preview": "vite preview"
+    "dev": "node scripts/prepare-build.mjs && vite",
+    "build": "node scripts/prepare-build.mjs && vite build && node scripts/post-build.mjs",
+    "preview": "vite preview",
+    "publish:local": "npm run build && node scripts/sync-pages.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",

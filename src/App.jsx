@@ -31,6 +31,15 @@ const navItems = [
   { label: "CV", path: "/cv" },
 ];
 
+const routeMeta = {
+  "/": { title: "Steven Jia | Software Engineer & Full Stack Developer", description: "Steven Jia, Software Engineer and Full Stack Developer building multi-tenant web, data, AI, and cloud applications." },
+  "/experience": { title: "Experience | Steven Jia", description: "Full-stack development, coding education, technical support, and customer-facing experience." },
+  "/projects": { title: "Software Projects | Steven Jia", description: "Selected Laravel, Vue, React, Next.js, .NET, AI, data automation, testing, and integration projects." },
+  "/profile": { title: "Technical Profile | Steven Jia", description: "Technical skills, education, certification, engineering practice, and professional interests." },
+  "/cv": { title: "CV and Contact | Steven Jia", description: "View Steven Jia's current software engineering CV and contact information." },
+  "/tour": { title: "3D Portfolio Tour | Steven Jia", description: "An interactive 3D tour of Steven Jia's experience, projects, technical skills, and contact details." },
+};
+
 const skillGroups = [
   { title: "Frontend & Product", items: ["React", "Vue 3", "Inertia.js", "TypeScript", "JavaScript", "Vite", "Zustand", "Next.js", "HTML5", "CSS3", "Responsive Design", "Progressive Web Apps", "Three.js", "React Three Fiber", "WebGL"] },
   { title: "Backend & Data", items: ["PHP", "Laravel", "C#", "ASP.NET Core", "Node.js", "Express", "Eloquent ORM", "Entity Framework Core", "PostgreSQL", "SQLite", "SQL", "Prisma", "Relational Data Modelling"] },
@@ -143,6 +152,10 @@ const experience = [
 const projects = [
   {
     name: "JobTrack Fullstack",
+    category: "AI workflow platform",
+    proof: "Evidence-grounded fit reports + private CV storage",
+    visual: "JT",
+    accent: "#0f766e",
     summary: "Full-stack job tracker with SEEK and LinkedIn importing, browser-extension capture, editable records, private CV storage, and an OpenAI agent that returns structured fit reports grounded in the latest reviewed CV evidence.",
     tags: ["Next.js", "Supabase", "PostgreSQL", "Vercel AI SDK", "OpenAI Responses API", "Zod"],
     link: "https://jobtrack-fullstack-ashy.vercel.app/",
@@ -151,6 +164,10 @@ const projects = [
   },
   {
     name: "Reel Local Cinema SaaS",
+    category: "Booking SaaS",
+    proof: "Protected booking and profile workflows",
+    visual: "RL",
+    accent: "#2563eb",
     summary: "Full-stack cinema booking platform for local film clubs and community screenings, with movie browsing, protected routes, booking workflows, profile pages, Express APIs, and PostgreSQL persistence through Prisma.",
     tags: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma"],
     link: "https://reel-local-project.vercel.app/",
@@ -159,6 +176,10 @@ const projects = [
   },
   {
     name: "Dependency Map",
+    category: "Multi-tenant Laravel",
+    proof: "31 feature tests + PostgreSQL CI",
+    visual: "DM",
+    accent: "#d97706",
     summary: "Authenticated dependency-graph workspace with scoped project, node, and relationship CRUD, persistent layouts, 31 domain-focused feature tests, and a CI pipeline backed by PostgreSQL integration.",
     tags: ["Laravel 13", "Vue 3", "Inertia.js", "TypeScript", "PostgreSQL", "Pest", "GitHub Actions"],
     source: "https://github.com/ZiruiJia11/dependency-map",
@@ -166,6 +187,10 @@ const projects = [
   },
   {
     name: "FitQuest - MSA 2026",
+    category: "Gamified fitness",
+    proof: "Validated APIs, rate limits, and automated tests",
+    visual: "FQ",
+    accent: "#e85d4f",
     summary: "Deployed gamified fitness tracker with quest CRUD, XP progression, streaks, achievements, responsive navigation, animated feedback, request validation, API rate limiting, and frontend and backend tests.",
     tags: ["React", "TypeScript", "ASP.NET Core", "C#", "Entity Framework Core", "SQLite", "xUnit"],
     link: "https://msa-2026-phase-2-software.vercel.app/",
@@ -174,6 +199,10 @@ const projects = [
   },
   {
     name: "Power BI OData API Demo",
+    category: "Enterprise integration",
+    proof: "11 feature tests + Basic/Bearer authentication",
+    visual: "BI",
+    accent: "#6d5bd0",
     summary: "Tenant-isolated Laravel integration exposing discoverable OData feeds with filters, Basic and Bearer authentication, rate limiting, downloadable PBIDS/PBIT assets, and 11 domain-focused feature tests.",
     tags: ["Laravel", "Vue 3", "Inertia.js", "OData", "Power BI", "Multi-tenancy", "Pest"],
     source: "https://github.com/ZiruiJia11/power-bi-api-demo",
@@ -181,6 +210,10 @@ const projects = [
   },
   {
     name: "Kiwi Supplement Watch",
+    category: "Live data automation",
+    proof: "Daily collectors + source-health reporting",
+    visual: "KW",
+    accent: "#0284c7",
     summary: "New Zealand supplement price-monitoring dashboard with live retailer collectors, source-health reporting, price history, stale-data fallback, and automated daily collection, smoke testing, dataset updates, and deployment.",
     tags: ["React", "Vite", "JavaScript", "GitHub Actions", "Data Automation", "Vercel"],
     link: "https://kiwi-supplement-watch.vercel.app/",
@@ -189,27 +222,39 @@ const projects = [
   },
   {
     name: "Data and AI Classification Projects",
+    category: "Machine learning",
+    proof: "94.7% AG News test accuracy",
+    visual: "ML",
+    accent: "#7c3aed",
     summary: "Prepared image and text datasets, compared CNN, Vision Transformer, traditional ML, and transformer approaches, and used class-level error analysis to improve models; the strongest AG News model reached about 94.7% test accuracy.",
     tags: ["Python", "Machine Learning", "NLP", "CNN", "Vision Transformer", "Model Evaluation"],
     source: "https://github.com/ZiruiJia11/hand-written-letter-recognizer",
   },
   {
     name: "Tax Case Triage Assistant",
+    category: "Explainable systems",
+    proof: "Human approval + timestamped audit trail",
+    visual: "TX",
+    accent: "#b45309",
     summary: "Explainable case-prioritisation prototype using synthetic data, deterministic risk rules, visible evidence, mandatory human approval, timestamped audit logging, local-only data handling, and automated tests.",
     tags: ["Python", "SQLite", "JavaScript", "Explainable Rules", "Audit Logging", "Human in the Loop"],
   },
   {
     name: "Java Algorithms and Automated Testing",
+    category: "Algorithms & testing",
+    proof: "DFS, BFS, A* + custom fuzzing",
+    visual: "JA",
+    accent: "#be123c",
     summary: "Route-planning application using DFS, BFS, and A* over structured transport data, paired with a team-built 2D maze game, JUnit test cases, and a custom fuzzing tool for regressions and edge cases.",
     tags: ["Java", "Algorithms", "Data Structures", "JUnit", "Git", "Fuzz Testing"],
   },
 ];
 
-function SectionHeader({ eyebrow, title, copy }) {
+function SectionHeader({ eyebrow, title, copy, as: Heading = "h2" }) {
   return (
     <div className="section-header">
       <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
+      <Heading>{title}</Heading>
       {copy ? <p>{copy}</p> : null}
     </div>
   );
@@ -232,34 +277,12 @@ function App() {
     return normalizePath(hashPath || pathname);
   };
   const [currentPath, setCurrentPath] = useState(getPath);
-  const [showExperiencePicker, setShowExperiencePicker] = useState(() => {
-    try {
-      return getPath() === "/" && window.sessionStorage.getItem("portfolio-experience-selected") !== "true";
-    } catch {
-      return getPath() === "/";
-    }
+  const [lowPowerMode, setLowPowerMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      || window.innerWidth <= 720
+      || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
   });
-
-  const rememberExperienceChoice = () => {
-    try {
-      window.sessionStorage.setItem("portfolio-experience-selected", "true");
-    } catch {
-      // The choice still works when browser storage is unavailable.
-    }
-  };
-
-  const chooseStandardExperience = () => {
-    rememberExperienceChoice();
-    setShowExperiencePicker(false);
-  };
-
-  const chooseTourExperience = () => {
-    rememberExperienceChoice();
-    setShowExperiencePicker(false);
-    window.history.pushState({}, "", "/tour");
-    window.dispatchEvent(new PopStateEvent("popstate"));
-  };
-
   const openCvPopup = () => {
     const cvUrl = new URL(`${import.meta.env.BASE_URL}cv-complete.pdf`, window.location.origin).href;
     const width = Math.min(1100, window.screen.availWidth - 80);
@@ -281,13 +304,6 @@ function App() {
         window.history.replaceState({}, "", nextPath);
       }
       setCurrentPath(nextPath);
-      if (nextPath === "/") {
-        try {
-          setShowExperiencePicker(window.sessionStorage.getItem("portfolio-experience-selected") !== "true");
-        } catch {
-          setShowExperiencePicker(true);
-        }
-      }
       window.scrollTo({ top: 0, behavior: "instant" });
     };
     window.addEventListener("popstate", handleRouteChange);
@@ -300,18 +316,31 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!showExperiencePicker) return undefined;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") chooseStandardExperience();
-    };
-    window.addEventListener("keydown", handleKeyDown);
+    const meta = routeMeta[currentPath] || routeMeta["/"];
+    const canonicalUrl = `https://stevenjia.co.nz${currentPath === "/" ? "/" : currentPath}`;
+    document.title = meta.title;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", meta.description);
+    document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
+    document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonicalUrl);
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", meta.title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", meta.description);
+  }, [currentPath]);
+
+  useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMode = () => setLowPowerMode(
+      motion.matches
+      || window.innerWidth <= 720
+      || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4),
+    );
+    syncMode();
+    motion.addEventListener?.("change", syncMode);
+    window.addEventListener("resize", syncMode);
     return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
+      motion.removeEventListener?.("change", syncMode);
+      window.removeEventListener("resize", syncMode);
     };
-  }, [showExperiencePicker]);
+  }, []);
 
   if (currentPath === "/tour") {
     return (
@@ -323,42 +352,8 @@ function App() {
 
   return (
     <>
-      {showExperiencePicker ? (
-        <div className="experience-picker-backdrop" role="presentation">
-          <section className="experience-picker" role="dialog" aria-modal="true" aria-labelledby="experience-picker-title">
-            <header className="experience-picker-header">
-              <p className="eyebrow">Choose your experience</p>
-              <h1 id="experience-picker-title">How would you like to explore?</h1>
-              <p>Both paths contain the same portfolio. Choose the version that suits your time and device.</p>
-            </header>
-
-            <div className="experience-picker-options">
-              <button type="button" className="experience-option standard" onClick={chooseStandardExperience} autoFocus>
-                <span className="experience-option-icon"><Code2 size={25} /></span>
-                <span className="experience-option-label">QUICK &amp; SMOOTH</span>
-                <strong>Standard portfolio</strong>
-                <span className="experience-option-copy">The fastest way to review my experience, projects, skills, and CV.</span>
-                <span className="experience-option-note">Recommended if you are short on time or want to avoid performance issues.</span>
-                <span className="experience-option-action">ENTER STANDARD <ArrowUpRight size={18} /></span>
-              </button>
-
-              <button type="button" className="experience-option immersive" onClick={chooseTourExperience}>
-                <span className="experience-option-icon"><Gamepad2 size={25} /></span>
-                <span className="experience-option-label">BEST EXPERIENCE</span>
-                <strong>3D guided tour</strong>
-                <span className="experience-option-copy">An interactive cyber-world journey with animated scenes and project exhibits.</span>
-                <span className="experience-option-note">Choose this for the full visual experience on a capable device.</span>
-                <span className="experience-option-action">ENTER 3D TOUR <ArrowUpRight size={18} /></span>
-              </button>
-            </div>
-
-            <p className="experience-picker-footnote">You can switch between both versions at any time from the navigation.</p>
-          </section>
-        </div>
-      ) : null}
-
-      <div className="site-waves" aria-hidden="true">
-        <ShapeWaves
+      <div className={`site-waves${lowPowerMode ? " is-static" : ""}`} aria-hidden="true">
+        {!lowPowerMode ? <ShapeWaves
           text="STEVEN JIA"
           fontFamily='Geist, "Geist Sans", system-ui, sans-serif'
           fontWeight={500}
@@ -383,7 +378,7 @@ function App() {
           intro={true}
           introDuration={1.6}
           paused={false}
-        />
+        /> : null}
       </div>
       <header className="site-header">
         <a className="brand" href="/" aria-label="Steven Jia home">SJ</a>
@@ -506,7 +501,7 @@ function App() {
         </> : null}
 
         {currentPath === "/profile" ? <div className="route-page">
-          <SectionHeader eyebrow="Profile" title="How I work, learn, and build" copy="A closer look at my technical range, daily practice, education, and interests beyond code." />
+          <SectionHeader as="h1" eyebrow="Profile" title="How I work, learn, and build" copy="A closer look at my technical range, daily practice, education, and interests beyond code." />
           <section className="page-section daily-section" aria-label="Daily practice">
           <SectionHeader eyebrow="Daily practice" title="How I keep improving outside coursework" copy="My daily routine is built around shipping small improvements, learning from real tools, and keeping my job-search workflow organized." />
           <div className="daily-grid">
@@ -559,7 +554,7 @@ function App() {
         </div> : null}
 
         {currentPath === "/experience" ? <div className="route-page experience-page">
-          <SectionHeader eyebrow="Experience" title="Professional product development, teaching, and technical support" copy="Multi-tenant application work at Ocular, backed by tutoring, repair, and customer-facing problem solving." />
+          <SectionHeader as="h1" eyebrow="Experience" title="Professional product development, teaching, and technical support" copy="Multi-tenant application work at Ocular, backed by tutoring, repair, and customer-facing problem solving." />
           <section className="page-section">
           <div className="timeline">
             {experience.map((job, index) => (
@@ -579,12 +574,19 @@ function App() {
         </div> : null}
 
         {currentPath === "/projects" ? <div className="route-page">
-          <SectionHeader eyebrow="Selected work" title="Projects with real implementation depth" copy="Deployed full-stack products, evidence-grounded AI, live data automation, integrations, testing, algorithms, and machine-learning prototypes." />
+          <SectionHeader as="h1" eyebrow="Selected work" title="Projects with real implementation depth" copy="Deployed full-stack products, evidence-grounded AI, live data automation, integrations, testing, algorithms, and machine-learning prototypes." />
           <section className="page-section projects-section">
           <div className="projects-grid">
             {projects.map((project) => (
               <CardSurface key={project.name} accentColor={project.featured ? "#9fffe8" : "#a8c7ff"}>
                 <SpotlightCard className="project" spotlightColor={project.featured ? "rgba(15, 118, 110, 0.18)" : "rgba(37, 99, 235, 0.14)"}>
+                  <div className="project-visual" style={{ "--project-accent": project.accent }} aria-hidden="true">
+                    <span>{project.visual}</span>
+                    <div>
+                      <small>{project.category}</small>
+                      <strong>{project.proof}</strong>
+                    </div>
+                  </div>
                   <div className="project-top">
                     <div className="project-kicker">
                       <Code2 size={20} />
@@ -609,7 +611,7 @@ function App() {
         </div> : null}
 
         {currentPath === "/cv" ? <div className="route-page">
-          <SectionHeader eyebrow="CV & contact" title="View my CV" copy="Open my complete CV in a dedicated window, then use the contact links below if you would like to talk." />
+          <SectionHeader as="h1" eyebrow="CV & contact" title="View my CV" copy="Open my complete CV in a dedicated window, then use the contact links below if you would like to talk." />
           <section className="cv-section">
             <div>
               <p className="eyebrow">Complete profile / PDF</p>
