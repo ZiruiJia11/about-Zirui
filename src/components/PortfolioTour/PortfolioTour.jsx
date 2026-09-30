@@ -687,23 +687,47 @@ function ContactSignal({ onFinish }) {
         <span className="contact-cv-showcase-meta"><FileText size={16} aria-hidden="true" /> PERSONNEL FILE / PDF</span>
         <span className="contact-cv-showcase-title">
           {showCvFold ? (
-            <FoldText
-              text="VIEW MY CV"
-              splitBy="char"
-              hinge="top"
-              trigger="mount"
-              duration={0.72}
-              stagger={0.07}
-              ease="power3.out"
-              perspective={700}
-              creaseShading={0.7}
-              fontSize="clamp(2.25rem, 4.25vw, 4.9rem)"
-              fontWeight={800}
-              color="#d8ffec"
-              className="contact-cv-fold-text"
-            />
+            <>
+              <span className="contact-cv-title-line">
+                <FoldText
+                  text="VIEW MY"
+                  splitBy="char"
+                  hinge="top"
+                  trigger="mount"
+                  duration={0.72}
+                  stagger={0.07}
+                  ease="power3.out"
+                  perspective={700}
+                  creaseShading={0.7}
+                  fontSize="clamp(2.25rem, 4.25vw, 4.9rem)"
+                  fontWeight={800}
+                  color="#d8ffec"
+                  className="contact-cv-fold-text"
+                />
+              </span>
+              <span className="contact-cv-title-line">
+                <FoldText
+                  text="CV"
+                  splitBy="char"
+                  hinge="top"
+                  trigger="mount"
+                  duration={0.72}
+                  stagger={0.07}
+                  ease="power3.out"
+                  perspective={700}
+                  creaseShading={0.7}
+                  fontSize="clamp(2.25rem, 4.25vw, 4.9rem)"
+                  fontWeight={800}
+                  color="#d8ffec"
+                  className="contact-cv-fold-text"
+                />
+              </span>
+            </>
           ) : (
-            <span className="contact-cv-placeholder" aria-hidden="true">VIEW MY CV</span>
+            <>
+              <span className="contact-cv-placeholder contact-cv-title-line" aria-hidden="true">VIEW MY</span>
+              <span className="contact-cv-placeholder contact-cv-title-line" aria-hidden="true">CV</span>
+            </>
           )}
         </span>
         <span className="contact-cv-showcase-cta">OPEN DOCUMENT <ArrowRight size={19} /></span>

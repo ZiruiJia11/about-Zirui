@@ -1,4 +1,4 @@
-import{i as e}from"./chunk-aKtaBQYM.js";import{_ as t,a as n,c as r,i,l as a,n as o,o as s,r as c,s as l,u}from"./index-B1HdRPAR.js";var d=e(t(),1),f=u(),ee={mixed:0,squares:1,circles:2,triangles:3},p=2,te=1024,ne=32,re=.1,ie=1/60,ae=.42,oe=.94,se=.972,ce=.01,m=.2,h=.3,g=.16,_=1.66,le=`
+import{i as e}from"./chunk-aKtaBQYM.js";import{_ as t,a as n,c as r,i,l as a,n as o,o as s,r as c,s as l,u}from"./index-B7cTbuPz.js";var d=e(t(),1),f=u(),ee={mixed:0,squares:1,circles:2,triangles:3},p=2,te=1024,ne=32,re=.1,ie=1/60,ae=.42,oe=.94,se=.972,ce=.01,m=.2,h=.3,g=.16,_=1.66,le=`
 struct Params {
   resolution: vec4f,
   placement: vec4f,
