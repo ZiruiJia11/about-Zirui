@@ -20,6 +20,7 @@ import SpotlightCard from "./components/SpotlightCard/SpotlightCard.jsx";
 import ShapeWaves from "./components/ShapeWaves/ShapeWaves.jsx";
 import GooeyNav from "./components/GooeyNav/GooeyNav.jsx";
 import DepthText from "./components/DepthText/DepthText.jsx";
+import { portfolioHome, resolveEntryPath, supports3DTour } from "./portfolioEntry.js";
 
 const PortfolioTour = lazy(() => import("./components/PortfolioTour/PortfolioTour.jsx"));
 
@@ -274,7 +275,7 @@ function App() {
   const getPath = () => {
     const hashPath = window.location.hash.replace(/^#/, "");
     const pathname = window.location.pathname.replace(/\/$/, "") || "/";
-    return normalizePath(hashPath || pathname);
+    return resolveEntryPath(normalizePath(hashPath || pathname), window.location.search, supports3DTour());
   };
   const [currentPath, setCurrentPath] = useState(getPath);
   const [lowPowerMode, setLowPowerMode] = useState(() => {
@@ -300,8 +301,8 @@ function App() {
   useEffect(() => {
     const handleRouteChange = () => {
       const nextPath = getPath();
-      if (window.location.hash) {
-        window.history.replaceState({}, "", nextPath);
+      if (window.location.hash || (window.location.pathname.replace(/\/$/, "") || "/") !== nextPath) {
+        window.history.replaceState({}, "", `${nextPath}${window.location.search}`);
       }
       setCurrentPath(nextPath);
       window.scrollTo({ top: 0, behavior: "instant" });
@@ -353,7 +354,7 @@ function App() {
   return (
     <>
       <div className={`site-waves${lowPowerMode ? " is-static" : ""}`} aria-hidden="true">
-        {!lowPowerMode ? <ShapeWaves
+        {!lowPowerMode && supports3DTour() ? <ShapeWaves
           text="STEVEN JIA"
           fontFamily='Geist, "Geist Sans", system-ui, sans-serif'
           fontWeight={500}
@@ -381,10 +382,10 @@ function App() {
         /> : null}
       </div>
       <header className="site-header">
-        <a className="brand" href="/" aria-label="Steven Jia home">SJ</a>
+        <a className="brand" href={portfolioHome} aria-label="Steven Jia home">SJ</a>
         <div className="site-header-nav">
           <GooeyNav
-            items={navItems.map((item) => ({ label: item.label, href: item.path }))}
+            items={navItems.map((item) => ({ label: item.label, href: item.path === "/" ? portfolioHome : item.path }))}
             particleCount={15}
             particleDistances={[90, 10]}
             particleR={100}

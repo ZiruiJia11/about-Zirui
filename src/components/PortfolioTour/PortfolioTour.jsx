@@ -24,6 +24,7 @@ import GlitchText from "../GlitchText.jsx";
 import FoldText from "../FoldText.jsx";
 import SplitFlapText from "../SplitFlapText.jsx";
 import tourScenes from "./tourScenes.js";
+import { portfolioHome, supports3DTour } from "../../portfolioEntry.js";
 import "./PortfolioTour.css";
 
 const CyberWorld = lazy(() => import("./CyberWorld.jsx"));
@@ -736,15 +737,6 @@ function ContactSignal({ onFinish }) {
   );
 }
 
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return Boolean(window.WebGLRenderingContext && (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")));
-  } catch {
-    return false;
-  }
-}
-
 export default function PortfolioTour() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -771,7 +763,7 @@ export default function PortfolioTour() {
     const syncMotion = () => setReducedMotion(media.matches);
     syncMotion();
     media.addEventListener?.("change", syncMotion);
-    setWebGLReady(supportsWebGL());
+    setWebGLReady(supports3DTour());
     return () => media.removeEventListener?.("change", syncMotion);
   }, []);
 
@@ -805,7 +797,7 @@ export default function PortfolioTour() {
     if (portalExitTimerRef.current) return;
     setPortalExiting(true);
     portalExitTimerRef.current = window.setTimeout(() => {
-      window.history.pushState({}, "", "/");
+      window.history.pushState({}, "", portfolioHome);
       window.dispatchEvent(new PopStateEvent("popstate"));
       portalExitTimerRef.current = null;
     }, reducedMotion ? 180 : 1120);
@@ -1013,7 +1005,7 @@ export default function PortfolioTour() {
       </div>
 
       <header className="tour-header">
-        <a className="tour-brand" href="/" aria-label="Return to Steven Jia portfolio"><span className="tour-logo"><Orbit size={21} strokeWidth={2.4} /></span><strong>Steven<span> / Lab</span></strong></a>
+        <a className="tour-brand" href={portfolioHome} aria-label="Return to Steven Jia portfolio"><span className="tour-logo"><Orbit size={21} strokeWidth={2.4} /></span><strong>Steven<span> / Lab</span></strong></a>
         <div className="tour-world-heading" aria-label="Cyber World — interactive VR 3D portfolio">
           <span>VR / 3D portfolio</span>
           <strong>Cyber World</strong>
@@ -1031,7 +1023,7 @@ export default function PortfolioTour() {
             <SlidersHorizontal size={17} />
             <span>{liteMode ? "Lite" : "Full"}</span>
           </button>
-          <a className="tour-exit" href="/"><Home size={16} /> <span>Exit tour</span></a>
+          <a className="tour-exit" href={portfolioHome}><Home size={16} /> <span>Exit tour</span></a>
         </div>
       </header>
 
