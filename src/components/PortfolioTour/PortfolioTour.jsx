@@ -7,6 +7,7 @@ import {
   CalendarDays,
   Code2,
   Cpu,
+  Download,
   FileText,
   FolderOpen,
   Globe2,
@@ -338,7 +339,7 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
           <FolderOpen size={18} />
           <span><strong>Project archive</strong><em>Selected portfolio projects / 2026</em></span>
         </div>
-        <div className="project-file-count">6 FILES / AUTO SWAP</div>
+        <div className="project-file-count">6 FILES / EXPLORE PROJECTS</div>
       </header>
       <div className="project-card-swap-stage" style={{ height: "600px", position: "relative" }}>
         <aside className="project-stroke-intro" aria-label="My selected portfolio projects">
@@ -394,7 +395,7 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
           </Suspense>
           <p>Six selected portfolio projects across full-stack systems, AI workflows, live data, and machine learning.</p>
         </aside>
-        <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false}>
+        <CardSwap cardDistance={42} verticalDistance={46} delay={8000} pauseOnHover>
           {projectPages.map((project) => (
             <Card key={project.id} customClass="project-swap-card" style={{ "--card-accent": project.color }}>
               <header><span>PROJECT FILE / {project.number}</span><em>{project.type}</em></header>
@@ -413,7 +414,7 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
       </div>
       <footer className="project-archive-footer">
         <button type="button" className="project-scene-back" onClick={onPreviousScene}><ArrowLeft size={17} /> Experience</button>
-        <div className="project-swap-note"><i /> Auto swap · 5 seconds</div>
+        <div className="project-swap-note"><i /> EXPERIENCE ← SCENES → SKILLS</div>
         <button type="button" className="project-scene-next" onClick={onNextScene}>Continue to skills <ArrowRight size={17} /></button>
       </footer>
     </section>
@@ -622,19 +623,7 @@ function ContactSignal({ onFinish }) {
     { label: "LINKEDIN", value: "Steven Jia", href: "https://www.linkedin.com/in/steven-jia-b78314231/", external: true },
     { label: "PORTFOLIO", value: "stevenjia.co.nz", href: "https://stevenjia.co.nz/", external: true },
   ];
-  const openCvPopup = () => {
-    const cvUrl = new URL(`${import.meta.env.BASE_URL}cv-complete.pdf`, window.location.origin).href;
-    const width = Math.min(1100, window.screen.availWidth - 80);
-    const height = Math.min(860, window.screen.availHeight - 80);
-    const left = Math.max(0, Math.round((window.screen.availWidth - width) / 2));
-    const top = Math.max(0, Math.round((window.screen.availHeight - height) / 2));
-    const popup = window.open(
-      cvUrl,
-      "steven-jia-complete-cv",
-      `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`,
-    );
-    popup?.focus();
-  };
+  const cvUrl = `${import.meta.env.BASE_URL}cv-complete.pdf`;
 
   useEffect(() => {
     const timer = window.setTimeout(() => setShowCvFold(true), 1000);
@@ -686,7 +675,8 @@ function ContactSignal({ onFinish }) {
         />
       </div>
 
-      <button type="button" className="contact-cv-showcase" onClick={openCvPopup} aria-label="View my CV">
+      <div className="contact-cv-showcase">
+      <a className="contact-cv-open" href={cvUrl} aria-label="View my CV">
         <span className="contact-cv-showcase-meta"><FileText size={16} aria-hidden="true" /> PERSONNEL FILE / PDF</span>
         <span className="contact-cv-showcase-title">
           {showCvFold ? (
@@ -734,7 +724,9 @@ function ContactSignal({ onFinish }) {
           )}
         </span>
         <span className="contact-cv-showcase-cta">OPEN DOCUMENT <ArrowRight size={19} /></span>
-      </button>
+      </a>
+      <a className="contact-cv-download" href={cvUrl} download><Download size={16} /> Download PDF</a>
+      </div>
     </>
   );
 }

@@ -1,4 +1,5 @@
-import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef } from 'react';
+import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import gsap from 'gsap';
 import './CardSwap.css';
 
@@ -7,173 +8,113 @@ export const Card = forwardRef(({ customClass, ...rest }, ref) => (
 ));
 Card.displayName = 'Card';
 
-const makeSlot = (i, distX, distY, total) => ({
-  x: i * distX,
-  y: -i * distY,
-  z: -i * distX * 1.5,
-  zIndex: total - i
-});
-const placeNow = (el, slot, skew) =>
-  gsap.set(el, {
-    x: slot.x,
-    y: slot.y,
-    z: slot.z,
-    xPercent: -50,
-    yPercent: -50,
-    skewY: skew,
-    transformOrigin: 'center center',
-    zIndex: slot.zIndex,
-    force3D: true
-  });
-
 const CardSwap = ({
   width = 500,
-  height = 400,
+  height = 440,
   cardDistance = 60,
   verticalDistance = 70,
-  delay = 5000,
-  pauseOnHover = false,
+  delay = 8000,
+  pauseOnHover = true,
   onCardClick,
   skewAmount = 6,
-  easing = 'elastic',
   children
 }) => {
-  const config =
-    easing === 'elastic'
-      ? {
-          ease: 'elastic.out(0.6,0.9)',
-          durDrop: 2,
-          durMove: 2,
-          durReturn: 2,
-          promoteOverlap: 0.9,
-          returnDelay: 0.05
-        }
-      : {
-          ease: 'power1.inOut',
-          durDrop: 0.8,
-          durMove: 0.8,
-          durReturn: 0.8,
-          promoteOverlap: 0.45,
-          returnDelay: 0.2
-        };
-
-  const childArr = useMemo(() => Children.toArray(children), [children]);
-  const refs = useMemo(
-    () => childArr.map(() => React.createRef()),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [childArr.length]
-  );
-
-  const order = useRef(Array.from({ length: childArr.length }, (_, i) => i));
-
-  const tlRef = useRef(null);
-  const intervalRef = useRef();
-  const container = useRef(null);
+  const childArr = Children.toArray(children);
+  const total = childArr.length;
+  const refs = useMemo(() => Array.from({ length: total }, () => React.createRef()), [total]);
+  const [active, setActive] = useState(0);
+  const [compact, setCompact] = useState(() => window.matchMedia('(max-width: 820px)').matches);
+  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const [playing, setPlaying] = useState(() => !window.matchMedia('(max-width: 820px), (pointer: coarse), (prefers-reduced-motion: reduce)').matches);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const placed = useRef(false);
+  const paused = !playing || (pauseOnHover && hovered) || focused || reducedMotion;
 
   useEffect(() => {
-    const total = refs.length;
-    refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
-
-    const swap = () => {
-      if (order.current.length < 2) return;
-
-      const [front, ...rest] = order.current;
-      const elFront = refs[front].current;
-      const tl = gsap.timeline();
-      tlRef.current = tl;
-
-      tl.to(elFront, {
-        y: '+=500',
-        duration: config.durDrop,
-        ease: config.ease
-      });
-
-      tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`);
-      rest.forEach((idx, i) => {
-        const el = refs[idx].current;
-        const slot = makeSlot(i, cardDistance, verticalDistance, refs.length);
-        tl.set(el, { zIndex: slot.zIndex }, 'promote');
-        tl.to(
-          el,
-          {
-            x: slot.x,
-            y: slot.y,
-            z: slot.z,
-            duration: config.durMove,
-            ease: config.ease
-          },
-          `promote+=${i * 0.15}`
-        );
-      });
-
-      const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
-      tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
-      tl.call(
-        () => {
-          gsap.set(elFront, { zIndex: backSlot.zIndex });
-        },
-        undefined,
-        'return'
-      );
-      tl.to(
-        elFront,
-        {
-          x: backSlot.x,
-          y: backSlot.y,
-          z: backSlot.z,
-          duration: config.durReturn,
-          ease: config.ease
-        },
-        'return'
-      );
-
-      tl.call(() => {
-        order.current = [...rest, front];
-      });
+    const size = window.matchMedia('(max-width: 820px)');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      setCompact(size.matches);
+      setReducedMotion(motion.matches);
+      if (size.matches || motion.matches) setPlaying(false);
     };
+    size.addEventListener('change', update);
+    motion.addEventListener('change', update);
+    return () => {
+      size.removeEventListener('change', update);
+      motion.removeEventListener('change', update);
+    };
+  }, []);
 
-    swap();
-    intervalRef.current = window.setInterval(swap, delay);
+  useEffect(() => {
+    refs.forEach((ref, index) => {
+      const slot = (index - active + total) % total;
+      const target = {
+        x: slot * cardDistance, y: -slot * verticalDistance, z: -slot * cardDistance * 1.5,
+        xPercent: -50, yPercent: -50, skewY: skewAmount,
+        zIndex: total - slot, transformOrigin: 'center center', force3D: true
+      };
+      if (compact || reducedMotion || !placed.current) gsap.set(ref.current, target);
+      else gsap.to(ref.current, { ...target, duration: 0.65, ease: 'power2.out', overwrite: true });
+    });
+    placed.current = true;
+    return () => refs.forEach(ref => gsap.killTweensOf(ref.current));
+  }, [active, refs, total, compact, reducedMotion, cardDistance, verticalDistance, skewAmount]);
 
-    if (pauseOnHover) {
-      const node = container.current;
-      const pause = () => {
-        tlRef.current?.pause();
-        clearInterval(intervalRef.current);
-      };
-      const resume = () => {
-        tlRef.current?.play();
-        intervalRef.current = window.setInterval(swap, delay);
-      };
-      node.addEventListener('mouseenter', pause);
-      node.addEventListener('mouseleave', resume);
-      return () => {
-        node.removeEventListener('mouseenter', pause);
-        node.removeEventListener('mouseleave', resume);
-        clearInterval(intervalRef.current);
-      };
-    }
-    return () => clearInterval(intervalRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
+  useEffect(() => {
+    if (paused || total < 2) return;
+    const timer = window.setInterval(() => setActive(index => (index + 1) % total), delay);
+    return () => window.clearInterval(timer);
+  }, [paused, total, delay]);
 
-  const rendered = childArr.map((child, i) =>
-    isValidElement(child)
-      ? cloneElement(child, {
-          key: i,
-          ref: refs[i],
-          style: { width, height, ...(child.props.style ?? {}) },
-          onClick: e => {
-            child.props.onClick?.(e);
-            onCardClick?.(i);
-          }
-        })
-      : child
-  );
+  const move = (direction) => {
+    setPlaying(false);
+    setActive(index => (index + direction + total) % total);
+  };
 
   return (
-    <div ref={container} className="card-swap-container" style={{ width, height }}>
-      {rendered}
+    <div className={`card-swap-region${compact ? ' is-compact' : ''}`} role="region"
+      aria-roledescription="carousel" aria-label="Portfolio projects"
+      onKeyDown={event => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        event.stopPropagation();
+        move(event.key === 'ArrowRight' ? 1 : -1);
+      }}
+      onPointerEnter={event => { if (event.pointerType === 'mouse') setHovered(true); }}
+      onPointerLeave={() => setHovered(false)}
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
+      <div className="card-swap-container" style={{ width, height }}>
+        {childArr.map((child, index) => isValidElement(child) ? cloneElement(child, {
+          key: child.key ?? index,
+          ref: refs[index],
+          'data-active': index === active,
+          inert: index !== active,
+          'aria-hidden': index !== active,
+          role: 'group',
+          'aria-roledescription': 'slide',
+          'aria-label': `${index + 1} of ${total}`,
+          style: { width, height, ...(child.props.style ?? {}) },
+          onClick: event => { child.props.onClick?.(event); onCardClick?.(index); }
+        }) : child)}
+      </div>
+      <div className="card-swap-controls">
+        <button type="button" onClick={() => move(-1)} aria-label="Previous project" disabled={total < 2}><ChevronLeft size={20} /></button>
+        <span className="card-swap-status" aria-live={paused ? 'polite' : 'off'} aria-atomic="true">
+          <strong>{String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</strong>
+          <small>{paused ? 'Paused' : `Auto · ${delay / 1000}s`}</small>
+        </span>
+        <button type="button" onClick={() => move(1)} aria-label="Next project" disabled={total < 2}><ChevronRight size={20} /></button>
+        {!reducedMotion && <button type="button" onClick={() => {
+          if (!playing) { setHovered(false); setFocused(false); }
+          setPlaying(value => !value);
+        }}
+          aria-label={playing ? 'Pause automatic project rotation' : 'Start automatic project rotation'} aria-pressed={playing}>
+          {playing ? <Pause size={18} /> : <Play size={18} />}
+        </button>}
+      </div>
     </div>
   );
 };

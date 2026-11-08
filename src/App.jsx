@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
   Activity,
   ArrowUpRight,
@@ -9,6 +9,9 @@ import {
   Gamepad2,
   GraduationCap,
   Mail,
+  Menu,
+  X,
+  Download,
   Phone,
   Rocket,
   Sparkles,
@@ -280,25 +283,39 @@ function App() {
     return resolveEntryPath(normalizePath(hashPath || pathname), window.location.search, supports3DTour());
   };
   const [currentPath, setCurrentPath] = useState(getPath);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef(null);
+  const menuButtonRef = useRef(null);
+  const cvUrl = `${import.meta.env.BASE_URL}cv-complete.pdf`;
   const [lowPowerMode, setLowPowerMode] = useState(() => {
     if (typeof window === "undefined") return false;
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches
       || window.innerWidth <= 720
       || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
   });
-  const openCvPopup = () => {
-    const cvUrl = new URL(`${import.meta.env.BASE_URL}cv-complete.pdf`, window.location.origin).href;
-    const width = Math.min(1100, window.screen.availWidth - 80);
-    const height = Math.min(860, window.screen.availHeight - 80);
-    const left = Math.max(0, Math.round((window.screen.availWidth - width) / 2));
-    const top = Math.max(0, Math.round((window.screen.availHeight - height) / 2));
-    const popup = window.open(
-      cvUrl,
-      "steven-jia-complete-cv",
-      `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`,
-    );
-    popup?.focus();
-  };
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOutside = (event) => {
+      if (!headerRef.current?.contains(event.target)) setMenuOpen(false);
+    };
+    const closeEscape = (event) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      menuButtonRef.current?.focus();
+    };
+    const desktop = window.matchMedia("(min-width: 821px)");
+    const closeOnDesktop = () => { if (desktop.matches) setMenuOpen(false); };
+    document.addEventListener("pointerdown", closeOutside);
+    document.addEventListener("keydown", closeEscape);
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      document.removeEventListener("keydown", closeEscape);
+      desktop.removeEventListener("change", closeOnDesktop);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => { setMenuOpen(false); }, [currentPath]);
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -383,9 +400,17 @@ function App() {
           paused={false}
         /> : null}
       </div>
-      <header className="site-header">
+      <header className="site-header" ref={headerRef} onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false);
+      }}>
         <a className="brand" href={portfolioHome} aria-label="Steven Jia home">SJ</a>
         <div className="site-header-nav">
+          <button ref={menuButtonRef} className="mobile-menu-toggle" type="button"
+            aria-expanded={menuOpen} aria-controls="mobile-navigation"
+            onClick={() => setMenuOpen((open) => !open)}>
+            {menuOpen ? <X size={19} /> : <Menu size={19} />}
+            <span>Menu</span>
+          </button>
           <GooeyNav
             items={navItems.map((item) => ({ label: item.label, href: item.path === "/" ? portfolioHome : item.path }))}
             particleCount={15}
@@ -401,6 +426,13 @@ function App() {
             <span>3D Tour</span>
           </a>
         </div>
+        <nav id="mobile-navigation" className="mobile-navigation" aria-label="Main navigation" hidden={!menuOpen}>
+          {navItems.map((item) => (
+            <a key={item.path} href={item.path === "/" ? portfolioHome : item.path}
+              aria-current={currentPath === item.path ? "page" : undefined}
+              onClick={() => setMenuOpen(false)}>{item.label}</a>
+          ))}
+        </nav>
       </header>
 
       <main id="top" className="site-main">
@@ -618,18 +650,21 @@ function App() {
         </div> : null}
 
         {currentPath === "/cv" ? <div className="route-page">
-          <SectionHeader as="h1" eyebrow="CV & contact" title="View my CV" copy="Open my complete CV in a dedicated window, then use the contact links below if you would like to talk." />
+          <SectionHeader as="h1" eyebrow="CV & contact" title="View my CV" copy="Read my complete CV or download a copy, then use the contact links below if you would like to talk." />
           <section className="cv-section">
             <div>
               <p className="eyebrow">Complete profile / PDF</p>
               <h2>Steven Jia — Complete CV</h2>
               <p>Experience, education, projects, technical skills, certifications, and contact details in one current document.</p>
             </div>
-            <button type="button" className="cv-view-button" onClick={openCvPopup}>
-              <span><FileText size={22} /> Current CV</span>
-              <strong>VIEW MY CV</strong>
-              <em>OPEN DOCUMENT <ArrowUpRight size={20} /></em>
-            </button>
+            <div className="cv-document-actions">
+              <a className="cv-view-button" href={cvUrl}>
+                <span><FileText size={22} /> Current CV</span>
+                <strong>VIEW MY CV</strong>
+                <em>OPEN DOCUMENT <ArrowUpRight size={20} /></em>
+              </a>
+              <a className="cv-download-link" href={cvUrl} download><Download size={18} /> Download PDF</a>
+            </div>
           </section>
 
           <section className="contact-section" aria-labelledby="contact-title">
