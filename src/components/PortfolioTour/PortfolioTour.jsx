@@ -65,8 +65,8 @@ const projectPages = [
     id: "jobtrack",
     number: "03",
     name: "JobTrack Fullstack",
-    type: "Evidence-grounded AI workspace",
-    summary: "SEEK and LinkedIn job capture with editable records and structured OpenAI fit reports grounded in the latest private CV evidence.",
+    type: "Team MVP / AI-assisted job matching",
+    summary: "Led the team MVP with feedback-led user flows. URL imports cut recording from 1–2 minutes to under 30 seconds in my job search; AI matching highlights relevant experience and gaps.",
     stack: ["Next.js", "Supabase", "OpenAI"],
     color: "#8b5cf6",
     live: "https://jobtrack-fullstack-ashy.vercel.app/",
@@ -112,28 +112,29 @@ const experienceRecords = [
     tag: "CURRENT",
     company: "Ocular",
     location: "Wellington",
-    role: "Full Stack Developer Intern",
-    period: "Jul 2026 — Present",
-    summary: "Developing multi-tenant application features across a Vue 3 frontend and Laravel/PostgreSQL backend.",
+    role: "Full Stack Developer",
+    period: "2026 – Present",
+    summary: "Working with the team lead and colleagues to turn reporting requirements into secure features, alongside leading the JobTrack team MVP.",
     points: [
-      "Develop features using Vue 3, TypeScript, Inertia.js, PHP, Laravel, Eloquent ORM, and PostgreSQL.",
-      "Work across frontend components, business logic, REST APIs, validation, migrations, authentication, authorisation, and search.",
-      "Deliver search, storage, email, document-generation, queue, and real-time features through Docker, Laravel Sail, Git workflows, and structured debugging.",
+      "Worked with business analysts to clarify stakeholder reporting needs and with the team lead to turn a Power BI demo into a working data-export feature.",
+      "Simplified reporting integrations with colleagues, contributing to an estimated 200% improvement in integration speed.",
+      "Led the JobTrack team MVP within a tight timeframe, planning user flows with colleagues and refining features through testing and team feedback.",
+      "In my own job search, automated URL importing reduced recording time from 1–2 minutes to under 30 seconds per application. AI-assisted matching highlights relevant experience and gaps.",
     ],
   },
   {
-    id: "scots",
+    id: "matamoe",
     number: "02",
     tag: "TEACHING",
-    company: "Scots College",
+    company: "Matamoe",
     location: "Wellington",
     role: "Coding & Robotics Tutor",
-    period: "Jan 2024 — Present",
-    summary: "Helping secondary school students turn programming ideas into working code and robots.",
+    period: "Nov 2024 – Present",
+    summary: "Part-time coding and robotics tutoring, helping students with different levels of experience learn through practical activities.",
     points: [
-      "Teach Python, coding, and robotics to students with varied experience.",
-      "Adapt technical explanations and support structured problem solving.",
-      "Guide debugging, testing, and RoboCup preparation while strengthening mentoring, planning, and teamwork.",
+      "Deliver 2–3 sessions per week to classes of over 15 students, adapting explanations and guidance to different learning needs.",
+      "Encourage teamwork through coding activities and RoboCup preparation, helping students share ideas, divide tasks, and solve problems together.",
+      "Build confidence through patient feedback, balancing individual support with group activities and encouraging independent problem solving.",
     ],
   },
   {
@@ -142,13 +143,14 @@ const experienceRecords = [
     tag: "SUPPORT",
     company: "UR Tech",
     location: "Wellington",
-    role: "Mobile Phone & Computer Repair Technician",
-    period: "Dec 2025 — Feb 2026",
+    role: "PC and Mobile Phone Repair Technician",
+    period: "2025–2026",
     summary: "Diagnosing device problems and translating technical fixes into clear customer outcomes.",
     points: [
-      "Diagnosed hardware, software, and operating-system faults across computers, phones, and electronic devices.",
-      "Completed setup, data transfers, updates, and quality checks.",
-      "Investigated user-reported issues methodically and explained reliable solutions clearly to customers.",
+      "Completed 7–8 screen and battery replacements on busy days, checking device functionality before returning repairs.",
+      "Resolved customer concerns and post-repair issues with calm communication and practical troubleshooting, earning positive feedback and repeat business.",
+      "Contributed to an approximately 37% increase in sales alongside day-to-day repairs and customer support.",
+      "Explained device faults, repair options, estimated costs, and turnaround times clearly to non-technical customers.",
     ],
   },
 ];
@@ -168,7 +170,7 @@ const skillModules = [
     title: "Application development",
     subtitle: "Full-stack product delivery",
     color: "#60a5fa",
-    items: ["Laravel", "Vue 3", "Inertia.js", "React", "Next.js", "ASP.NET Core"],
+    items: ["Laravel", "Vue 3", "Inertia.js", "React", "Next.js", "ASP.NET Core", "Spring Boot"],
   },
   {
     number: "03",
@@ -200,7 +202,7 @@ const skillModules = [
     title: "Cloud & delivery",
     subtitle: "Build, ship, and operate",
     color: "#22d3ee",
-    items: ["Git", "GitHub Actions", "Docker", "Laravel Sail", "Vercel", "AWS Cloud Practitioner"],
+    items: ["Git", "GitHub Actions", "Docker", "Laravel Sail", "Vercel", "AWS Cloud Practitioner", "Jenkins", "IntelliJ"],
   },
 ];
 
@@ -263,7 +265,7 @@ const hobbyProfiles = [
   },
   {
     number: "02",
-    title: "Skiing",
+    title: "Snowboarding",
     subtitle: "Focus / momentum",
     description: "A fast outdoor challenge that rewards control, confidence, and staying composed as conditions change.",
     color: "#67e8f9",
@@ -334,13 +336,13 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
       <header className="project-archive-header">
         <div className="project-folder-tab">
           <FolderOpen size={18} />
-          <span><strong>Project archive</strong><em>Selected CV projects / 2026</em></span>
+          <span><strong>Project archive</strong><em>Selected portfolio projects / 2026</em></span>
         </div>
         <div className="project-file-count">6 FILES / AUTO SWAP</div>
       </header>
       <div className="project-card-swap-stage" style={{ height: "600px", position: "relative" }}>
-        <aside className="project-stroke-intro" aria-label="My selected CV projects">
-          <span>03 / SELECTED CV PROJECTS</span>
+        <aside className="project-stroke-intro" aria-label="My selected portfolio projects">
+          <span>03 / SELECTED PORTFOLIO PROJECTS</span>
           <Suspense fallback={<h2>MY PROJECTS</h2>}>
             <div className="project-stroke-lines">
               <StrokeText
@@ -390,7 +392,7 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
               />
             </div>
           </Suspense>
-          <p>Six selected CV projects across full-stack systems, AI workflows, live data, and machine learning.</p>
+          <p>Six selected portfolio projects across full-stack systems, AI workflows, live data, and machine learning.</p>
         </aside>
         <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false}>
           {projectPages.map((project) => (
@@ -537,7 +539,7 @@ function SkillsForge({ onPreviousScene, onNextScene }) {
             STACK FORGE
           </GlitchText>
         </div>
-        <div className="skills-forge-count">36 SKILLS / LIVE WALL</div>
+        <div className="skills-forge-count">{skillWallItems.length} SKILLS / LIVE WALL</div>
       </header>
       <div className="skills-drift-stage">
         <Suspense fallback={<div className="skills-drift-loading">Loading skill wall…</div>}>
@@ -561,7 +563,7 @@ function SkillsForge({ onPreviousScene, onNextScene }) {
             overlayColor="#060010"
           />
         </Suspense>
-        <div className="skills-drift-instruction"><i /> Continuous skill stream / 36 systems online</div>
+        <div className="skills-drift-instruction"><i /> Continuous skill stream / {skillWallItems.length} systems online</div>
       </div>
       <footer className="skills-forge-footer">
         <button type="button" onClick={onPreviousScene}><ArrowLeft size={17} /> Projects</button>

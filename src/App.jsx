@@ -33,8 +33,8 @@ const navItems = [
 ];
 
 const routeMeta = {
-  "/": { title: "Steven Jia | Software Engineer & Full Stack Developer", description: "Steven Jia, Software Engineer and Full Stack Developer building multi-tenant web, data, AI, and cloud applications." },
-  "/experience": { title: "Experience | Steven Jia", description: "Full-stack development, coding education, technical support, and customer-facing experience." },
+  "/": { title: "Steven Jia | Software Engineer & Full Stack Developer", description: "Steven Jia, Full Stack Developer at Ocular. Reporting and data-export features, the JobTrack team MVP, and junior or intermediate software engineering opportunities." },
+  "/experience": { title: "Experience | Steven Jia", description: "Full Stack Developer at Ocular, Coding and Robotics Tutor at Matamoe, and PC and Mobile Phone Repair Technician at UR Tech." },
   "/projects": { title: "Software Projects | Steven Jia", description: "Selected Laravel, Vue, React, Next.js, .NET, AI, data automation, testing, and integration projects." },
   "/profile": { title: "Technical Profile | Steven Jia", description: "Technical skills, education, certification, engineering practice, and professional interests." },
   "/cv": { title: "CV and Contact | Steven Jia", description: "View Steven Jia's current software engineering CV and contact information." },
@@ -43,18 +43,18 @@ const routeMeta = {
 
 const skillGroups = [
   { title: "Frontend & Product", items: ["React", "Vue 3", "Inertia.js", "TypeScript", "JavaScript", "Vite", "Zustand", "Next.js", "HTML5", "CSS3", "Responsive Design", "Progressive Web Apps", "Three.js", "React Three Fiber", "WebGL"] },
-  { title: "Backend & Data", items: ["PHP", "Laravel", "C#", "ASP.NET Core", "Node.js", "Express", "Eloquent ORM", "Entity Framework Core", "PostgreSQL", "SQLite", "SQL", "Prisma", "Relational Data Modelling"] },
+  { title: "Backend & Data", items: ["PHP", "Laravel", "Java", "Spring Boot", "C#", "ASP.NET Core", "Node.js", "Express", "Eloquent ORM", "Entity Framework Core", "PostgreSQL", "SQLite", "SQL", "Prisma", "Relational Data Modelling"] },
   { title: "APIs & Integration", items: ["REST APIs", "OData", "Power BI", "Multi-tenancy", "Authentication", "Authorisation", "API Rate Limiting", "Queues", "Real-time Features", "Meilisearch", "Valkey", "MinIO", "Gotenberg"] },
   { title: "Laravel Ecosystem", items: ["Reverb", "Sail", "Tenancy", "Versionable", "Auditing", "Media Library", "Migrations", "Validation", "CRUD"] },
   { title: "Testing & Quality", items: ["Pest", "xUnit", "Vitest", "React Testing Library", "JUnit", "Jest", "Unit Testing", "Integration Testing", "Feature Testing", "Static Analysis", "Fuzz Testing", "Debugging", "CI/CD"] },
   { title: "AI, Data & Automation", items: ["Vercel AI SDK", "OpenAI Responses API", "Tool-using Agents", "Zod", "Python", "Machine Learning", "NLP", "Computer Vision", "CNN", "Vision Transformer", "Model Evaluation", "Error Analysis", "Data Automation", "Explainable Systems"] },
-  { title: "Developer Tools", items: ["VS Code", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm", "Mailpit"] },
-  { title: "Cloud & Platforms", items: ["Docker", "Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions"] },
+  { title: "Developer Tools", items: ["VS Code", "IntelliJ", "PyCharm", "Codex", "ChatGPT", "Git", "GitHub", "Postman", "npm", "Mailpit"] },
+  { title: "Cloud & Platforms", items: ["Docker", "Vercel", "Render", "Supabase", "AWS", "Snowflake", "GitHub Pages", "GitHub Actions", "Jenkins"] },
 ];
 
 const highlights = [
-  "Full Stack Developer Intern at Ocular, building multi-tenant features across Vue 3, TypeScript, Laravel, and PostgreSQL.",
-  "Builds deployed products across Laravel/Vue, React/TypeScript, Next.js/Supabase, and C#/.NET ecosystems.",
+  "Full Stack Developer at Ocular, turning reporting requirements into secure, practical features with business analysts and the development team.",
+  "Led the JobTrack team MVP, combining automated job importing with AI-assisted matching and feedback-led improvements.",
   "AWS Certified Cloud Practitioner with tutoring, support, and customer-facing experience.",
 ];
 
@@ -65,9 +65,9 @@ const profileStats = [
 ];
 
 const workspaceSignals = [
-  { label: "Current role", value: "Ocular", status: "Interning" },
+  { label: "Current role", value: "Ocular", status: "Full Stack Developer" },
   { label: "Stack focus", value: "Vue + Laravel", status: "Building" },
-  { label: "Current work", value: "Multi-tenant features", status: "Shipping" },
+  { label: "Current work", value: "Reporting & data export", status: "Shipping" },
 ];
 
 const dailyPractices = [
@@ -95,12 +95,12 @@ const lifeInterests = [
     copy: "I enjoy games that reward planning, pattern recognition, adaptation, and calm decision-making under uncertainty.",
   },
   {
-    title: "Skiing and outdoor challenges",
-    copy: "Skiing helps me stay active, focused, and comfortable working through fast-changing situations with control.",
+    title: "Snowboarding and outdoor challenges",
+    copy: "Snowboarding helps me stay active and enjoy time outdoors, away from the screen.",
   },
   {
-    title: "Nature and quiet reset time",
-    copy: "I like spending time outdoors because it builds patience, observation, and balance after long stretches of technical work.",
+    title: "Hunting and time in nature",
+    copy: "I enjoy hunting and spending time outdoors, with space to observe, reset, and find balance after technical work.",
   },
   {
     title: "Curiosity beyond assignments",
@@ -110,33 +110,35 @@ const lifeInterests = [
 
 const experience = [
   {
-    role: "Full Stack Developer Intern",
+    role: "Full Stack Developer",
     company: "Ocular, Wellington",
-    period: "Jul 2026 - Present",
+    period: "2026 – Present",
     points: [
-      "Develop multi-tenant application features using Vue 3, TypeScript, Inertia.js, PHP, Laravel, Eloquent ORM, and PostgreSQL.",
-      "Deliver complete request lifecycles across reusable interfaces, REST APIs, validation, middleware, business logic, migrations, and ownership-aware database queries.",
-      "Integrate authentication and authorisation, search, storage, email, document generation, queues, and real-time services through Docker, Laravel Sail, and Git-based delivery workflows.",
+      "Worked with business analysts to clarify stakeholder reporting needs and with the team lead to turn a Power BI demo into a working data-export feature.",
+      "Simplified reporting integrations with colleagues, contributing to an estimated 200% improvement in integration speed.",
+      "Led development of the JobTrack team MVP, planning user flows with colleagues and refining core features through testing and team feedback within a tight timeframe.",
+      "Used JobTrack in my own job search: automated URL importing reduced recording time from 1–2 minutes to under 30 seconds per application; AI-assisted matching highlights relevant experience and gaps.",
     ],
   },
   {
     role: "Coding & Robotics Tutor",
-    company: "Scots College, Wellington",
-    period: "2024 - Present",
+    company: "Matamoe",
+    period: "Nov 2024 – Present",
     points: [
-      "Teach Python, robotics, debugging, and structured problem solving to secondary school students.",
-      "Guide students preparing for RoboCup and adapt explanations for different technical backgrounds.",
-      "Support live code reviews, technical exercises, teamwork, and confident learning habits.",
+      "Deliver 2–3 coding and robotics sessions per week to classes of over 15 students, adapting explanations to different learning needs.",
+      "Encourage teamwork through coding activities and RoboCup preparation, helping students share ideas, divide tasks, and solve problems together.",
+      "Build confidence through patient guidance and feedback, balancing individual support with group activities and encouraging independent problem solving.",
     ],
   },
   {
-    role: "Mobile Phone & Computer Repair Technician",
+    role: "PC and Mobile Phone Repair Technician",
     company: "UR Tech, Wellington",
-    period: "Dec 2025 - Feb 2026",
+    period: "2025–2026",
     points: [
-      "Diagnosed hardware and software faults across phones, computers, and household devices.",
-      "Handled OS setup, local network configuration, secure data transfers, and quality checks.",
-      "Translated technical issues into clear customer-facing explanations in a fast-paced support role.",
+      "Completed 7–8 screen and battery replacements on busy days, checking device functionality before returning repairs.",
+      "Resolved customer concerns and post-repair issues through calm communication and practical troubleshooting, earning positive feedback and repeat business.",
+      "Contributed to an approximately 37% increase in sales alongside day-to-day repairs and customer support.",
+      "Diagnosed faults and explained repair options, estimated costs, and turnaround times clearly to non-technical customers.",
     ],
   },
   {
@@ -154,10 +156,10 @@ const projects = [
   {
     name: "JobTrack Fullstack",
     category: "AI workflow platform",
-    proof: "Evidence-grounded fit reports + private CV storage",
+    proof: "Job recording: 1–2 minutes → under 30 seconds",
     visual: "JT",
     accent: "#0f766e",
-    summary: "Full-stack job tracker with SEEK and LinkedIn importing, browser-extension capture, editable records, private CV storage, and an OpenAI agent that returns structured fit reports grounded in the latest reviewed CV evidence.",
+    summary: "Led the JobTrack team MVP, refining user flows through colleague feedback and testing. Automated URL importing reduced recording time from 1–2 minutes to under 30 seconds per application in my own job search. AI-assisted matching highlights relevant experience and gaps, alongside editable records and private CV storage.",
     tags: ["Next.js", "Supabase", "PostgreSQL", "Vercel AI SDK", "OpenAI Responses API", "Zod"],
     link: "https://jobtrack-fullstack-ashy.vercel.app/",
     source: "https://github.com/ZiruiJia11/jobtrack-fullstack",
@@ -405,7 +407,7 @@ function App() {
         {currentPath === "/" ? <>
           <section className="hero" aria-labelledby="hero-title">
             <div className="hero-copy">
-            <p className="eyebrow"><ShinyText text="Open to graduate and junior roles" /></p>
+            <p className="eyebrow"><ShinyText text="Open to junior and intermediate roles" /></p>
             <h1 id="hero-title">
               <DepthText
                 text="Steven Jia"
@@ -424,8 +426,8 @@ function App() {
                 shadow
               />
             </h1>
-            <p className="hero-role">Software Engineer &amp; Full Stack Developer Intern | Laravel, Vue, React &amp; .NET</p>
-            <p className="hero-summary">I build reliable, data-backed products across Vue and Laravel, React and TypeScript, Next.js and Supabase, and C# with ASP.NET Core. Recent work includes multi-tenant product features, evidence-grounded AI workflows, live data automation, OData integrations, automated testing, CI/CD, and cloud deployment.</p>
+            <p className="hero-role">Software Engineer &amp; Full Stack Developer | Laravel, Vue, React &amp; .NET</p>
+            <p className="hero-summary">I started coding at 16 and have kept learning through university projects and hands-on development. At Ocular, I work with colleagues to turn reporting needs into practical features and led the JobTrack team MVP. I enjoy explaining technical ideas in everyday language and building useful software with a collaborative team.</p>
             <div className="hero-actions" aria-label="Contact and profile links">
               <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Email</a>
               <a className="button secondary" href="/projects"><ArrowUpRight size={18} /> View work</a>
@@ -483,10 +485,10 @@ function App() {
           <section className="feature-strip" aria-label="Featured build snapshot">
             <div>
               <p className="eyebrow">Featured build</p>
-              <h2>JobTrack combines application workflows with evidence-grounded AI matching.</h2>
+              <h2>Led the JobTrack team MVP: faster job recording and AI-assisted matching.</h2>
             </div>
             <div className="feature-metrics">
-              <span>AI Match Agent</span><span>CV evidence</span><span>Job URL import</span><span>Supabase</span>
+              <span>Team MVP</span><span>Under 30s to record</span><span>AI matching</span><span>Supabase</span>
             </div>
             <a href="https://jobtrack-fullstack-ashy.vercel.app/" target="_blank" rel="noreferrer" aria-label="Open JobTrack live demo"><ArrowUpRight size={20} /></a>
           </section>
@@ -502,7 +504,10 @@ function App() {
         </> : null}
 
         {currentPath === "/profile" ? <div className="route-page">
-          <SectionHeader as="h1" eyebrow="Profile" title="How I work, learn, and build" copy="A closer look at my technical range, daily practice, education, and interests beyond code." />
+          <SectionHeader as="h1" eyebrow="Profile" title="How I work, learn, and build" copy="Coding since 16, learning through hands-on projects, and explaining technical ideas through everyday examples. I enjoy turning abstract ideas into practical solutions with a collaborative team." />
+          <section className="page-section" aria-label="Languages">
+            <SectionHeader eyebrow="Communication" title="Languages" copy="English and Mandarin Chinese." />
+          </section>
           <section className="page-section daily-section" aria-label="Daily practice">
           <SectionHeader eyebrow="Daily practice" title="How I keep improving outside coursework" copy="My daily routine is built around shipping small improvements, learning from real tools, and keeping my job-search workflow organized." />
           <div className="daily-grid">
@@ -531,7 +536,7 @@ function App() {
           </section>
 
           <section className="page-section">
-          <SectionHeader eyebrow="Technical profile" title="Skills that connect product, systems, data, AI, and testing" copy="A practical stack for graduate and junior software, full-stack, web, data, automation, and applied AI roles." />
+          <SectionHeader eyebrow="Technical profile" title="Skills that connect product, systems, data, AI, and testing" copy="A practical stack for junior and intermediate software engineering roles across full-stack development, data, automation, and applied AI." />
           <div className="skills-grid">
             {skillGroups.map((group) => (
               <CardSurface key={group.title} accentColor="#a7d9ff">
@@ -547,7 +552,8 @@ function App() {
           <section className="page-section education-section">
             <SectionHeader eyebrow="Education & certification" title="Computer Science, AI, and cloud fundamentals" />
             <div className="education-grid">
-              <CardSurface accentColor="#a8c7ff"><article className="education-item"><GraduationCap size={22} /><div><h3>Bachelor of Science in Computer Science</h3><p>Victoria University of Wellington | 2023 - 2025</p><p>Minor in Artificial Intelligence. Relevant study: software engineering, algorithms, databases, machine learning, networks, and HCI.</p></div></article></CardSurface>
+              <CardSurface accentColor="#a8c7ff"><article className="education-item"><GraduationCap size={22} /><div><h3>Bachelor of Science in Computer Science</h3><p>Victoria University of Wellington | 2023–2025</p><p>Minor in Artificial Intelligence.</p><p>Selected results: Foundations of Application Development (A+); Programming for the Natural and Social Sciences (A+); User Experience Engineering (A−).</p></div></article></CardSurface>
+              <CardSurface accentColor="#a8c7ff"><article className="education-item"><GraduationCap size={22} /><div><h3>Wellington College</h3><p>2018–2022</p><p>NCEA Levels 1, 2 and 3.</p></div></article></CardSurface>
               <CardSurface accentColor="#ffd59a"><article className="education-item certification"><img src={awsBadge} alt="AWS Certified Cloud Practitioner badge" /><div><h3>AWS Certified Cloud Practitioner</h3><p>2026</p><p>Cloud fundamentals, core AWS services, security, billing, and shared responsibility concepts.</p></div></article></CardSurface>
               <CardSurface accentColor="#9fffe8"><article className="education-item"><Award size={22} /><div><h3>VUW Git & GitHub Workshop</h3><p>2024</p><p>Version control, repository workflow, collaboration basics, and source management habits.</p></div></article></CardSurface>
             </div>
@@ -555,7 +561,7 @@ function App() {
         </div> : null}
 
         {currentPath === "/experience" ? <div className="route-page experience-page">
-          <SectionHeader as="h1" eyebrow="Experience" title="Professional product development, teaching, and technical support" copy="Multi-tenant application work at Ocular, backed by tutoring, repair, and customer-facing problem solving." />
+          <SectionHeader as="h1" eyebrow="Experience" title="Professional product development, teaching, and technical support" copy="Reporting and data-export features and the JobTrack team MVP at Ocular, backed by tutoring at Matamoe, repairs, and customer-facing problem solving." />
           <section className="page-section">
           <div className="timeline">
             {experience.map((job, index) => (
@@ -629,8 +635,9 @@ function App() {
           <section className="contact-section" aria-labelledby="contact-title">
           <div>
             <p className="eyebrow">Next step</p>
-            <h2 id="contact-title">Open to graduate and junior software, full-stack, web, data, and applied AI roles</h2>
+            <h2 id="contact-title">Open to junior and intermediate software engineering roles</h2>
             <p>I am ready to discuss the engineering decisions behind these projects and how I can contribute across product development, data-backed systems, testing, automation, and technical problem solving.</p>
+            <p>References available upon request.</p>
           </div>
           <div className="contact-actions">
             <a className="button primary" href="mailto:steven5115115@gmail.com"><Mail size={18} /> Contact me</a>

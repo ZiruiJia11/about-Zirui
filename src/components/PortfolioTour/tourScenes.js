@@ -4,9 +4,9 @@ const tourScenes = [
     number: "01",
     eyebrow: "Player profile",
     title: "Steven Jia",
-    summary: "Software Engineer and Full Stack Developer Intern building multi-tenant, web, data, and AI-assisted applications across Laravel, Vue, React, TypeScript, .NET, and PostgreSQL.",
+    summary: "Software Engineer and Full Stack Developer at Ocular. Coding since 16, I turn reporting needs into practical features, led the JobTrack team MVP, and explain technical ideas in everyday language.",
     facts: [
-      "Full Stack Developer Intern at Ocular",
+      "Full Stack Developer at Ocular · 2026 – Present",
       "BSc Computer Science, Minor in AI · VUW · 2023–2025",
     ],
     label: "IDENTITY DOCK",
@@ -21,8 +21,8 @@ const tourScenes = [
     title: "Building, teaching, and solving",
     summary: "Professional experience spanning multi-tenant product development, technical teaching, device diagnostics, and customer-focused problem solving.",
     facts: [
-      "Multi-tenant Vue 3, TypeScript, Laravel, REST API, and PostgreSQL work at Ocular",
-      "Python, coding, robotics, and RoboCup tutoring at Scots College",
+      "Reporting and data-export features and the JobTrack team MVP at Ocular",
+      "Coding, robotics, and RoboCup tutoring at Matamoe · Nov 2024 – Present",
       "Hardware, software, OS, data-transfer, and customer support at UR Tech",
     ],
     label: "MEMORY VAULT",
@@ -35,7 +35,7 @@ const tourScenes = [
     number: "03",
     eyebrow: "Build archive",
     title: "Products backed by engineering depth",
-    summary: "Six selected CV projects spanning multi-tenant workflows, AI-assisted job tracking, fitness, live data collection, machine learning, and OData integration.",
+    summary: "Six selected portfolio projects spanning multi-tenant workflows, AI-assisted job tracking, fitness, live data collection, machine learning, and OData integration.",
     facts: [
       "Dependency Map and Power BI OData Demo — tenant-isolated Laravel systems",
       "JobTrack and Kiwi Supplement Watch — AI workflows and live data automation",
@@ -54,8 +54,8 @@ const tourScenes = [
     summary: "A production-focused toolkit covering interfaces, backend services, relational data, integrations, automated testing, CI/CD, and cloud delivery.",
     facts: [
       "Python, PHP, TypeScript, JavaScript, C#, Java, SQL, HTML5, and CSS3",
-      "Laravel, Vue 3, React, Next.js, ASP.NET Core, Node.js, and REST APIs",
-      "AWS Certified with Docker, GitHub Actions, Vercel, Render, and Supabase",
+      "Laravel, Vue 3, React, Next.js, ASP.NET Core, Spring Boot, and REST APIs",
+      "AWS Certified with Docker, GitHub Actions, Jenkins, Vercel, and Supabase",
     ],
     label: "STACK FORGE",
     color: "#6366f1",
@@ -70,7 +70,7 @@ const tourScenes = [
     summary: "Strategy, outdoor challenges, patient observation, and technical experiments keep me balanced and curious outside work.",
     facts: [
       "Strategic board games and collaborative problem solving",
-      "Skiing, hunting, and time in challenging outdoor environments",
+      "Snowboarding, hunting, and time in challenging outdoor environments",
       "Exploring new frameworks, AI tools, and development ideas",
     ],
     label: "LEISURE VAULT",
@@ -83,7 +83,7 @@ const tourScenes = [
     number: "06",
     eyebrow: "Final checkpoint",
     title: "Let’s build something useful",
-    summary: "I am ready to discuss software, full-stack, web, data, automation, and applied AI opportunities, project decisions, and implementation trade-offs.",
+    summary: "Seeking junior and intermediate software engineering opportunities with a collaborative team. I speak English and Mandarin Chinese. References available upon request.",
     facts: [
       "021 119 9859 · steven5115115@gmail.com",
       "github.com/ZiruiJia11 · linkedin.com/in/steven-jia-b78314231",

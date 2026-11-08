@@ -7,7 +7,7 @@ const distRoot = resolve(projectRoot, "dist");
 const template = await readFile(resolve(distRoot, "index.html"), "utf8");
 
 const routes = [
-  { path: "experience", title: "Experience | Steven Jia", description: "Steven Jia's full-stack development, coding education, technical support, and customer-facing experience.", heading: "Steven Jia — Professional Experience" },
+  { path: "experience", title: "Experience | Steven Jia", description: "Steven Jia's full-stack development at Ocular, coding and robotics tutoring at Matamoe, and PC and mobile phone repairs at UR Tech.", heading: "Steven Jia — Professional Experience" },
   { path: "projects", title: "Software Projects | Steven Jia", description: "Selected Laravel, Vue, React, Next.js, .NET, AI, data automation, testing, and integration projects by Steven Jia.", heading: "Steven Jia — Selected Software Projects" },
   { path: "profile", title: "Technical Profile | Steven Jia", description: "Steven Jia's technical skills, education, certification, engineering practice, and professional interests.", heading: "Steven Jia — Technical Profile" },
   { path: "cv", title: "CV and Contact | Steven Jia", description: "View Steven Jia's current software engineering CV and contact information.", heading: "Steven Jia — CV and Contact" },
