@@ -16,7 +16,7 @@ for (const route of generatedRoutes) {
   await cp(resolve(distRoot, route), destination, { recursive: true });
 }
 
-for (const filename of ["index.html", "404.html", "CNAME", "robots.txt", "sitemap.xml", "cv-complete.pdf"]) {
+for (const filename of ["index.html", "404.html", "CNAME", "robots.txt", "sitemap.xml", "cv-complete.pdf", "og-image.png"]) {
   const source = resolve(distRoot, filename);
   const content = await readFile(source);
   await writeFile(resolve(projectRoot, filename), content);
