@@ -504,10 +504,13 @@ function HoloFrame({ color, width, height, reducedMotion }) {
           transparent
         />
       </mesh>
-      <mesh ref={scanRef} position={[0, 0, 0.095]}>
-        <planeGeometry args={[width - 0.2, 0.035]} />
-        <meshBasicMaterial blending={THREE.AdditiveBlending} color="#e0f2fe" depthWrite={false} toneMapped={false} transparent opacity={0.4} />
-      </mesh>
+      {/* Only a moving scan bar reads as a hologram; frozen (lite/reduced motion) it looks like a stray line across the photo. */}
+      {!reducedMotion ? (
+        <mesh ref={scanRef} position={[0, 0, 0.095]}>
+          <planeGeometry args={[width - 0.2, 0.035]} />
+          <meshBasicMaterial blending={THREE.AdditiveBlending} color="#e0f2fe" depthWrite={false} toneMapped={false} transparent opacity={0} />
+        </mesh>
+      ) : null}
     </group>
   );
 }
