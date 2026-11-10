@@ -3713,6 +3713,50 @@
   .is-compact .project-swap-card > footer a { min-height: 44px; font-size: 0.75rem; }
   .is-compact .card-swap-controls { position: relative; inset: auto; transform: none; align-self: center; flex-shrink: 0; }
   .project-archive-footer { margin-top: 8px; }
+
+  /* Fit the whole project card plus its controls on one phone screen instead of scrolling inside the stage. */
+  /* The site-wide `footer` rule (padding 28px/38px, border, width) leaks onto this <footer> and steals ~70px from the card. */
+  .project-archive-footer {
+    width: auto;
+    margin: 8px 0 0;
+    padding: 0;
+    border-top: 0;
+  }
+  .card-swap-region.is-compact { gap: 10px; padding: 10px 4px 4px; }
+  .project-card-swap-stage .is-compact .project-swap-card[data-active="true"] { min-height: 0; }
+  .is-compact .project-swap-card > header { min-height: 38px; padding: 8px 14px; }
+  .is-compact .project-swap-content { padding: 14px 16px; }
+  .is-compact .project-swap-content > p {
+    display: -webkit-box;
+    margin-top: 10px;
+    overflow: hidden;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+  .is-compact .project-swap-tech { margin-top: 12px; }
+  .is-compact .project-swap-card > footer { padding: 6px; }
+  .is-compact .project-swap-card > footer a { min-height: 40px; }
+}
+
+@media (max-width: 820px) and (max-height: 720px) {
+  .project-archive { top: 84px; }
+  .is-compact .project-swap-content h2 { font-size: clamp(1.45rem, 6.4vw, 1.9rem); }
+  .is-compact .project-swap-content > p { -webkit-line-clamp: 3; font-size: 0.82rem; }
+  .is-compact .project-swap-tech { max-height: 30px; overflow: hidden; }
+  .is-compact .card-swap-controls { padding: 3px; }
+  .is-compact .card-swap-controls button { min-width: 40px; min-height: 40px; }
+  .is-compact .card-swap-status small { display: none; }
+}
+
+/* Very short screens (small phones with browser bars showing). */
+@media (max-width: 820px) and (max-height: 600px) {
+  .project-archive { top: 76px; }
+  .project-archive-header { display: none; }
+  .is-compact .project-swap-content { padding: 12px 14px; }
+  .is-compact .project-swap-content > p { -webkit-line-clamp: 2; }
+  .is-compact .project-swap-tech { display: none; }
 }
 
 @media (max-width: 1080px) {
