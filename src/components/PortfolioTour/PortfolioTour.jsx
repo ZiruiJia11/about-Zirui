@@ -474,7 +474,7 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
               backgroundColor="transparent"
               wireframes={false}
               gravity={0.56}
-              fontSize="2rem"
+              fontSize="clamp(1.25rem, 6vw, 2rem)"
               mouseConstraintStiffness={0.9}
             />
           </Suspense>
@@ -766,6 +766,8 @@ export default function PortfolioTour() {
   const [portalExiting, setPortalExiting] = useState(false);
   const [selectedExperienceIndex, setSelectedExperienceIndex] = useState(null);
   const [revealedSceneIndex, setRevealedSceneIndex] = useState(0);
+  const [worldReady, setWorldReady] = useState(false);
+  const handleWorldReady = useCallback(() => setWorldReady(true), []);
   const shellRef = useRef(null);
   const portalExitTimerRef = useRef(null);
   const activeScene = tourScenes[activeIndex];
@@ -904,10 +906,18 @@ export default function PortfolioTour() {
               moving={moving}
               onNext={handleNext}
               portalExiting={portalExiting}
+              onReady={handleWorldReady}
             />
           </Suspense>
         ) : <div className="tour-static-backdrop" />}
       </div>
+
+      {webGLReady && !worldReady ? (
+        <div className="tour-loading" role="status">
+          <i aria-hidden="true" />
+          <span>Loading Cyber World…</span>
+        </div>
+      ) : null}
 
       <div className="portal-exit-transition" aria-hidden="true">
         <i />

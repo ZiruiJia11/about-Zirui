@@ -66,6 +66,43 @@
 }
 
 /* Shared backdrop for every zone; --scene-glow (r, g, b) comes from the active scene. */
+.tour-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(var(--scene-glow, 139, 92, 246), 0.36);
+  border-radius: 999px;
+  background: rgba(8, 5, 18, 0.72);
+  color: rgba(237, 233, 254, 0.86);
+  font: 700 0.72rem/1 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.tour-loading i {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(var(--scene-glow, 139, 92, 246), 0.3);
+  border-top-color: rgb(var(--scene-glow, 139, 92, 246));
+  border-radius: 50%;
+  animation: tour-loading-spin 0.8s linear infinite;
+}
+
+@keyframes tour-loading-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour-loading i { animation: none; }
+}
+
 .tour-unified-background {
   position: absolute;
   inset: 0;
@@ -3165,9 +3202,23 @@
   }
 
   .contact-signal-kicker,
-  .contact-signal h1,
   .contact-signal-summary {
     display: none;
+  }
+
+  /* Keep a compact title so the last scene still says what it is on phones. */
+  .contact-signal h1 {
+    margin: 0 0 8px;
+    font-size: clamp(1.35rem, 6.4vw, 1.75rem);
+    line-height: 1.05;
+  }
+
+  .experience-falling-prompt {
+    width: calc(100vw - 32px);
+  }
+
+  .tour-loading {
+    top: 46%;
   }
 
   .contact-signal-lines {

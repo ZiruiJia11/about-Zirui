@@ -1139,6 +1139,9 @@ function StackForgeLandmark({ color, reducedMotion }) {
   const coreRef = useRef();
   const ringRef = useRef();
   const crownRef = useRef();
+  const { size } = useThree();
+  // On phones the crown floats right over the "Stack Forge" heading, so it is left out there.
+  const showCrown = size.width > 820;
   useFrame((state, delta) => {
     if (reducedMotion) return;
     if (coreRef.current) coreRef.current.rotation.y += delta * 0.34;
@@ -1174,12 +1177,14 @@ function StackForgeLandmark({ color, reducedMotion }) {
           <meshBasicMaterial color={color} toneMapped={false} transparent opacity={0.42} />
         </mesh>
       </group>
-      <group ref={crownRef} position={[0, 2.72, -0.55]}>
-        <mesh>
-          <octahedronGeometry args={[0.32, 1]} />
-          <meshStandardMaterial color="#dbeafe" emissive="#22d3ee" emissiveIntensity={2.4} metalness={0.3} roughness={0.16} toneMapped={false} />
-        </mesh>
-      </group>
+      {showCrown ? (
+        <group ref={crownRef} position={[0, 2.72, -0.55]}>
+          <mesh>
+            <octahedronGeometry args={[0.32, 1]} />
+            <meshStandardMaterial color="#dbeafe" emissive="#22d3ee" emissiveIntensity={2.4} metalness={0.3} roughness={0.16} toneMapped={false} />
+          </mesh>
+        </group>
+      ) : null}
       {[-2.15, -1.35, 1.35, 2.15].map((x, index) => (
         <group key={x} position={[x, 0.66 + (index % 2) * 0.18, -1.18 + Math.abs(x) * 0.1]}>
           <RoundedBox args={[0.48, 1.5 + (index % 2) * 0.34, 0.58]} radius={0.055} smoothness={3}>
@@ -1436,7 +1441,16 @@ function World({ activeIndex, reducedMotion, moving, onNext, portalExiting, lite
   );
 }
 
-export default function CyberWorld({ activeIndex, reducedMotion, moving, onNext, portalExiting, liteMode = false }) {
+// Mounts only once everything above it in the Suspense boundary (textures, fonts) has loaded.
+function ReadySignal({ onReady }) {
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => onReady?.());
+    return () => cancelAnimationFrame(frame);
+  }, [onReady]);
+  return null;
+}
+
+export default function CyberWorld({ activeIndex, reducedMotion, moving, onNext, portalExiting, liteMode = false, onReady }) {
   return (
     <Canvas
       camera={{ position: tourScenes[0].camera, fov: 46 }}
@@ -1450,6 +1464,7 @@ export default function CyberWorld({ activeIndex, reducedMotion, moving, onNext,
     >
       <Suspense fallback={null}>
         <World activeIndex={activeIndex} reducedMotion={reducedMotion} moving={moving} onNext={onNext} portalExiting={portalExiting} liteMode={liteMode} />
+        <ReadySignal onReady={onReady} />
       </Suspense>
     </Canvas>
   );
