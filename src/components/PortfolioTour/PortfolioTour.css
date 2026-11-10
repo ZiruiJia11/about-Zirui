@@ -65,105 +65,29 @@
   inset: 0;
 }
 
-.tour-prism-background {
+/* Shared backdrop for every zone; --scene-glow (r, g, b) comes from the active scene. */
+.tour-unified-background {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  opacity: 0.7;
-  pointer-events: none;
-  mask-image: radial-gradient(ellipse 72% 82% at 57% 48%, #000 12%, rgba(0, 0, 0, 0.88) 48%, transparent 100%);
-}
-
-.tour-prism-background .prism-container {
-  position: absolute;
-  inset: 0;
-}
-
-.tour-letter-glitch-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  opacity: 0.58;
-  pointer-events: none;
-}
-
-.tour-gridscan-background,
-.tour-dither-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.tour-gridscan-background {
   opacity: 0.82;
   background:
-    radial-gradient(circle at 50% 46%, rgba(115, 70, 190, 0.14), transparent 44%),
+    radial-gradient(circle at 50% 46%, rgba(var(--scene-glow, 139, 92, 246), 0.16), transparent 46%),
     #08050e;
+  pointer-events: none;
 }
 
-.tour-gridscan-background .gridscan,
-.tour-dither-background .dither-container {
+.tour-unified-background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: radial-gradient(ellipse at 50% 48%, transparent 30%, rgba(5, 3, 12, 0.5) 96%);
+  pointer-events: none;
+}
+
+.tour-unified-background .gridscan {
   position: absolute !important;
-  inset: 0;
-}
-
-.tour-dither-background {
-  opacity: 0.58;
-  background: #06030c;
-  mask-image: radial-gradient(ellipse 90% 90% at 52% 48%, #000 34%, rgba(0, 0, 0, 0.88) 70%, transparent 100%);
-}
-
-.tour-acid-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  background: #07040e;
-  opacity: 0.68;
-}
-
-.tour-acid-background::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background:
-    linear-gradient(180deg, rgba(5, 4, 12, 0.22), rgba(5, 4, 12, 0.48)),
-    radial-gradient(ellipse at 50% 46%, transparent 20%, rgba(4, 3, 10, 0.36) 88%);
-  pointer-events: none;
-}
-
-.tour-acid-background .acid-squares-container {
-  position: absolute;
-  inset: 0;
-}
-
-.tour-shape-waves-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  background: #070011;
-  opacity: 0.86;
-}
-
-.tour-shape-waves-background::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background:
-    radial-gradient(circle at 14% 26%, rgba(255, 24, 218, 0.16), transparent 34%),
-    radial-gradient(circle at 84% 66%, rgba(0, 229, 255, 0.14), transparent 36%),
-    linear-gradient(180deg, rgba(16, 0, 34, 0.08), rgba(3, 0, 14, 0.34)),
-    radial-gradient(ellipse at 50% 48%, transparent 26%, rgba(5, 0, 18, 0.34) 94%);
-  box-shadow: inset 0 0 120px rgba(110, 26, 255, 0.18);
-  pointer-events: none;
-}
-
-.tour-shape-waves-background .shape-waves {
-  position: absolute;
   inset: 0;
 }
 
@@ -753,34 +677,9 @@
   background:
     linear-gradient(rgba(92, 63, 154, 0.14) 1px, transparent 1px),
     linear-gradient(90deg, rgba(92, 63, 154, 0.14) 1px, transparent 1px),
-    radial-gradient(circle at 50% 48%, rgba(82, 39, 255, 0.22), transparent 36%),
+    radial-gradient(circle at 50% 48%, rgba(var(--scene-glow, 82, 39, 255), 0.22), transparent 38%),
     #07040d;
   background-size: 72px 72px, 72px 72px, auto, auto;
-}
-
-.tour-lite-background.is-experience {
-  background-color: #080413;
-  filter: hue-rotate(12deg);
-}
-
-.tour-lite-background.is-projects {
-  background-color: #050713;
-  filter: hue-rotate(28deg);
-}
-
-.tour-lite-background.is-skills {
-  background-color: #09030f;
-  filter: hue-rotate(-12deg);
-}
-
-.tour-lite-background.is-hobbies {
-  background-color: #061008;
-  filter: hue-rotate(78deg);
-}
-
-.tour-lite-background.is-contact {
-  background-color: #04080d;
-  filter: hue-rotate(150deg);
 }
 
 .tour-exit {
@@ -2899,23 +2798,23 @@
 
 .hobbies-vault-header h1 {
   margin: 8px 0 0;
-  color: #b8ff3d;
+  color: #8fdcff;
   font-family: "SFMono-Regular", "Roboto Mono", Consolas, monospace;
   font-weight: 900;
   font-size: clamp(2.4rem, 5.4vw, 5.6rem);
   line-height: 0.88;
   letter-spacing: -0.085em;
   text-shadow:
-    0 0 8px rgba(184, 255, 61, 0.72),
-    0 0 28px rgba(120, 255, 42, 0.38),
-    0 0 64px rgba(70, 255, 80, 0.16);
+    0 0 8px rgba(56, 189, 248, 0.7),
+    0 0 28px rgba(99, 102, 241, 0.38),
+    0 0 64px rgba(139, 92, 246, 0.18);
   text-transform: uppercase;
 }
 
 .hobbies-vault-header > p {
   width: min(360px, 34vw);
   margin: 0 0 5px;
-  color: #ff75ec;
+  color: #c4b5fd;
   font-size: 0.84rem;
   font-weight: 700;
   line-height: 1.55;
@@ -3842,4 +3741,158 @@
     transition: none;
   }
   .tour-cursor { display: none; }
+}
+
+/* ---- Site polish (Nov 2026) ---- */
+
+/* Projects: link to the full list */
+.project-all-link {
+  color: #ddd6fe;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.project-all-link:hover {
+  color: #ffffff;
+  border-color: rgba(196, 181, 253, 0.6);
+}
+
+/* Skills: grouped legend in real text + opaque stage so the 3D core no longer covers tiles */
+.skills-forge {
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+}
+
+.skills-forge-legend {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  list-style: none;
+  pointer-events: auto;
+}
+
+.skills-forge-legend li {
+  position: relative;
+  display: grid;
+  padding: 10px 10px 9px;
+  gap: 4px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--module-color) 38%, rgba(255, 255, 255, 0.08));
+  border-radius: 10px;
+  background: #10111e;
+}
+
+.skills-forge-legend li::before {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: 40px;
+  height: 2px;
+  content: "";
+  background: var(--module-color);
+}
+
+.skills-forge-legend strong {
+  color: var(--module-color);
+  font-size: 0.74rem;
+  line-height: 1.15;
+}
+
+.skills-forge-legend span {
+  display: -webkit-box;
+  overflow: hidden;
+  color: rgba(224, 231, 255, 0.78);
+  font-size: 0.66rem;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.skills-drift-stage {
+  background: rgba(8, 9, 19, 0.88);
+}
+
+@media (max-width: 1080px) {
+  .skills-forge-legend { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 820px) {
+  .skills-forge {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .skills-forge-legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* Contact: readable panel over the character rain (desktop) */
+@media (min-width: 821px) {
+  .contact-signal {
+    box-sizing: border-box;
+    width: clamp(320px, 27vw, 440px);
+    padding: 22px 22px 20px;
+    border: 1px solid rgba(97, 220, 163, 0.26);
+    border-radius: 18px;
+    background: rgba(3, 14, 10, 0.9);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+  }
+
+  .contact-signal h1 {
+    font-size: clamp(2.1rem, 3.1vw, 3.6rem);
+  }
+
+  .contact-signal-summary {
+    color: rgba(236, 252, 245, 0.9);
+    font-size: 0.95rem;
+  }
+
+  .contact-signal-lines {
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .contact-signal-lines a {
+    min-height: 44px;
+    padding: 9px 12px;
+    background: rgba(8, 32, 24, 0.9);
+    color: #f3fff9;
+    font-size: 0.82rem;
+  }
+
+  .contact-signal-lines strong {
+    font-size: 0.7rem;
+  }
+
+  .contact-signal-lines em {
+    overflow: visible;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+}
+
+/* Projects intro: keep clear of the archive tab on shorter desktop viewports */
+@media (max-height: 820px) and (min-width: 821px) {
+  .project-stroke-intro {
+    transform: translateY(-50%) scale(0.84);
+    transform-origin: left center;
+  }
+
+  .project-stroke-intro > p {
+    display: none;
+  }
+}
+
+/* Experience: keep the gaps in "OPEN THIS FILE" before the letters drop */
+.experience-falling-prompt .word {
+  white-space: pre;
 }

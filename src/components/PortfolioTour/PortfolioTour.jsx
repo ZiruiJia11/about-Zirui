@@ -28,15 +28,20 @@ import tourScenes from "./tourScenes.js";
 import { portfolioHome, supports3DTour } from "../../portfolioEntry.js";
 import "./PortfolioTour.css";
 
+// One shared background: the same grid scan in every zone, tinted by that zone's accent.
+const sceneBackdrops = {
+  intro: { scan: "#8b7cff", lines: "#2f2a52", glow: "111, 124, 255", tail: "#67e8f9" },
+  experience: { scan: "#d16cff", lines: "#3d2b52", glow: "217, 70, 239", tail: "#8b5cf6" },
+  projects: { scan: "#9d7bff", lines: "#332b58", glow: "139, 92, 246", tail: "#67e8f9" },
+  skills: { scan: "#7c83ff", lines: "#2b2d5a", glow: "99, 102, 241", tail: "#a78bfa" },
+  hobbies: { scan: "#5cc8ff", lines: "#233656", glow: "56, 189, 248", tail: "#818cf8" },
+  contact: { scan: "#c48cff", lines: "#3a2c55", glow: "192, 132, 252", tail: "#67e8f9" },
+};
+
 const CyberWorld = lazy(() => import("./CyberWorld.jsx"));
 const DriftWall = lazy(() => import("../DriftWall.jsx"));
-const Prism = lazy(() => import("../Prism.jsx"));
-const LetterGlitch = lazy(() => import("../LetterGlitch.jsx"));
-const Dither = lazy(() => import("../Dither.jsx"));
 const GridScan = lazy(() => import("../GridScan.jsx").then(module => ({ default: module.GridScan })));
-const AcidSquares = lazy(() => import("../AcidSquares.jsx"));
 const DepthCarousel = lazy(() => import("../DepthCarousel.jsx"));
-const ShapeWaves = lazy(() => import("../ShapeWaves.jsx"));
 const FallingText = lazy(() => import("../FallingText.jsx"));
 const StrokeText = lazy(() => import("../StrokeText.jsx"));
 
@@ -339,7 +344,7 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
           <FolderOpen size={18} />
           <span><strong>Project archive</strong><em>Selected portfolio projects / 2026</em></span>
         </div>
-        <div className="project-file-count">6 FILES / EXPLORE PROJECTS</div>
+        <a className="project-file-count project-all-link" href="/projects">6 OF 9 FILES / SEE ALL →</a>
       </header>
       <div className="project-card-swap-stage" style={{ height: "600px", position: "relative" }}>
         <aside className="project-stroke-intro" aria-label="My selected portfolio projects">
@@ -351,9 +356,9 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
                 strokeColor="#C084FC"
                 fillColor="#F8FAFC"
                 strokeWidth={1.4}
-                drawDuration={1.35}
-                fillDelay={0.16}
-                stagger={0.05}
+                drawDuration={0.7}
+                fillDelay={0.05}
+                stagger={0.03}
                 ease="power2.out"
                 trigger="mount"
                 fillMode="wipe"
@@ -366,9 +371,9 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
                 strokeColor="#A78BFA"
                 fillColor="#F8FAFC"
                 strokeWidth={1.4}
-                drawDuration={1.6}
-                fillDelay={0.2}
-                stagger={0.045}
+                drawDuration={0.8}
+                fillDelay={0.05}
+                stagger={0.03}
                 ease="power2.out"
                 trigger="mount"
                 fillMode="wipe"
@@ -381,9 +386,9 @@ function ProjectArchive({ onPreviousScene, onNextScene }) {
                 strokeColor="#67E8F9"
                 fillColor="#DDD6FE"
                 strokeWidth={1.25}
-                drawDuration={1.45}
-                fillDelay={0.18}
-                stagger={0.04}
+                drawDuration={0.8}
+                fillDelay={0.05}
+                stagger={0.03}
                 ease="power2.out"
                 trigger="mount"
                 fillMode="wipe"
@@ -458,14 +463,14 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
         <div className="experience-drone experience-drone-right-secondary" aria-hidden="true">
           <span className="drone-chassis"><i className="drone-top-panel" /><i className="drone-depth" /><i className="drone-lens" /></span><span className="drone-scan-grid" />
         </div>
-        <div className="experience-falling-prompt" aria-label="Open this file">
+        <div className="experience-falling-prompt" role="img" aria-label="Open this file">
           <Suspense fallback={<span>OPEN THIS FILE</span>}>
             <FallingText
               text="OPEN THIS FILE"
               highlightWords={["O", "F"]}
               highlightClass="highlighted"
               trigger={dropText ? "auto" : "manual"}
-              triggerDelay={0}
+              triggerDelay={180}
               backgroundColor="transparent"
               wireframes={false}
               gravity={0.56}
@@ -474,7 +479,14 @@ function ExperienceFolder({ onPreviousScene, onNextScene, onSelectExperience }) 
             />
           </Suspense>
         </div>
-        <Folder size={2.58} color="#5227FF" className="custom-folder" items={experienceFiles} onItemClick={onSelectExperience} onMouseEnter={() => setDropText(true)} />
+        <Folder
+          size={2.58}
+          color="#5227FF"
+          className="custom-folder"
+          items={experienceFiles}
+          onItemClick={onSelectExperience}
+          onOpenChange={(isOpen) => { if (isOpen) setDropText(true); }}
+        />
         <p className="experience-folder-instruction"><i /> Click the folder to reveal three roles</p>
       </div>
       <footer className="experience-folder-footer">
@@ -540,8 +552,16 @@ function SkillsForge({ onPreviousScene, onNextScene }) {
             STACK FORGE
           </GlitchText>
         </div>
-        <div className="skills-forge-count">{skillWallItems.length} SKILLS / LIVE WALL</div>
+        <div className="skills-forge-count">{skillWallItems.length} SKILLS / 6 GROUPS</div>
       </header>
+      <ul className="skills-forge-legend" aria-label="Skills by group">
+        {skillModules.map((module) => (
+          <li key={module.code} style={{ "--module-color": module.color }}>
+            <strong>{module.title}</strong>
+            <span>{module.items.join(" · ")}</span>
+          </li>
+        ))}
+      </ul>
       <div className="skills-drift-stage">
         <Suspense fallback={<div className="skills-drift-loading">Loading skill wall…</div>}>
           <DriftWall
@@ -596,9 +616,9 @@ function HobbiesVault({ onPreviousScene, onNextScene }) {
             spread={112}
             tilt={22}
             tiltDirection="right"
-            visibleCards={4}
-            falloff={0.2}
-            blur={6}
+            visibleCards={3}
+            falloff={0.45}
+            blur={10}
             autoplay
             loop
           />
@@ -657,9 +677,10 @@ function ContactSignal({ onFinish }) {
       </section>
 
       <div className="contact-portal-status" aria-label="Return to homepage portal">
-        <span>HOMEBOUND GATE / CLICK TO RETURN</span>
+        <span aria-hidden="true">HOMEBOUND GATE / CLICK TO RETURN</span>
         <SplitFlapText
-          words={['RETURN HOME', 'BACK TO MAIN', 'PORTAL READY']}
+          aria-hidden="true"
+          words={['RETURN HOME']}
           flipDuration={0.12}
           stagger={0.06}
           cycleDelay={2400}
@@ -670,7 +691,7 @@ function ContactSignal({ onFinish }) {
           tileRadius={8}
           gap={6}
           fontSize={52}
-          loop
+          loop={false}
           padTo={12}
         />
       </div>
@@ -748,6 +769,7 @@ export default function PortfolioTour() {
   const shellRef = useRef(null);
   const portalExitTimerRef = useRef(null);
   const activeScene = tourScenes[activeIndex];
+  const activeBackdrop = sceneBackdrops[activeScene.id] ?? sceneBackdrops.intro;
   const isLast = activeIndex === tourScenes.length - 1;
   const sceneContentReady = ![1, 2].includes(activeIndex) || revealedSceneIndex === activeIndex;
   const closeExperienceDetail = useCallback(() => setSelectedExperienceIndex(null), []);
@@ -824,27 +846,29 @@ export default function PortfolioTour() {
   return (
     <GlowCursor
       className="tour-glow-cursor"
-      color="#67E8F9"
-      secondaryColor="#A78BFA"
-      trailLength={40}
-      trailWidth={8}
-      trailTaper={0.8}
-      followSpeed={0.16}
-      glowIntensity={1.9}
-      glowSpread={1.2}
-      hotspot={0.65}
-      brightness={1.25}
-      opacity={1}
-      pulseSpeed={1.1}
-      noiseStrength={0.035}
+      color={activeBackdrop.scan}
+      secondaryColor={activeBackdrop.tail}
+      trailLength={28}
+      trailWidth={5}
+      trailTaper={0.9}
+      followSpeed={0.22}
+      glowIntensity={1.15}
+      glowSpread={0.9}
+      hotspot={0.5}
+      brightness={1}
+      opacity={0.85}
+      pulseSpeed={0.6}
+      noiseStrength={0.02}
       idleFade
-      idleTimeout={700}
-      fadeDuration={900}
+      idleTimeout={500}
+      fadeDuration={700}
       blendMode="screen"
+      enabled={!reducedMotion}
     >
       <section
       className={`portfolio-tour${moving ? " is-moving" : ""}${portalExiting ? " is-portal-exiting" : ""}${liteMode ? " is-lite-mode" : ""}${activeScene.id === "projects" ? " is-project-scene" : ""}${activeScene.id === "experience" ? " is-experience-scene" : ""}${activeScene.id === "skills" ? " is-skills-scene" : ""}${activeScene.id === "hobbies" ? " is-hobbies-scene" : ""}${!liteMode && [0, 1, 2, 3, 4, 5].includes(activeIndex) ? " has-react-bits-background" : ""}`}
       ref={shellRef}
+      style={{ "--scene-glow": activeBackdrop.glow }}
       tabIndex={0}
       onKeyDown={handleKeyDown}
       onPointerMove={handlePointerMove}
@@ -853,128 +877,20 @@ export default function PortfolioTour() {
     >
       <div className="tour-canvas" aria-hidden="true">
         {liteMode ? <div className={`tour-lite-background is-${activeScene.id}`} /> : null}
-        {!liteMode && activeIndex === 0 ? (
-          <div className="tour-prism-background">
-            <Suspense fallback={null}>
-              <Prism
-                animationType="rotate"
-                timeScale={0.5}
-                height={3.5}
-                baseWidth={5.5}
-                scale={3.6}
-                hueShift={0}
-                colorFrequency={1}
-                noise={0.5}
-                glow={1}
-              />
-            </Suspense>
-          </div>
-        ) : null}
-        {!liteMode && activeIndex === 1 ? (
-          <div className="tour-gridscan-background">
+        {!liteMode ? (
+          <div className="tour-unified-background">
             <Suspense fallback={null}>
               <GridScan
                 sensitivity={0.55}
                 lineThickness={1}
-                linesColor="#3d3152"
+                linesColor={activeBackdrop.lines}
                 gridScale={0.1}
-                scanColor="#b86cff"
-                scanOpacity={0.44}
+                scanColor={activeBackdrop.scan}
+                scanOpacity={0.4}
                 enablePost
-                bloomIntensity={0.6}
+                bloomIntensity={0.55}
                 chromaticAberration={0.002}
                 noiseIntensity={0.01}
-              />
-            </Suspense>
-          </div>
-        ) : null}
-        {!liteMode && activeIndex === 2 ? (
-          <div className="tour-dither-background">
-            <Suspense fallback={null}>
-              <Dither
-                waveColor={[0.44, 0.16, 0.68]}
-                backgroundColor={[0.018, 0.008, 0.04]}
-                disableAnimation={false}
-                enableMouseInteraction
-                mouseRadius={0.3}
-                colorNum={4}
-                waveAmplitude={0.3}
-                waveFrequency={3}
-                waveSpeed={0.05}
-              />
-            </Suspense>
-          </div>
-        ) : null}
-        {!liteMode && activeIndex === 3 ? (
-          <div className="tour-acid-background">
-            <Suspense fallback={null}>
-              <AcidSquares
-                color1="#5227FF"
-                color2="#A855F7"
-                color3="#FFFFFF"
-                detail="medium"
-                speed={0.7}
-                waveDepth={1}
-                zoom={1.3}
-                density={10}
-                glow={1}
-                exposure={2700}
-                spread={0.3}
-                stepSize={0.002}
-                colorShift={0}
-                contrast={1}
-                brightness={1}
-                opacity={1}
-                mouseInteraction
-                mouseStrength={0.1}
-                mouseRadius={0.35}
-                blur={0}
-                grain
-                grainIntensity={0.05}
-              />
-            </Suspense>
-          </div>
-        ) : null}
-        {!liteMode && activeIndex === 4 ? (
-          <div className="tour-shape-waves-background">
-            <Suspense fallback={null}>
-              <ShapeWaves
-                text="OFF DUTY"
-                fontFamily={'Geist, "Geist Sans", system-ui, sans-serif'}
-                fontWeight={500}
-                textSize={0.6}
-                shapes="mixed"
-                cellSize={10}
-                dotSize={0.75}
-                color="#72ff45"
-                hoverColor="#ff3de8"
-                backgroundColor="#070011"
-                speed={1}
-                scale={1}
-                contrast={1}
-                brightness={0.4}
-                flow={0}
-                direction={0}
-                fade={0.25}
-                interactive
-                splashRadius={40}
-                splashStrength={0.4}
-                glow={0.35}
-                intro
-                introDuration={1.6}
-                paused={false}
-              />
-            </Suspense>
-          </div>
-        ) : null}
-        {!liteMode && isLast ? (
-          <div className="tour-letter-glitch-background">
-            <Suspense fallback={null}>
-              <LetterGlitch
-                glitchSpeed={50}
-                centerVignette
-                outerVignette={false}
-                smooth
               />
             </Suspense>
           </div>

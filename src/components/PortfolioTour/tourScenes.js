@@ -8,6 +8,8 @@ const tourScenes = [
     facts: [
       "Full Stack Developer at Ocular · 2026 – Present",
       "BSc Computer Science, Minor in AI · VUW · 2023–2025",
+      "Laravel · Vue · React · .NET · AWS Certified Cloud Practitioner",
+      "Open to junior and intermediate software engineering roles",
     ],
     label: "IDENTITY DOCK",
     color: "#a855f7",

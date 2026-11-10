@@ -62,7 +62,7 @@ const highlights = [
 ];
 
 const profileStats = [
-  { value: "10+", label: "portfolio projects" },
+  { value: "9", label: "portfolio projects" },
   { value: "AWS", label: "cloud certified" },
   { value: "Full-stack", label: "Laravel, React, Vue, .NET" },
 ];
@@ -443,10 +443,10 @@ function App() {
             <h1 id="hero-title">
               <DepthText
                 text="Steven Jia"
-                layers={34}
-                depth={2.4}
+                layers={16}
+                depth={1.5}
                 faceColor="#1455d9"
-                depthColor="#ff7a45"
+                depthColor="#0a1f4d"
                 tilt={7.5}
                 pointerTracking
                 smoothing={0.14}
@@ -526,7 +526,7 @@ function App() {
           </section>
 
           <section className="home-next">
-            <div><p className="eyebrow">Explore the portfolio</p><h2>Each part now has room to breathe.</h2></div>
+            <div><p className="eyebrow">Explore the portfolio</p><h2>See my experience, projects, and technical skills in detail.</h2></div>
             <div className="home-next-links">
               <a href="/experience">Experience <ArrowUpRight size={18} /></a>
               <a href="/projects">Projects <ArrowUpRight size={18} /></a>
@@ -658,12 +658,8 @@ function App() {
               <p>Experience, education, projects, technical skills, certifications, and contact details in one current document.</p>
             </div>
             <div className="cv-document-actions">
-              <a className="cv-view-button" href={cvUrl}>
-                <span><FileText size={22} /> Current CV</span>
-                <strong>VIEW MY CV</strong>
-                <em>OPEN DOCUMENT <ArrowUpRight size={20} /></em>
-              </a>
-              <a className="cv-download-link" href={cvUrl} download><Download size={18} /> Download PDF</a>
+              <a className="button primary" href={cvUrl} target="_blank" rel="noreferrer"><FileText size={18} /> Open CV (PDF)</a>
+              <a className="cv-download-link" href={cvUrl} download><Download size={18} /> or download a copy</a>
             </div>
           </section>
 

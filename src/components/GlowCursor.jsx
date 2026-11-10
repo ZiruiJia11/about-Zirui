@@ -231,6 +231,22 @@ const GlowCursor = ({
     let lastFrameTime = performance.now();
     let raf = 0;
     let destroyed = false;
+    let sleeping = false;
+    // Colors ease toward the requested ones so a prop change (e.g. a new scene) blends instead of snapping.
+    const currentColor = hexToRgb(initialConfig.color);
+    const currentSecondary = hexToRgb(initialConfig.secondaryColor);
+    const easeColor = (current, targetHex, amount) => {
+      const targetRgb = hexToRgb(targetHex);
+      for (let i = 0; i < 3; i++) current[i] += (targetRgb[i] - current[i]) * amount;
+      return current;
+    };
+
+    const wake = () => {
+      if (!sleeping || destroyed) return;
+      sleeping = false;
+      lastFrameTime = performance.now();
+      raf = requestAnimationFrame(render);
+    };
 
     const resize = () => {
       width = Math.max(container.clientWidth, 1);
@@ -253,6 +269,8 @@ const GlowCursor = ({
     };
 
     const updatePointer = event => {
+      // A trail under a finger just smears the page while scrolling.
+      if (event.pointerType === 'touch') return;
       const rect = container.getBoundingClientRect();
       const x = clamp(event.clientX - rect.left, 0, rect.width);
       const y = clamp(rect.height - (event.clientY - rect.top), 0, rect.height);
@@ -261,6 +279,7 @@ const GlowCursor = ({
       target.y = y;
       pointerInside = true;
       lastInputTime = performance.now();
+      wake();
     };
 
     const onPointerLeave = () => {
@@ -301,8 +320,9 @@ const GlowCursor = ({
       fade += (fadeTarget - fade) * Math.min(1, fadeStep * 7);
 
       program.uniforms.uPointCount.value = clamp(Math.round(config.trailLength), 2, MAX_POINTS);
-      program.uniforms.uColor.value = hexToRgb(config.color);
-      program.uniforms.uSecondaryColor.value = hexToRgb(config.secondaryColor);
+      const colorEase = 1 - Math.pow(0.92, delta);
+      program.uniforms.uColor.value = easeColor(currentColor, config.color, colorEase);
+      program.uniforms.uSecondaryColor.value = easeColor(currentSecondary, config.secondaryColor, colorEase);
       program.uniforms.uTrailWidth.value = Math.max(config.trailWidth, 0.1);
       program.uniforms.uTaper.value = clamp(config.trailTaper, 0, 1);
       program.uniforms.uGlowIntensity.value = Math.max(config.glowIntensity, 0);
@@ -315,6 +335,13 @@ const GlowCursor = ({
       program.uniforms.uNormalBlend.value = config.blendMode === 'normal' ? 1 : 0;
       program.uniforms.uTime.value = now * 0.001;
       program.uniforms.uFade.value = fade;
+
+      // Fully faded and nothing pending: clear once and stop the loop until the pointer moves again.
+      if (fadeTarget === 0 && fade < 0.002) {
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        sleeping = true;
+        return;
+      }
 
       renderer.render({ scene: mesh });
       if (!destroyed) raf = requestAnimationFrame(render);
